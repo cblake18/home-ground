@@ -7,7 +7,7 @@
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
-    <link rel="stylesheet" href="nc_assets/css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="keyboard-grid"></div>
@@ -84,62 +84,73 @@
 </section>
 
     <section class="projects" id="projects">
-        <div class="keyboard-grid"></div>
-        <div class="container">
-            <h2 id="projects-heading">My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card key">
-                    <div class="project-image">OS Memory Allocator</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Custom Memory Allocator</h3>
-                        <p>Developed a custom memory manager in C, implementing First Fit, Best Fit, and a Buddy System to handle allocation and deallocation requests, analyzing the performance and fragmentation of each algorithm.</p>
-                        <a href="#" class="btn key">View Project</a>
-                    </div>
+    <div class="keyboard-grid"></div>
+    <div class="container">
+        <h2 id="projects-heading">My Projects</h2>
+        <div class="projects-grid">
+            <!-- Memory Allocator Project -->
+            <div class="project-card key" data-project="memory-allocator">
+                <div class="project-image">OS Memory Allocator</div>
+                <div class="project-info">
+                    <h3 class="project-title">Custom Memory Allocator</h3>
+                    <p>Developed a custom memory manager in C, implementing First Fit, Best Fit, and a Buddy System to handle allocation and deallocation requests, analyzing the performance and fragmentation of each algorithm.</p>
+                    <button class="btn key project-modal-trigger">View Details</button>
                 </div>
-                <div class="project-card key">
-                    <div class="project-image">Binary Bomb Defusal</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Reverse Engineering Challenge</h3>
-                        <p>Defused a "binary bomb" by reverse-engineering the x86-64 assembly code of six distinct phases, using GDB to analyze control flow and deduce the required inputs to prevent detonation.</p>
-                        <a href="#" class="btn key">View Project</a>
-                    </div>
+            </div>
+
+            <!-- Binary Bomb Project -->
+            <div class="project-card key" data-project="binary-bomb">
+                <div class="project-image">Binary Bomb Defusal</div>
+                <div class="project-info">
+                    <h3 class="project-title">Reverse Engineering Challenge</h3>
+                    <p>Defused a "binary bomb" by reverse-engineering the x86-64 assembly code of six distinct phases, using GDB to analyze control flow and deduce the required inputs to prevent detonation.</p>
+                    <button class="btn key project-modal-trigger">View Details</button>
                 </div>
-                <div class="project-card key">
-                    <div class="project-image">Multithreaded Donut Shop</div>
-                    <div class="project-info">
-                        <h3 class="project-title">Multithreaded Producer-Consumer</h3>
-                        <p>Solved the classic producer-consumer problem by simulating a multi-threaded donut shop in C. Implemented two distinct solutions using Pthreads (mutexes, condition variables) and System V IPC (semaphores, shared memory) to manage concurrency.</p>
-                        <a href="#" class="btn key">View Project</a>
-                    </div>
+            </div>
+
+            <!-- Donut Shop Project -->
+            <div class="project-card key" data-project="donut-shop">
+                <div class="project-image">Multithreaded Donut Shop</div>
+                <div class="project-info">
+                    <h3 class="project-title">Multithreaded Producer-Consumer</h3>
+                    <p>Solved the classic producer-consumer problem by simulating a multi-threaded donut shop in C. Implemented two distinct solutions using Pthreads (mutexes, condition variables) and System V IPC (semaphores, shared memory) to manage concurrency.</p>
+                    <button class="btn key project-modal-trigger">View Details</button>
                 </div>
-                <div class="project-card key">
-                    <div class="project-image">Machine Learning Face Recognition</div>
-                    <div class="project-info">
-                        <h3 class="project-title">ML Face Recognition</h3>
-                        <p>Developed a face recognition model using SVMs and ensemble methods on the LFW Pairs dataset. Applied PCA and difference imaging for feature extraction and performed hyperparameter tuning with RandomizedSearchCV to improve model performance.</p>
-                        <a href="#" class="btn key">View Project</a>
-                    </div>
+            </div>
+
+            <!-- Face Recognition Project -->
+            <div class="project-card key" data-project="face-recognition">
+                <div class="project-image">Machine Learning Face Recognition</div>
+                <div class="project-info">
+                    <h3 class="project-title">ML Face Recognition</h3>
+                    <p>Developed a face recognition model using SVMs and ensemble methods on the LFW Pairs dataset. Applied PCA and difference imaging for feature extraction and performed hyperparameter tuning with RandomizedSearchCV to improve model performance.</p>
+                    <button class="btn key project-modal-trigger">View Details</button>
                 </div>
-                <div class="project-card key">
-                    <div class="project-image">University Database</div>
-                    <div class="project-info">
-                        <h3 class="project-title">University Database Developer</h3>
-                        <p>Designed and implemented a relational database in SQL for university operations, managing entities like students and courses with proper constraints. Created ER diagrams to model relationships and ensured data integrity.</p>
-                        <a href="#" class="btn key">View Project</a>
-                    </div>
+            </div>
+
+            <!-- University Database Project -->
+            <div class="project-card key" data-project="university-db">
+                <div class="project-image">University Database</div>
+                <div class="project-info">
+                    <h3 class="project-title">University Database Developer</h3>
+                    <p>Designed and implemented a relational database in SQL for university operations, managing entities like students and courses with proper constraints. Created ER diagrams to model relationships and ensured data integrity.</p>
+                    <button class="btn key project-modal-trigger">View Details</button>
                 </div>
-                <div class="project-card key">
-                    <div class="project-image">N-Body Simulation</div>
-                    <div class="project-info">
-                        <h3 class="project-title">N-Body Physics Simulation</h3>
-                        <p>Built a graphical planetary physics simulator in C++ and SFML that models gravitational forces between celestial bodies, using object-oriented principles to manage state and behavior.</p>
-                        <a href="#" class="btn key">View Project</a>
-                    </div>
+            </div>
+
+            <!-- N-Body Simulation Project -->
+            <div class="project-card key" data-project="nbody-sim">
+                <div class="project-image">N-Body Simulation</div>
+                <div class="project-info">
+                    <h3 class="project-title">N-Body Physics Simulation</h3>
+                    <p>Built a graphical planetary physics simulator in C++ and SFML that models gravitational forces between celestial bodies, using object-oriented principles to manage state and behavior.</p>
+                    <button class="btn key project-modal-trigger">View Details</button>
                 </div>
             </div>
         </div>
-        <div class="rgb-shift"></div>
-    </section>
+    </div>
+    <div class="rgb-shift"></div>
+</section>
 
      <section class="contact" id="contact">
         <canvas class="fractal-canvas" id="contact-fractal"></canvas>
@@ -191,6 +202,35 @@
         <source src="https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_tiny.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="nc_assets/js/scripts.js"></script>
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-close">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <p class="tagline" id="modalTagline"></p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-links" id="modalLinks"></div>
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <div id="modalDescription"></div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-stack" id="modalTechStack"></div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Challenges & Solutions</h3>
+                    <div id="modalChallenges"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
 </body>
 </html>

@@ -1,3 +1,178 @@
+// Project data structure containing all information
+const projectData = {
+    'memory-allocator': {
+        title: 'Custom Memory Allocator',
+        tagline: 'A low-level memory management system implementing three allocation algorithms with performance analysis and fragmentation tracking.',
+        links: {
+            demo: '#',
+            github: 'https://github.com/yourusername/memory-allocator'
+        },
+        description: {
+            problem: 'Operating systems need efficient memory management to handle dynamic allocation requests from multiple processes. Poor allocation strategies lead to memory fragmentation, wasted space, and degraded system performance.',
+            solution: 'I developed a comprehensive memory allocator in C that implements three distinct allocation strategies: First Fit (quickly allocates the first available block), Best Fit (searches for the smallest suitable block), and Buddy System (uses power-of-2 block sizes for fast allocation).',
+            role: 'This was an individual project where I designed and implemented the core allocation algorithms from scratch, built a free list management system with coalescing, created comprehensive testing suite processing 1000+ allocation/deallocation requests, and implemented performance metrics tracking.'
+        },
+        techStack: ['C', 'Linux', 'GCC', 'Valgrind', 'Make'],
+        challenges: [
+            {
+                title: 'Pointer Arithmetic Complexity',
+                description: 'Managing memory addresses and calculating block sizes required careful pointer arithmetic. I solved this by creating detailed diagrams of memory layouts and implementing extensive boundary checking.'
+            },
+            {
+                title: 'Coalescing Adjacent Free Blocks',
+                description: 'Preventing fragmentation required merging adjacent free blocks. I implemented a recursive coalescing algorithm that checks for valid buddy pairs based on address alignment.'
+            },
+            {
+                title: 'Performance vs. Memory Efficiency Trade-off',
+                description: 'First Fit was fast but wasteful, while Best Fit was efficient but slow. I learned to analyze algorithmic trade-offs and choose appropriate strategies based on workload characteristics.'
+            }
+        ]
+    },
+    'binary-bomb': {
+        title: 'x86-64 Binary Bomb Defuser',
+        tagline: 'Reverse-engineered a multi-phase binary executable using assembly analysis and GDB to defuse a "bomb" without source code.',
+        links: {
+            github: 'https://github.com/yourusername/binary-bomb',
+            writeup: '#'
+        },
+        description: {
+            problem: 'Understanding compiled binaries and assembly code is crucial for security researchers and systems programmers. The Binary Bomb tests these skills through a compiled program with six hidden phases.',
+            solution: 'I systematically reverse-engineered each phase using static analysis (examining assembly code), dynamic analysis (using GDB), and pattern recognition. Each phase required specific input strings to proceed without detonation.',
+            role: 'Working independently, I analyzed 1000+ lines of x86-64 assembly code, mapped control flow diagrams, identified encoding schemes, documented the solution process, and successfully defused all six phases plus the secret phase.'
+        },
+        techStack: ['GDB', 'objdump', 'x86-64 Assembly', 'Linux', 'C'],
+        challenges: [
+            {
+                title: 'Understanding Optimized Assembly',
+                description: 'The compiler had optimized the code, making logic non-intuitive. I learned to recognize optimization patterns like multiplication replaced with shifts and adds.'
+            },
+            {
+                title: 'Recursive Function Analysis',
+                description: 'Phase 4 involved a recursive function difficult to trace in assembly. I solved this by carefully tracking the stack frame and drawing out the recursion tree.'
+            },
+            {
+                title: 'Hidden Data Structures',
+                description: 'Phase 6 used a hidden linked list. By examining memory dumps and pointer relationships, I discovered the node structure and traversal logic.'
+            }
+        ]
+    },
+    'donut-shop': {
+        title: 'Concurrent Donut Shop Simulator',
+        tagline: 'A high-performance producer-consumer system using POSIX threads, demonstrating advanced synchronization with mutexes and condition variables.',
+        links: {
+            demo: '#',
+            github: 'https://github.com/yourusername/donut-shop'
+        },
+        description: {
+            problem: 'The producer-consumer problem is a classic synchronization challenge. Multiple threads must coordinate access to shared resources without deadlock, race conditions, or starvation.',
+            solution: 'I implemented a robust multithreaded system with 30 producer threads making 4 flavors, 50 consumer threads collecting 2000 dozen each, ring buffer data structures, fine-grained locking, and performance monitoring.',
+            role: 'I designed the concurrent architecture, implemented thread-safe ring buffers, created a logging system, built signal handling, and optimized performance to handle 50 concurrent consumers efficiently.'
+        },
+        techStack: ['C', 'POSIX Threads', 'Mutexes', 'Condition Variables', 'Linux', 'Makefile'],
+        challenges: [
+            {
+                title: 'Avoiding Deadlock',
+                description: 'With multiple mutexes for different flavors, I prevented circular waiting by establishing strict locking order and using separate producer/consumer mutexes.'
+            },
+            {
+                title: 'Preventing Buffer Overflow/Underflow',
+                description: 'The ring buffer required careful pointer management. I implemented producer waiting when full and consumer waiting when empty.'
+            },
+            {
+                title: 'Performance Optimization',
+                description: 'I optimized by using condition variables instead of busy-waiting, implementing batch operations, and fine-tuning buffer sizes.'
+            }
+        ]
+    },
+    'face-recognition': {
+        title: 'SVM-Based Face Recognition System',
+        tagline: 'Achieved 95%+ accuracy on face pair matching using Support Vector Machines with advanced feature engineering and hyperparameter optimization.',
+        links: {
+            demo: '#',
+            github: 'https://github.com/yourusername/face-recognition',
+            notebook: '#'
+        },
+        description: {
+            problem: 'Face recognition requires determining whether two face images show the same person. The LFW dataset presents real-world challenges with varying lighting, poses, and expressions.',
+            solution: 'I developed a machine learning pipeline processing 13,000+ face images, implementing PCA for dimensionality reduction, using SVM with RBF kernel, and achieving 95%+ accuracy through hyperparameter tuning.',
+            role: 'I analyzed the complex dataset, implemented feature extraction techniques, designed the ML pipeline, conducted hyperparameter optimization, and created detailed visualizations.'
+        },
+        techStack: ['Python', 'scikit-learn', 'NumPy', 'Matplotlib', 'SVM', 'PCA'],
+        challenges: [
+            {
+                title: 'High-Dimensional Data',
+                description: 'With 5828 features per image pair, I applied PCA to reduce dimensions while preserving variance, significantly improving training speed.'
+            },
+            {
+                title: 'Class Imbalance',
+                description: 'I addressed uneven distribution using balanced class_weight parameter and stratified sampling.'
+            },
+            {
+                title: 'Hyperparameter Optimization',
+                description: 'I used RandomizedSearchCV with log-uniform distributions to efficiently explore the parameter space, testing 20 configurations.'
+            }
+        ]
+    },
+    'university-db': {
+        title: 'University Course Management System',
+        tagline: 'A full-stack web application managing students, courses, and instructors with role-based access control and comprehensive course rating system.',
+        links: {
+            demo: '#',
+            github: 'https://github.com/yourusername/university-db',
+            schema: '#'
+        },
+        description: {
+            problem: 'Universities need comprehensive systems to manage course registration, student records, and feedback. Manual processes lead to scheduling conflicts and enrollment errors.',
+            solution: 'I developed a database-driven web application with multi-role authentication, course registration with conflict checking, instructor dashboards, student features, and a course rating system.',
+            role: 'I designed a normalized database with 15+ tables, implemented secure authentication, created responsive interfaces, built complex SQL queries, and developed the rating system.'
+        },
+        techStack: ['PHP', 'MySQL', 'HTML/CSS', 'JavaScript', 'Apache', 'phpMyAdmin'],
+        challenges: [
+            {
+                title: 'Complex Database Relationships',
+                description: 'I created junction tables for many-to-many relationships and enforced referential integrity across students, courses, sections, and ratings.'
+            },
+            {
+                title: 'Role-Based Access Control',
+                description: 'I implemented session-based authentication with role checking on each page load to ensure proper security and permissions.'
+            },
+            {
+                title: 'Real-Time Constraint Checking',
+                description: 'I wrote complex SQL queries with multiple joins and used transactions to ensure data consistency during registration.'
+            }
+        ]
+    },
+    'nbody-sim': {
+        title: 'N-Body Physics Simulator',
+        tagline: 'Real-time visualization of planetary motion using Newton\'s law of gravitation, featuring accurate orbital mechanics and scalable performance.',
+        links: {
+            demo: '#',
+            github: 'https://github.com/yourusername/nbody-sim',
+            docs: '#'
+        },
+        description: {
+            problem: 'Simulating gravitational interactions between multiple celestial bodies is computationally intensive, requiring O(n²) force calculations per time step.',
+            solution: 'I built a physics engine that calculates gravitational forces, updates positions using numerical integration, renders with accurate scaling, and supports variable time steps.',
+            role: 'I implemented the physics engine, designed the OOP architecture, created the rendering system, optimized performance, built file I/O, and added debug output.'
+        },
+        techStack: ['C++', 'SFML', 'Object-Oriented Design', 'Makefile', 'Git'],
+        challenges: [
+            {
+                title: 'Numerical Stability',
+                description: 'Simple integration accumulated errors over time. I implemented leapfrog integration for better energy conservation.'
+            },
+            {
+                title: 'Coordinate System Transformation',
+                description: 'I developed a scaling system that automatically adjusts based on window size while maintaining aspect ratios.'
+            },
+            {
+                title: 'Performance Optimization',
+                description: 'I implemented spatial optimization, efficient vector operations, and smart rendering that only updates changed positions.'
+            }
+        ]
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
  // Initialize EmailJS once when the page loads
     if (typeof emailjs !== 'undefined') {
@@ -572,5 +747,91 @@ document.addEventListener('DOMContentLoaded', function() {
         if (metalSurface) {
             metalSurface.style.backgroundPosition = `${x * 30}% ${y * 30}%`;
         }
+    });
+});
+
+// Modal functionality
+const modal = document.getElementById('projectModal');
+const modalClose = document.getElementsByClassName('modal-close')[0];
+
+// Function to open modal with project data
+function openProjectModal(projectId) {
+    const project = projectData[projectId];
+    if (!project) return;
+
+    // Play key click sound if available
+    playRandomKeySound();
+
+    // Set title and tagline
+    document.getElementById('modalTitle').textContent = project.title;
+    document.getElementById('modalTagline').textContent = project.tagline;
+
+    // Set links
+    const linksHtml = Object.entries(project.links).map(([key, url]) => {
+        const linkText = key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' ');
+        const icon = key === 'github' ? '📁' : key === 'demo' ? '🚀' : '📄';
+        return `<a href="${url}" target="_blank">${icon} ${linkText}</a>`;
+    }).join('');
+    document.getElementById('modalLinks').innerHTML = linksHtml;
+
+    // Set description
+    const descHtml = `
+        <h4>The Problem</h4>
+        <p>${project.description.problem}</p>
+        <h4>The Solution</h4>
+        <p>${project.description.solution}</p>
+        <h4>My Role & Contributions</h4>
+        <p>${project.description.role}</p>
+    `;
+    document.getElementById('modalDescription').innerHTML = descHtml;
+
+    // Set tech stack
+    const techHtml = project.techStack.map(tech => 
+        `<span class="tech-item">${tech}</span>`
+    ).join('');
+    document.getElementById('modalTechStack').innerHTML = techHtml;
+
+    // Set challenges
+    const challengesHtml = project.challenges.map(challenge => `
+        <div class="challenge-box">
+            <strong>${challenge.title}:</strong>
+            <p>${challenge.description}</p>
+        </div>
+    `).join('');
+    document.getElementById('modalChallenges').innerHTML = challengesHtml;
+
+    // Show modal
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close modal
+modalClose.onclick = function() {
+    playRandomKeySound();
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target == modal) {
+        playRandomKeySound();
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Add click handlers to project cards
+document.addEventListener('DOMContentLoaded', function() {
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Prevent if clicking on a link inside the card
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+                e.preventDefault();
+            }
+            const projectId = this.getAttribute('data-project');
+            openProjectModal(projectId);
+        });
     });
 });
