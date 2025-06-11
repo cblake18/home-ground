@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christian Blake | Software Developer Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="keyboard-grid"></div>
+    <div class="metal-surface"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" id="logo">Christian Blake</div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="key nav-link-item">Home</a></li>
+                    <li><a href="#about" class="key nav-link-item">About</a></li>
+                    <li><a href="#skills" class="key nav-link-item">Skills</a></li>
+                    <li><a href="#projects" class="key nav-link-item">Projects</a></li>
+                    <li><a href="#contact" class="key nav-link-item">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <canvas class="fractal-canvas" id="hero-fractal"></canvas>
+        <div class="keyboard-grid"></div>
+        <div class="container">
+            <h1 id="hero-title">Hi, I'm Christian Blake</h1>
+            <p id="hero-subtitle">A Computer Science graduate specializing in systems programming and software development.</p>
+            <a href="#projects" class="btn key">View My Work</a>
+        </div>
+        <div class="rgb-shift"></div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="keyboard-grid"></div>
+        <div class="container">
+            <h2 id="about-heading">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>As a recent Computer Science graduate from UMass Lowell, I am eager to apply my technical foundation and enthusiasm for technology to an entry-level software development or IT role. My academic journey has provided me with a strong understanding of systems programming, concurrent processing, and complex algorithms.</p>
+                    <p>I am a dedicated problem-solver, committed to contributing to innovative projects and growing within a dynamic team that fosters professional development. My experience ranges from low-level systems and assembly to object-oriented application development.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://i.imgur.com/7DAl93s.jpeg" alt="Christian Blake">
+                </div>
+            </div>
+        </div>
+        <div class="rgb-shift"></div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="keyboard-grid"></div>
+        <div class="container">
+            <h2 id="skills-heading">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-item key"><h3>C / C++</h3></div>
+                <div class="skill-item key"><h3>Python</h3></div>
+                <div class="skill-item key"><h3>Java</h3></div>
+                <div class="skill-item key"><h3>Linux</h3></div>
+                <div class="skill-item key"><h3>x86-64 Assembly</h3></div>
+                <div class="skill-item key"><h3>Git</h3></div>
+                <div class="skill-item key"><h3>SQL</h3></div>
+                <div class="skill-item key"><h3>Pthreads</h3></div>
+                <div class="skill-item key"><h3>System V IPC</h3></div>
+                <div class="skill-item key"><h3>GDB</h3></div>
+                <div class="skill-item key"><h3>SFML</h3></div>
+                <div class="skill-item key"><h3>LaTeX</h3></div>
+            </div>
+        </div>
+        <div class="rgb-shift"></div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="keyboard-grid"></div>
+        <div class="container">
+            <h2 id="projects-heading">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card key">
+                    <div class="project-image">OS Memory Allocator</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Custom Memory Allocator</h3>
+                        <p>Developed a custom memory manager in C, implementing First Fit, Best Fit, and a Buddy System to handle allocation and deallocation requests, analyzing the performance and fragmentation of each algorithm.</p>
+                        <a href="#" class="btn key">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card key">
+                    <div class="project-image">Binary Bomb Defusal</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Reverse Engineering Challenge</h3>
+                        <p>Defused a "binary bomb" by reverse-engineering the x86-64 assembly code of six distinct phases, using GDB to analyze control flow and deduce the required inputs to prevent detonation.</p>
+                        <a href="#" class="btn key">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card key">
+                    <div class="project-image">Multithreaded Donut Shop</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Multithreaded Producer-Consumer</h3>
+                        <p>Solved the classic producer-consumer problem by simulating a multi-threaded donut shop in C. Implemented two distinct solutions using Pthreads (mutexes, condition variables) and System V IPC (semaphores, shared memory) to manage concurrency.</p>
+                        <a href="#" class="btn key">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card key">
+                    <div class="project-image">Machine Learning Face Recognition</div>
+                    <div class="project-info">
+                        <h3 class="project-title">ML Face Recognition</h3>
+                        <p>Developed a face recognition model using SVMs and ensemble methods on the LFW Pairs dataset. Applied PCA and difference imaging for feature extraction and performed hyperparameter tuning with RandomizedSearchCV to improve model performance.</p>
+                        <a href="#" class="btn key">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card key">
+                    <div class="project-image">University Database</div>
+                    <div class="project-info">
+                        <h3 class="project-title">University Database Developer</h3>
+                        <p>Designed and implemented a relational database in SQL for university operations, managing entities like students and courses with proper constraints. Created ER diagrams to model relationships and ensured data integrity.</p>
+                        <a href="#" class="btn key">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card key">
+                    <div class="project-image">N-Body Simulation</div>
+                    <div class="project-info">
+                        <h3 class="project-title">N-Body Physics Simulation</h3>
+                        <p>Built a graphical planetary physics simulator in C++ and SFML that models gravitational forces between celestial bodies, using object-oriented principles to manage state and behavior.</p>
+                        <a href="#" class="btn key">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rgb-shift"></div>
+    </section>
+
+    <section class="contact" id="contact">
+        <canvas class="fractal-canvas" id="contact-fractal"></canvas>
+        <div class="keyboard-grid"></div>
+        <div class="container">
+            <h2 id="contact-heading">Get In Touch</h2>
+            <div class="contact-form">
+                <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required class="key-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required class="key-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required class="key-input"></textarea>
+                    </div>
+                    <button type="submit" class="btn key">Send Message</button>
+                </form>
+            </div>
+        </div>
+        <div class="rgb-shift"></div>
+    </section>
+
+    <footer>
+        <div class="keyboard-grid"></div>
+        <div class="container">
+            <p>&copy; 2025 Christian Blake. All Rights Reserved.</p>
+            <ul class="social-links">
+                <li><a href="https://www.linkedin.com/in/christian-blake3" target="_blank" class="key">LinkedIn</a></li>
+                <li><a href="#" class="key">GitHub</a></li>
+                <li><a href="mailto:christianblake3333@gmail.com" class="key">Email</a></li>
+            </ul>
+        </div>
+        <div class="rgb-shift"></div>
+    </footer>
+
+    <audio id="keyClick1" preload="auto">
+        <source src="https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="keyClick2" preload="auto">
+        <source src="https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click_on.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="keyClick3" preload="auto">
+        <source src="https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_tiny.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
