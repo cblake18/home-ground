@@ -1,0 +1,1175 @@
+MANAGEMENT POLICY = Buddy System
+POOL SIZE = 512 KB
+Failed Req 12 is size 72992
+Failed Req 14 is size 58400
+Failed Req 15 is size 84640
+Failed Req 21 is size 118240
+Failed Req 25 is size 113440
+Failed Req 43 is size 55968
+Failed Req 51 is size 10848
+Failed Req 56 is size 36640
+Failed Req 62 is size 113952
+Failed Req 72 is size 36704
+Failed Req 78 is size 85024
+Failed Req 81 is size 39520
+Failed Req 82 is size 79840
+Failed Req 85 is size 79840
+Failed Req 86 is size 110816
+Failed Req 89 is size 53152
+Failed Req 122 is size 91680
+Failed Req 124 is size 94752
+Failed Req 125 is size 113376
+Failed Req 126 is size 82272
+Failed Req 129 is size 124832
+Failed Req 136 is size 44192
+Failed Req 139 is size 124064
+Failed Req 152 is size 84384
+Failed Req 153 is size 67936
+Failed Req 154 is size 67872
+Failed Req 165 is size 93408
+Failed Req 166 is size 46368
+Failed Req 167 is size 47584
+Failed Req 178 is size 92448
+Failed Req 185 is size 114656
+Failed Req 186 is size 93216
+Failed Req 187 is size 103776
+Failed Req 196 is size 112480
+Failed Req 200 is size 91424
+Failed Req 201 is size 69472
+Failed Req 204 is size 105760
+Failed Req 208 is size 101536
+Failed Req 212 is size 46304
+Failed Req 213 is size 112480
+Failed Req 216 is size 48992
+Failed Req 217 is size 128224
+Failed Req 218 is size 65568
+Failed Req 234 is size 116000
+Failed Req 235 is size 65824
+Failed Req 236 is size 110944
+Failed Req 248 is size 121056
+Failed Req 253 is size 8352
+Failed Req 254 is size 48416
+Failed Req 266 is size 118048
+Failed Req 267 is size 98656
+Failed Req 269 is size 125344
+Failed Req 271 is size 116064
+Failed Req 272 is size 69664
+Failed Req 275 is size 114976
+Failed Req 279 is size 106784
+Failed Req 295 is size 121184
+Failed Req 298 is size 77216
+Failed Req 299 is size 103776
+Failed Req 300 is size 120480
+Failed Req 303 is size 42080
+Failed Req 312 is size 87648
+Failed Req 329 is size 46688
+Failed Req 330 is size 44128
+Failed Req 331 is size 86176
+Failed Req 332 is size 109792
+Failed Req 334 is size 74784
+Failed Req 346 is size 112864
+Failed Req 350 is size 128160
+Failed Req 352 is size 85472
+Failed Req 373 is size 53280
+Failed Req 375 is size 87200
+Failed Req 378 is size 68832
+Failed Req 381 is size 36000
+Failed Req 384 is size 117344
+Failed Req 387 is size 83872
+Failed Req 394 is size 40608
+Failed Req 402 is size 107168
+Failed Req 403 is size 72416
+Failed Req 408 is size 66208
+Failed Req 409 is size 108512
+Failed Req 429 is size 111136
+Failed Req 438 is size 67104
+Failed Req 439 is size 129184
+Failed Req 448 is size 103264
+Failed Req 449 is size 74464
+Failed Req 455 is size 89696
+Failed Req 461 is size 114784
+Failed Req 471 is size 126944
+Failed Req 475 is size 105248
+Failed Req 476 is size 111264
+Failed Req 487 is size 30880
+Failed Req 488 is size 34016
+Failed Req 489 is size 121504
+Failed Req 490 is size 34784
+Failed Req 493 is size 63904
+Failed Req 495 is size 127520
+Failed Req 514 is size 129056
+Failed Req 518 is size 123872
+Failed Req 520 is size 108320
+Failed Req 522 is size 92512
+Failed Req 528 is size 32608
+Failed Req 531 is size 76256
+Failed Req 532 is size 83040
+Failed Req 535 is size 117408
+Failed Req 536 is size 103520
+Failed Req 538 is size 35168
+Failed Req 547 is size 95584
+Failed Req 556 is size 126048
+Failed Req 561 is size 76064
+Failed Req 576 is size 72992
+Failed Req 580 is size 81568
+Failed Req 581 is size 100960
+Failed Req 583 is size 69664
+Failed Req 584 is size 75040
+Failed Req 586 is size 82656
+Failed Req 587 is size 72864
+Failed Req 592 is size 58208
+Failed Req 612 is size 102944
+Failed Req 614 is size 78304
+Failed Req 617 is size 98528
+Failed Req 621 is size 126240
+Failed Req 623 is size 97568
+Failed Req 632 is size 108896
+Failed Req 634 is size 65696
+Failed Req 635 is size 100448
+Failed Req 646 is size 117536
+Failed Req 652 is size 41568
+Failed Req 654 is size 48608
+Failed Req 667 is size 105632
+Failed Req 676 is size 126816
+Failed Req 678 is size 54688
+Failed Req 683 is size 45088
+Failed Req 704 is size 75040
+Failed Req 707 is size 113376
+Failed Req 713 is size 123936
+Failed Req 714 is size 117664
+Failed Req 737 is size 92064
+Failed Req 764 is size 105696
+Failed Req 765 is size 97952
+Failed Req 794 is size 34592
+Failed Req 796 is size 124896
+Failed Req 798 is size 69856
+Failed Req 799 is size 92640
+Failed Req 812 is size 107040
+Failed Req 813 is size 123808
+Failed Req 814 is size 77088
+Failed Req 823 is size 76000
+Failed Req 827 is size 38112
+Failed Req 828 is size 110112
+Failed Req 835 is size 80864
+Failed Req 836 is size 48544
+Failed Req 864 is size 113120
+Failed Req 865 is size 59104
+Failed Req 869 is size 92832
+Failed Req 870 is size 125088
+Failed Req 871 is size 124128
+Failed Req 873 is size 80736
+Failed Req 898 is size 121440
+Failed Req 939 is size 126368
+Failed Req 940 is size 110624
+Failed Req 944 is size 110496
+Failed Req 945 is size 90400
+Failed Req 951 is size 116832
+Failed Req 955 is size 101728
+Failed Req 970 is size 95456
+Failed Req 972 is size 76320
+Failed Req 978 is size 78880
+Failed Req 981 is size 90656
+Failed Req 984 is size 87840
+Failed Req 989 is size 119072
+TOTAL ALLOCATIONS: 329
+Seq # Type Size/Rq# Done? Free Total Free Elems Largest Chunk
+1     alloc 99744   YES  393216     2          262144    
+2     alloc 111776  YES  262144     1          262144    
+3     alloc 64864   YES  196608     2          131072    
+4     alloc 91552   YES  65536      1          65536     
+5     free 2       YES  196608     2          131072    
+6     free 4       YES  327680     3          131072    
+7     alloc 5600    YES  319488     5          131072    
+8     alloc 110304  YES  188416     4          131072    
+9     alloc 78688   YES  57344      3          32768     
+10    alloc 8032    YES  49152      2          32768     
+11    alloc 27872   YES  16384      1          16384     
+12    alloc 72992   NO   16384      1          16384     
+13    alloc 4960    YES  8192       1          8192      
+14    alloc 58400   NO   8192       1          8192      
+15    alloc 84640   NO   8192       1          8192      
+16    free 9       YES  139264     2          131072    
+17    alloc 25760   YES  106496     3          65536     
+18    free 7       YES  114688     4          65536     
+19    free 3       YES  180224     5          65536     
+20    alloc 6496    YES  172032     4          65536     
+21    alloc 118240  NO   172032     4          65536     
+22    free 11      YES  204800     5          65536     
+23    alloc 44448   YES  139264     4          65536     
+24    free 10      YES  147456     5          65536     
+25    alloc 113440  NO   147456     5          65536     
+26    free 1       YES  278528     6          131072    
+27    free 21      NO   278528     6          131072    
+28    free 20      YES  286720     6          131072    
+29    free 15      NO   286720     6          131072    
+30    alloc 115040  YES  155648     5          65536     
+31    free 17      YES  188416     4          131072    
+32    alloc 55072   YES  122880     4          65536     
+33    free 13      YES  131072     2          65536     
+34    free 23      YES  196608     2          131072    
+35    free 32      YES  262144     2          131072    
+36    alloc 57312   YES  196608     2          131072    
+37    alloc 101408  YES  65536      1          65536     
+38    free 8       YES  196608     2          131072    
+39    free 12      NO   196608     2          131072    
+40    free 14      NO   196608     2          131072    
+41    alloc 71328   YES  65536      1          65536     
+42    alloc 26144   YES  32768      1          32768     
+43    alloc 55968   NO   32768      1          32768     
+44    alloc 17824   YES  0          0          0         
+45    free 42      YES  32768      1          32768     
+46    free 36      YES  98304      2          65536     
+47    alloc 49120   YES  32768      1          32768     
+48    free 41      YES  163840     2          131072    
+49    alloc 87200   YES  32768      1          32768     
+50    alloc 16928   YES  0          0          0         
+51    alloc 10848   NO   0          0          0         
+52    free 50      YES  32768      1          32768     
+53    free 49      YES  163840     2          131072    
+54    alloc 110112  YES  32768      1          32768     
+55    free 25      NO   32768      1          32768     
+56    alloc 36640   NO   32768      1          32768     
+57    free 54      YES  163840     2          131072    
+58    alloc 90592   YES  32768      1          32768     
+59    alloc 32      YES  32736      10         16384     
+60    free 30      YES  163808     11         131072    
+61    alloc 57312   YES  98272      11         65536     
+62    alloc 113952  NO   98272      11         65536     
+63    free 37      YES  229344     12         131072    
+64    alloc 88160   YES  98272      11         65536     
+65    free 43      NO   98272      11         65536     
+66    free 51      NO   98272      11         65536     
+67    alloc 35424   YES  32736      10         16384     
+68    alloc 7584    YES  24544      9          16384     
+69    free 47      YES  90080      10         65536     
+70    free 68      YES  98272      11         65536     
+71    alloc 60960   YES  32736      10         16384     
+72    alloc 36704   NO   32736      10         16384     
+73    free 58      YES  163808     11         131072    
+74    free 44      YES  196576     12         131072    
+75    alloc 44512   YES  131040     12         65536     
+76    alloc 34656   YES  65504      11         32768     
+77    free 59      YES  65536      1          65536     
+78    alloc 85024   NO   65536      1          65536     
+79    free 56      NO   65536      1          65536     
+80    alloc 42080   YES  0          0          0         
+81    alloc 39520   NO   0          0          0         
+82    alloc 79840   NO   0          0          0         
+83    free 80      YES  65536      1          65536     
+84    free 61      YES  131072     2          65536     
+85    alloc 79840   NO   131072     2          65536     
+86    alloc 110816  NO   131072     2          65536     
+87    alloc 61664   YES  65536      1          65536     
+88    alloc 51808   YES  0          0          0         
+89    alloc 53152   NO   0          0          0         
+90    free 67      YES  65536      1          65536     
+91    free 62      NO   65536      1          65536     
+92    free 78      NO   65536      1          65536     
+93    free 64      YES  196608     2          131072    
+94    free 75      YES  262144     3          131072    
+95    free 72      NO   262144     3          131072    
+96    free 76      YES  327680     2          262144    
+97    free 81      NO   327680     2          262144    
+98    alloc 40736   YES  262144     1          262144    
+99    alloc 108192  YES  131072     1          131072    
+100   free 71      YES  196608     2          131072    
+101   free 85      NO   196608     2          131072    
+102   alloc 43552   YES  131072     1          131072    
+103   alloc 95840   YES  0          0          0         
+104   free 98      YES  65536      1          65536     
+105   free 89      NO   65536      1          65536     
+106   free 103     YES  196608     2          131072    
+107   alloc 10464   YES  180224     3          131072    
+108   alloc 51552   YES  114688     3          65536     
+109   free 86      NO   114688     3          65536     
+110   free 108     YES  180224     3          131072    
+111   alloc 31200   YES  147456     2          131072    
+112   free 82      NO   147456     2          131072    
+113   free 88      YES  212992     3          131072    
+114   alloc 63648   YES  147456     2          131072    
+115   free 87      YES  212992     3          131072    
+116   free 99      YES  344064     3          262144    
+117   alloc 96480   YES  212992     3          131072    
+118   alloc 44832   YES  147456     2          131072    
+119   alloc 24864   YES  114688     3          65536     
+120   free 119     YES  147456     2          131072    
+121   alloc 80224   YES  16384      1          16384     
+122   alloc 91680   NO   16384      1          16384     
+123   free 107     YES  32768      1          32768     
+124   alloc 94752   NO   32768      1          32768     
+125   alloc 113376  NO   32768      1          32768     
+126   alloc 82272   NO   32768      1          32768     
+127   free 102     YES  98304      2          65536     
+128   free 111     YES  131072     2          65536     
+129   alloc 124832  NO   131072     2          65536     
+130   alloc 45664   YES  65536      1          65536     
+131   free 114     YES  131072     1          131072    
+132   alloc 94432   YES  0          0          0         
+133   free 126     NO   0          0          0         
+134   free 124     NO   0          0          0         
+135   free 122     NO   0          0          0         
+136   alloc 44192   NO   0          0          0         
+137   free 132     YES  131072     1          131072    
+138   alloc 93856   YES  0          0          0         
+139   alloc 124064  NO   0          0          0         
+140   free 136     NO   0          0          0         
+141   free 118     YES  65536      1          65536     
+142   free 121     YES  196608     2          131072    
+143   alloc 24288   YES  163840     2          131072    
+144   free 117     YES  294912     2          262144    
+145   free 139     NO   294912     2          262144    
+146   free 125     NO   294912     2          262144    
+147   alloc 84000   YES  163840     2          131072    
+148   alloc 62688   YES  98304      2          65536     
+149   free 147     YES  229376     3          131072    
+150   free 129     NO   229376     3          131072    
+151   alloc 123104  YES  98304      2          65536     
+152   alloc 84384   NO   98304      2          65536     
+153   alloc 67936   NO   98304      2          65536     
+154   alloc 67872   NO   98304      2          65536     
+155   free 148     YES  163840     2          131072    
+156   free 130     YES  229376     3          131072    
+157   alloc 91104   YES  98304      2          65536     
+158   alloc 21280   YES  65536      1          65536     
+159   alloc 8480    YES  49152      2          32768     
+160   free 138     YES  180224     3          131072    
+161   alloc 27872   YES  147456     2          131072    
+162   alloc 30304   YES  114688     3          65536     
+163   alloc 44256   YES  49152      2          32768     
+164   free 158     YES  81920      3          32768     
+165   alloc 93408   NO   81920      3          32768     
+166   alloc 46368   NO   81920      3          32768     
+167   alloc 47584   NO   81920      3          32768     
+168   free 157     YES  212992     4          131072    
+169   free 163     YES  278528     5          131072    
+170   free 151     YES  409600     5          262144    
+171   free 143     YES  442368     5          262144    
+172   alloc 122528  YES  311296     5          131072    
+173   alloc 56800   YES  245760     4          131072    
+174   free 153     NO   245760     4          131072    
+175   free 154     NO   245760     4          131072    
+176   alloc 69984   YES  114688     3          65536     
+177   free 152     NO   114688     3          65536     
+178   alloc 92448   NO   114688     3          65536     
+179   alloc 18400   YES  81920      2          65536     
+180   free 161     YES  114688     3          65536     
+181   free 159     YES  131072     2          65536     
+182   free 172     YES  262144     3          131072    
+183   free 162     YES  294912     4          131072    
+184   alloc 74080   YES  163840     3          65536     
+185   alloc 114656  NO   163840     3          65536     
+186   alloc 93216   NO   163840     3          65536     
+187   alloc 103776  NO   163840     3          65536     
+188   alloc 3936    YES  159744     5          65536     
+189   free 166     NO   159744     5          65536     
+190   free 165     NO   159744     5          65536     
+191   free 176     YES  290816     6          131072    
+192   free 167     NO   290816     6          131072    
+193   alloc 94240   YES  159744     5          65536     
+194   free 186     NO   159744     5          65536     
+195   free 179     YES  192512     6          65536     
+196   alloc 112480  NO   192512     6          65536     
+197   free 173     YES  258048     6          131072    
+198   free 187     NO   258048     6          131072    
+199   alloc 102560  YES  126976     5          65536     
+200   alloc 91424   NO   126976     5          65536     
+201   alloc 69472   NO   126976     5          65536     
+202   alloc 15328   YES  110592     4          65536     
+203   alloc 14240   YES  94208      4          65536     
+204   alloc 105760  NO   94208      4          65536     
+205   free 178     NO   94208      4          65536     
+206   free 184     YES  225280     5          131072    
+207   alloc 80608   YES  94208      4          65536     
+208   alloc 101536  NO   94208      4          65536     
+209   free 200     NO   94208      4          65536     
+210   alloc 63648   YES  28672      3          16384     
+211   free 196     NO   28672      3          16384     
+212   alloc 46304   NO   28672      3          16384     
+213   alloc 112480  NO   28672      3          16384     
+214   free 185     NO   28672      3          16384     
+215   free 188     YES  32768      2          16384     
+216   alloc 48992   NO   32768      2          16384     
+217   alloc 128224  NO   32768      2          16384     
+218   alloc 65568   NO   32768      2          16384     
+219   alloc 14816   YES  16384      1          16384     
+220   free 202     YES  32768      2          16384     
+221   free 212     NO   32768      2          16384     
+222   free 193     YES  163840     3          131072    
+223   free 210     YES  229376     4          131072    
+224   free 219     YES  245760     4          131072    
+225   free 201     NO   245760     4          131072    
+226   alloc 122592  YES  114688     3          65536     
+227   alloc 16480   YES  81920      2          65536     
+228   free 208     NO   81920      2          65536     
+229   free 199     YES  212992     3          131072    
+230   alloc 122080  YES  81920      2          65536     
+231   free 203     YES  98304      2          65536     
+232   free 213     NO   98304      2          65536     
+233   free 204     NO   98304      2          65536     
+234   alloc 116000  NO   98304      2          65536     
+235   alloc 65824   NO   98304      2          65536     
+236   alloc 110944  NO   98304      2          65536     
+237   free 207     YES  229376     3          131072    
+238   alloc 36192   YES  163840     2          131072    
+239   alloc 58336   YES  98304      2          65536     
+240   free 216     NO   98304      2          65536     
+241   free 226     YES  229376     3          131072    
+242   free 234     NO   229376     3          131072    
+243   alloc 57184   YES  163840     2          131072    
+244   free 227     YES  196608     2          131072    
+245   free 218     NO   196608     2          131072    
+246   free 217     NO   196608     2          131072    
+247   alloc 105632  YES  65536      1          65536     
+248   alloc 121056  NO   65536      1          65536     
+249   free 248     NO   65536      1          65536     
+250   free 230     YES  196608     2          131072    
+251   alloc 42080   YES  131072     1          131072    
+252   alloc 87328   YES  0          0          0         
+253   alloc 8352    NO   0          0          0         
+254   alloc 48416   NO   0          0          0         
+255   free 247     YES  131072     1          131072    
+256   free 251     YES  196608     2          131072    
+257   alloc 17312   YES  163840     2          131072    
+258   free 243     YES  229376     3          131072    
+259   alloc 63136   YES  163840     2          131072    
+260   free 236     NO   163840     2          131072    
+261   free 235     NO   163840     2          131072    
+262   alloc 47328   YES  98304      2          65536     
+263   free 238     YES  163840     3          65536     
+264   free 239     YES  229376     4          65536     
+265   alloc 52256   YES  163840     3          65536     
+266   alloc 118048  NO   163840     3          65536     
+267   alloc 98656   NO   163840     3          65536     
+268   alloc 11552   YES  147456     3          65536     
+269   alloc 125344  NO   147456     3          65536     
+270   free 257     YES  180224     4          65536     
+271   alloc 116064  NO   180224     4          65536     
+272   alloc 69664   NO   180224     4          65536     
+273   free 271     NO   180224     4          65536     
+274   free 254     NO   180224     4          65536     
+275   alloc 114976  NO   180224     4          65536     
+276   alloc 44064   YES  114688     3          65536     
+277   free 253     NO   114688     3          65536     
+278   alloc 39520   YES  49152      2          32768     
+279   alloc 106784  NO   49152      2          32768     
+280   free 262     YES  114688     3          65536     
+281   free 252     YES  245760     4          131072    
+282   free 259     YES  311296     5          131072    
+283   alloc 24096   YES  278528     4          131072    
+284   alloc 71968   YES  147456     3          65536     
+285   free 276     YES  212992     4          65536     
+286   alloc 58976   YES  147456     3          65536     
+287   free 272     NO   147456     3          65536     
+288   free 267     NO   147456     3          65536     
+289   free 269     NO   147456     3          65536     
+290   free 279     NO   147456     3          65536     
+291   free 265     YES  212992     3          131072    
+292   alloc 111008  YES  81920      2          65536     
+293   free 268     YES  98304      2          65536     
+294   alloc 42336   YES  32768      1          32768     
+295   alloc 121184  NO   32768      1          32768     
+296   free 266     NO   32768      1          32768     
+297   alloc 26848   YES  0          0          0         
+298   alloc 77216   NO   0          0          0         
+299   alloc 103776  NO   0          0          0         
+300   alloc 120480  NO   0          0          0         
+301   free 284     YES  131072     1          131072    
+302   alloc 118560  YES  0          0          0         
+303   alloc 42080   NO   0          0          0         
+304   free 275     NO   0          0          0         
+305   free 278     YES  65536      1          65536     
+306   free 294     YES  131072     1          131072    
+307   alloc 72992   YES  0          0          0         
+308   free 302     YES  131072     1          131072    
+309   alloc 44512   YES  65536      1          65536     
+310   free 300     NO   65536      1          65536     
+311   alloc 32224   YES  32768      1          32768     
+312   alloc 87648   NO   32768      1          32768     
+313   free 283     YES  65536      2          32768     
+314   alloc 32352   YES  32768      1          32768     
+315   free 286     YES  98304      2          65536     
+316   free 297     YES  131072     3          65536     
+317   free 292     YES  262144     4          131072    
+318   alloc 63584   YES  196608     3          131072    
+319   free 303     NO   196608     3          131072    
+320   alloc 30624   YES  163840     2          131072    
+321   alloc 18336   YES  131072     1          131072    
+322   free 295     NO   131072     1          131072    
+323   free 309     YES  196608     2          131072    
+324   alloc 224     YES  196352     9          131072    
+325   free 299     NO   196352     9          131072    
+326   alloc 113760  YES  65280      8          32768     
+327   free 298     NO   65280      8          32768     
+328   alloc 12960   YES  48896      7          32768     
+329   alloc 46688   NO   48896      7          32768     
+330   alloc 44128   NO   48896      7          32768     
+331   alloc 86176   NO   48896      7          32768     
+332   alloc 109792  NO   48896      7          32768     
+333   free 314     YES  81664      8          32768     
+334   alloc 74784   NO   81664      8          32768     
+335   free 307     YES  212736     9          131072    
+336   alloc 1376    YES  210688     8          131072    
+337   free 326     YES  341760     8          262144    
+338   free 320     YES  374528     8          262144    
+339   free 311     YES  407296     9          262144    
+340   free 312     NO   407296     9          262144    
+341   alloc 50848   YES  341760     8          262144    
+342   alloc 80800   YES  210688     8          131072    
+343   free 318     YES  276224     9          131072    
+344   free 328     YES  292608     10         131072    
+345   alloc 117088  YES  161536     9          65536     
+346   alloc 112864  NO   161536     9          65536     
+347   alloc 3616    YES  157440     8          65536     
+348   free 324     YES  157696     6          65536     
+349   alloc 56224   YES  92160      5          32768     
+350   alloc 128160  NO   92160      5          32768     
+351   free 321     YES  124928     5          65536     
+352   alloc 85472   NO   124928     5          65536     
+353   free 330     NO   124928     5          65536     
+354   alloc 55456   YES  59392      4          32768     
+355   free 329     NO   59392      4          32768     
+356   free 334     NO   59392      4          32768     
+357   free 336     YES  61440      4          32768     
+358   free 332     NO   61440      4          32768     
+359   free 331     NO   61440      4          32768     
+360   alloc 23264   YES  28672      3          16384     
+361   free 341     YES  94208      4          65536     
+362   free 342     YES  225280     5          131072    
+363   free 345     YES  356352     5          262144    
+364   alloc 37792   YES  290816     4          262144    
+365   free 347     YES  294912     2          262144    
+366   free 360     YES  327680     2          262144    
+367   free 349     YES  393216     3          262144    
+368   alloc 69728   YES  262144     3          131072    
+369   alloc 2208    YES  258048     6          131072    
+370   alloc 6368    YES  249856     5          131072    
+371   alloc 40608   YES  184320     4          131072    
+372   alloc 103328  YES  53248      3          32768     
+373   alloc 53280   NO   53248      3          32768     
+374   free 346     NO   53248      3          32768     
+375   alloc 87200   NO   53248      3          32768     
+376   free 368     YES  184320     4          131072    
+377   alloc 70752   YES  53248      3          32768     
+378   alloc 68832   NO   53248      3          32768     
+379   free 352     NO   53248      3          32768     
+380   free 350     NO   53248      3          32768     
+381   alloc 36000   NO   53248      3          32768     
+382   free 354     YES  118784     4          65536     
+383   free 364     YES  184320     5          65536     
+384   alloc 117344  NO   184320     5          65536     
+385   alloc 46176   YES  118784     4          65536     
+386   free 375     NO   118784     4          65536     
+387   alloc 83872   NO   118784     4          65536     
+388   free 371     YES  184320     4          131072    
+389   alloc 118112  YES  53248      3          32768     
+390   free 381     NO   53248      3          32768     
+391   free 372     YES  184320     4          131072    
+392   alloc 91808   YES  53248      3          32768     
+393   free 373     NO   53248      3          32768     
+394   alloc 40608   NO   53248      3          32768     
+395   alloc 27040   YES  20480      2          16384     
+396   free 389     YES  151552     3          131072    
+397   free 370     YES  159744     4          131072    
+398   free 369     YES  163840     2          131072    
+399   alloc 37344   YES  98304      2          65536     
+400   alloc 45152   YES  32768      1          32768     
+401   alloc 21152   YES  0          0          0         
+402   alloc 107168  NO   0          0          0         
+403   alloc 72416   NO   0          0          0         
+404   free 387     NO   0          0          0         
+405   free 377     YES  131072     1          131072    
+406   alloc 30944   YES  98304      2          65536     
+407   free 378     NO   98304      2          65536     
+408   alloc 66208   NO   98304      2          65536     
+409   alloc 108512  NO   98304      2          65536     
+410   free 400     YES  163840     3          65536     
+411   free 392     YES  294912     4          131072    
+412   alloc 64160   YES  229376     3          131072    
+413   free 385     YES  294912     4          131072    
+414   free 384     NO   294912     4          131072    
+415   alloc 22304   YES  262144     3          131072    
+416   free 401     YES  294912     4          131072    
+417   alloc 28896   YES  262144     3          131072    
+418   free 395     YES  294912     4          131072    
+419   free 399     YES  360448     5          131072    
+420   free 394     NO   360448     5          131072    
+421   free 403     NO   360448     5          131072    
+422   free 408     NO   360448     5          131072    
+423   alloc 61856   YES  294912     4          131072    
+424   free 402     NO   294912     4          131072    
+425   free 406     YES  327680     5          131072    
+426   alloc 54688   YES  262144     4          131072    
+427   alloc 7648    YES  253952     5          131072    
+428   alloc 85728   YES  122880     4          65536     
+429   alloc 111136  NO   122880     4          65536     
+430   free 417     YES  155648     4          65536     
+431   free 426     YES  221184     4          131072    
+432   free 415     YES  253952     5          131072    
+433   alloc 10784   YES  237568     4          131072    
+434   alloc 95520   YES  106496     3          65536     
+435   free 423     YES  172032     4          65536     
+436   free 409     NO   172032     4          65536     
+437   free 429     NO   172032     4          65536     
+438   alloc 67104   NO   172032     4          65536     
+439   alloc 129184  NO   172032     4          65536     
+440   free 412     YES  237568     4          131072    
+441   free 433     YES  253952     5          131072    
+442   alloc 7904    YES  245760     4          131072    
+443   free 428     YES  376832     5          131072    
+444   alloc 18784   YES  344064     4          131072    
+445   alloc 40032   YES  278528     3          131072    
+446   alloc 119200  YES  147456     2          131072    
+447   alloc 28384   YES  114688     3          65536     
+448   alloc 103264  NO   114688     3          65536     
+449   alloc 74464   NO   114688     3          65536     
+450   alloc 3936    YES  110592     4          65536     
+451   free 439     NO   110592     4          65536     
+452   alloc 13728   YES  94208      4          65536     
+453   free 442     YES  102400     5          65536     
+454   free 438     NO   102400     5          65536     
+455   alloc 89696   NO   102400     5          65536     
+456   free 446     YES  233472     6          131072    
+457   free 427     YES  241664     6          131072    
+458   free 449     NO   241664     6          131072    
+459   free 448     NO   241664     6          131072    
+460   alloc 96224   YES  110592     5          65536     
+461   alloc 114784  NO   110592     5          65536     
+462   free 455     NO   110592     5          65536     
+463   free 445     YES  176128     6          65536     
+464   free 434     YES  307200     7          131072    
+465   alloc 47200   YES  241664     6          131072    
+466   alloc 45152   YES  176128     5          131072    
+467   free 450     YES  180224     3          131072    
+468   alloc 11680   YES  163840     2          131072    
+469   alloc 91040   YES  32768      1          32768     
+470   free 468     YES  49152      2          32768     
+471   alloc 126944  NO   49152      2          32768     
+472   free 447     YES  81920      3          32768     
+473   free 471     NO   81920      3          32768     
+474   free 444     YES  114688     3          65536     
+475   alloc 105248  NO   114688     3          65536     
+476   alloc 111264  NO   114688     3          65536     
+477   free 460     YES  245760     4          131072    
+478   alloc 54624   YES  180224     3          131072    
+479   free 452     YES  196608     2          131072    
+480   free 469     YES  327680     3          131072    
+481   free 466     YES  393216     2          262144    
+482   free 476     NO   393216     2          262144    
+483   free 461     NO   393216     2          262144    
+484   alloc 115872  YES  262144     1          262144    
+485   alloc 97376   YES  131072     1          131072    
+486   alloc 71264   YES  0          0          0         
+487   alloc 30880   NO   0          0          0         
+488   alloc 34016   NO   0          0          0         
+489   alloc 121504  NO   0          0          0         
+490   alloc 34784   NO   0          0          0         
+491   free 465     YES  65536      1          65536     
+492   alloc 41248   YES  0          0          0         
+493   alloc 63904   NO   0          0          0         
+494   free 489     NO   0          0          0         
+495   alloc 127520  NO   0          0          0         
+496   free 492     YES  65536      1          65536     
+497   free 486     YES  196608     2          131072    
+498   free 478     YES  262144     2          131072    
+499   free 484     YES  393216     2          262144    
+500   alloc 33760   YES  327680     2          262144    
+501   free 475     NO   327680     2          262144    
+502   alloc 78112   YES  196608     2          131072    
+503   free 495     NO   196608     2          131072    
+504   alloc 40928   YES  131072     1          131072    
+505   alloc 32800   YES  65536      1          65536     
+506   alloc 17568   YES  32768      1          32768     
+507   free 493     NO   32768      1          32768     
+508   free 485     YES  163840     2          131072    
+509   free 487     NO   163840     2          131072    
+510   free 488     NO   163840     2          131072    
+511   alloc 32672   YES  131072     1          131072    
+512   alloc 93280   YES  0          0          0         
+513   free 500     YES  65536      1          65536     
+514   alloc 129056  NO   65536      1          65536     
+515   free 505     YES  131072     2          65536     
+516   free 506     YES  163840     3          65536     
+517   free 490     NO   163840     3          65536     
+518   alloc 123872  NO   163840     3          65536     
+519   alloc 40160   YES  98304      2          65536     
+520   alloc 108320  NO   98304      2          65536     
+521   alloc 14752   YES  81920      2          65536     
+522   alloc 92512   NO   81920      2          65536     
+523   free 518     NO   81920      2          65536     
+524   free 514     NO   81920      2          65536     
+525   free 504     YES  147456     2          131072    
+526   free 520     NO   147456     2          131072    
+527   alloc 71904   YES  16384      1          16384     
+528   alloc 32608   NO   16384      1          16384     
+529   free 502     YES  147456     2          131072    
+530   alloc 19360   YES  114688     3          65536     
+531   alloc 76256   NO   114688     3          65536     
+532   alloc 83040   NO   114688     3          65536     
+533   free 511     YES  147456     4          65536     
+534   free 522     NO   147456     4          65536     
+535   alloc 117408  NO   147456     4          65536     
+536   alloc 103520  NO   147456     4          65536     
+537   alloc 55584   YES  81920      3          32768     
+538   alloc 35168   NO   81920      3          32768     
+539   free 521     YES  98304      2          65536     
+540   free 538     NO   98304      2          65536     
+541   free 512     YES  229376     3          131072    
+542   alloc 57888   YES  163840     2          131072    
+543   free 519     YES  229376     3          131072    
+544   alloc 105312  YES  98304      2          65536     
+545   free 531     NO   98304      2          65536     
+546   alloc 23584   YES  65536      1          65536     
+547   alloc 95584   NO   65536      1          65536     
+548   free 546     YES  98304      2          65536     
+549   alloc 33632   YES  32768      1          32768     
+550   free 527     YES  163840     2          131072    
+551   alloc 117344  YES  32768      1          32768     
+552   free 528     NO   32768      1          32768     
+553   free 530     YES  65536      1          65536     
+554   alloc 49888   YES  0          0          0         
+555   free 554     YES  65536      1          65536     
+556   alloc 126048  NO   65536      1          65536     
+557   free 547     NO   65536      1          65536     
+558   free 556     NO   65536      1          65536     
+559   free 535     NO   65536      1          65536     
+560   free 532     NO   65536      1          65536     
+561   alloc 76064   NO   65536      1          65536     
+562   alloc 36832   YES  0          0          0         
+563   free 542     YES  65536      1          65536     
+564   free 544     YES  196608     2          131072    
+565   free 537     YES  262144     3          131072    
+566   free 536     NO   262144     3          131072    
+567   alloc 71008   YES  131072     2          65536     
+568   alloc 8672    YES  114688     3          65536     
+569   free 551     YES  245760     4          131072    
+570   alloc 49760   YES  180224     3          131072    
+571   alloc 94816   YES  49152      2          32768     
+572   free 571     YES  180224     3          131072    
+573   alloc 127328  YES  49152      2          32768     
+574   free 562     YES  114688     3          65536     
+575   free 561     NO   114688     3          65536     
+576   alloc 72992   NO   114688     3          65536     
+577   free 549     YES  180224     4          65536     
+578   free 573     YES  311296     5          131072    
+579   alloc 93408   YES  180224     4          65536     
+580   alloc 81568   NO   180224     4          65536     
+581   alloc 100960  NO   180224     4          65536     
+582   alloc 52576   YES  114688     3          65536     
+583   alloc 69664   NO   114688     3          65536     
+584   alloc 75040   NO   114688     3          65536     
+585   free 584     NO   114688     3          65536     
+586   alloc 82656   NO   114688     3          65536     
+587   alloc 72864   NO   114688     3          65536     
+588   free 567     YES  245760     4          131072    
+589   alloc 62432   YES  180224     3          131072    
+590   alloc 53280   YES  114688     3          65536     
+591   alloc 48992   YES  49152      2          32768     
+592   alloc 58208   NO   49152      2          32768     
+593   free 579     YES  180224     3          131072    
+594   free 570     YES  245760     4          131072    
+595   free 589     YES  311296     5          131072    
+596   free 568     YES  327680     3          131072    
+597   free 591     YES  393216     4          131072    
+598   free 587     NO   393216     4          131072    
+599   alloc 55456   YES  327680     3          131072    
+600   alloc 35232   YES  262144     2          131072    
+601   free 576     NO   262144     2          131072    
+602   free 600     YES  327680     3          131072    
+603   alloc 1824    YES  325632     7          131072    
+604   alloc 65568   YES  194560     6          131072    
+605   alloc 57440   YES  129024     6          65536     
+606   free 603     YES  131072     2          65536     
+607   free 580     NO   131072     2          65536     
+608   free 582     YES  196608     2          131072    
+609   alloc 24288   YES  163840     2          131072    
+610   alloc 91040   YES  32768      1          32768     
+611   free 581     NO   32768      1          32768     
+612   alloc 102944  NO   32768      1          32768     
+613   free 583     NO   32768      1          32768     
+614   alloc 78304   NO   32768      1          32768     
+615   free 586     NO   32768      1          32768     
+616   free 599     YES  98304      2          65536     
+617   alloc 98528   NO   98304      2          65536     
+618   alloc 54304   YES  32768      1          32768     
+619   free 590     YES  98304      2          65536     
+620   free 592     NO   98304      2          65536     
+621   alloc 126240  NO   98304      2          65536     
+622   free 609     YES  131072     2          65536     
+623   alloc 97568   NO   131072     2          65536     
+624   free 605     YES  196608     2          131072    
+625   free 618     YES  262144     1          262144    
+626   alloc 78560   YES  131072     1          131072    
+627   alloc 57952   YES  65536      1          65536     
+628   free 604     YES  196608     2          131072    
+629   alloc 81184   YES  65536      1          65536     
+630   free 610     YES  196608     2          131072    
+631   alloc 76000   YES  65536      1          65536     
+632   alloc 108896  NO   65536      1          65536     
+633   alloc 15136   YES  49152      2          32768     
+634   alloc 65696   NO   49152      2          32768     
+635   alloc 100448  NO   49152      2          32768     
+636   free 626     YES  180224     3          131072    
+637   free 623     NO   180224     3          131072    
+638   free 633     YES  196608     2          131072    
+639   free 617     NO   196608     2          131072    
+640   free 612     NO   196608     2          131072    
+641   alloc 67424   YES  65536      1          65536     
+642   free 634     NO   65536      1          65536     
+643   free 614     NO   65536      1          65536     
+644   alloc 15648   YES  49152      2          32768     
+645   alloc 19744   YES  16384      1          16384     
+646   alloc 117536  NO   16384      1          16384     
+647   free 621     NO   16384      1          16384     
+648   free 641     YES  147456     2          131072    
+649   free 629     YES  278528     3          131072    
+650   alloc 76512   YES  147456     2          131072    
+651   alloc 80928   YES  16384      1          16384     
+652   alloc 41568   NO   16384      1          16384     
+653   free 635     NO   16384      1          16384     
+654   alloc 48608   NO   16384      1          16384     
+655   free 631     YES  147456     2          131072    
+656   free 627     YES  212992     3          131072    
+657   free 632     NO   212992     3          131072    
+658   alloc 55712   YES  147456     2          131072    
+659   free 645     YES  180224     3          131072    
+660   free 658     YES  245760     4          131072    
+661   alloc 27296   YES  212992     3          131072    
+662   free 646     NO   212992     3          131072    
+663   alloc 127584  YES  81920      2          65536     
+664   alloc 12704   YES  65536      1          65536     
+665   free 644     YES  81920      2          65536     
+666   free 652     NO   81920      2          65536     
+667   alloc 105632  NO   81920      2          65536     
+668   free 651     YES  212992     3          131072    
+669   free 667     NO   212992     3          131072    
+670   alloc 53664   YES  147456     2          131072    
+671   alloc 30752   YES  114688     3          65536     
+672   free 670     YES  180224     4          65536     
+673   alloc 51552   YES  114688     3          65536     
+674   alloc 59232   YES  49152      2          32768     
+675   free 654     NO   49152      2          32768     
+676   alloc 126816  NO   49152      2          32768     
+677   free 664     YES  65536      2          32768     
+678   alloc 54688   NO   65536      2          32768     
+679   alloc 9760    YES  49152      2          32768     
+680   free 650     YES  180224     3          131072    
+681   alloc 111456  YES  49152      2          32768     
+682   alloc 28896   YES  16384      1          16384     
+683   alloc 45088   NO   16384      1          16384     
+684   free 671     YES  49152      2          32768     
+685   alloc 11040   YES  32768      1          32768     
+686   free 663     YES  163840     2          131072    
+687   alloc 52000   YES  98304      2          65536     
+688   alloc 16736   YES  65536      1          65536     
+689   alloc 62816   YES  0          0          0         
+690   free 688     YES  32768      1          32768     
+691   free 661     YES  65536      2          32768     
+692   free 674     YES  131072     3          65536     
+693   free 673     YES  196608     4          65536     
+694   alloc 3040    YES  192512     6          65536     
+695   alloc 56672   YES  126976     5          65536     
+696   alloc 31584   YES  94208      4          65536     
+697   free 682     YES  126976     5          65536     
+698   free 683     NO   126976     5          65536     
+699   free 679     YES  143360     6          65536     
+700   free 681     YES  274432     7          131072    
+701   alloc 81888   YES  143360     6          65536     
+702   free 685     YES  159744     6          65536     
+703   alloc 44320   YES  94208      5          32768     
+704   alloc 75040   NO   94208      5          32768     
+705   free 676     NO   94208      5          32768     
+706   free 678     NO   94208      5          32768     
+707   alloc 113376  NO   94208      5          32768     
+708   free 703     YES  159744     6          65536     
+709   alloc 21472   YES  126976     5          65536     
+710   alloc 19744   YES  94208      4          65536     
+711   free 687     YES  159744     5          65536     
+712   free 694     YES  163840     3          65536     
+713   alloc 123936  NO   163840     3          65536     
+714   alloc 117664  NO   163840     3          65536     
+715   free 701     YES  294912     4          131072    
+716   free 689     YES  360448     3          262144    
+717   alloc 71712   YES  229376     3          131072    
+718   free 707     NO   229376     3          131072    
+719   alloc 31584   YES  196608     2          131072    
+720   free 695     YES  262144     3          131072    
+721   alloc 114592  YES  131072     2          65536     
+722   free 717     YES  262144     3          131072    
+723   alloc 608     YES  261120     8          131072    
+724   alloc 19360   YES  228352     7          131072    
+725   alloc 58592   YES  162816     6          131072    
+726   free 696     YES  195584     7          131072    
+727   free 709     YES  228352     8          131072    
+728   free 725     YES  293888     9          131072    
+729   alloc 51360   YES  228352     8          131072    
+730   free 713     NO   228352     8          131072    
+731   free 704     NO   228352     8          131072    
+732   free 710     YES  261120     8          131072    
+733   alloc 22112   YES  228352     7          131072    
+734   alloc 108960  YES  97280      6          65536     
+735   alloc 18016   YES  64512      6          32768     
+736   alloc 24864   YES  31744      5          16384     
+737   alloc 92064   NO   31744      5          16384     
+738   free 734     YES  162816     6          131072    
+739   alloc 88800   YES  31744      5          16384     
+740   free 721     YES  162816     6          131072    
+741   alloc 27296   YES  130048     7          65536     
+742   free 719     YES  162816     8          65536     
+743   free 714     NO   162816     8          65536     
+744   free 723     YES  163840     4          65536     
+745   free 739     YES  294912     5          131072    
+746   alloc 99040   YES  163840     4          65536     
+747   free 724     YES  196608     4          65536     
+748   free 733     YES  229376     3          131072    
+749   alloc 117920  YES  98304      2          65536     
+750   free 746     YES  229376     3          131072    
+751   free 737     NO   229376     3          131072    
+752   free 735     YES  262144     4          131072    
+753   alloc 76064   YES  131072     3          65536     
+754   free 729     YES  196608     4          65536     
+755   alloc 38816   YES  131072     3          65536     
+756   alloc 32544   YES  98304      2          65536     
+757   free 753     YES  229376     3          131072    
+758   alloc 22880   YES  196608     2          131072    
+759   free 736     YES  229376     3          131072    
+760   alloc 56096   YES  163840     2          131072    
+761   alloc 31328   YES  131072     1          131072    
+762   alloc 3360    YES  126976     5          65536     
+763   free 758     YES  159744     6          65536     
+764   alloc 105696  NO   159744     6          65536     
+765   alloc 97952   NO   159744     6          65536     
+766   free 749     YES  290816     7          131072    
+767   free 741     YES  323584     7          131072    
+768   alloc 19808   YES  290816     6          131072    
+769   alloc 18272   YES  258048     6          131072    
+770   alloc 115680  YES  126976     5          65536     
+771   alloc 53984   YES  61440      4          32768     
+772   free 770     YES  192512     5          131072    
+773   free 755     YES  258048     6          131072    
+774   alloc 112032  YES  126976     5          65536     
+775   alloc 5792    YES  118784     4          65536     
+776   free 761     YES  151552     5          65536     
+777   free 756     YES  184320     4          131072    
+778   free 775     YES  192512     5          131072    
+779   alloc 28384   YES  159744     4          131072    
+780   alloc 121824  YES  28672      3          16384     
+781   free 769     YES  61440      4          32768     
+782   free 768     YES  94208      5          32768     
+783   alloc 15456   YES  77824      4          32768     
+784   free 765     NO   77824      4          32768     
+785   free 783     YES  94208      5          32768     
+786   free 764     NO   94208      5          32768     
+787   alloc 17824   YES  61440      4          32768     
+788   free 774     YES  192512     5          131072    
+789   alloc 16736   YES  159744     4          131072    
+790   free 760     YES  225280     5          131072    
+791   free 762     YES  229376     3          131072    
+792   alloc 81376   YES  98304      2          65536     
+793   alloc 39328   YES  32768      1          32768     
+794   alloc 34592   NO   32768      1          32768     
+795   free 771     YES  98304      2          65536     
+796   alloc 124896  NO   98304      2          65536     
+797   free 793     YES  163840     3          65536     
+798   alloc 69856   NO   163840     3          65536     
+799   alloc 92640   NO   163840     3          65536     
+800   free 779     YES  196608     4          65536     
+801   free 789     YES  229376     3          131072    
+802   alloc 126624  YES  98304      2          65536     
+803   alloc 16864   YES  65536      1          65536     
+804   free 799     NO   65536      1          65536     
+805   free 792     YES  196608     2          131072    
+806   free 780     YES  327680     2          262144    
+807   alloc 39520   YES  262144     1          262144    
+808   alloc 4128    YES  253952     5          131072    
+809   free 803     YES  286720     6          131072    
+810   free 787     YES  319488     6          131072    
+811   alloc 125984  YES  188416     5          65536     
+812   alloc 107040  NO   188416     5          65536     
+813   alloc 123808  NO   188416     5          65536     
+814   alloc 77088   NO   188416     5          65536     
+815   free 813     NO   188416     5          65536     
+816   free 802     YES  319488     6          131072    
+817   free 798     NO   319488     6          131072    
+818   free 807     YES  385024     5          262144    
+819   alloc 82912   YES  253952     5          131072    
+820   alloc 51552   YES  188416     4          131072    
+821   alloc 67360   YES  57344      3          32768     
+822   free 794     NO   57344      3          32768     
+823   alloc 76000   NO   57344      3          32768     
+824   alloc 23840   YES  24576      2          16384     
+825   free 796     NO   24576      2          16384     
+826   free 823     NO   24576      2          16384     
+827   alloc 38112   NO   24576      2          16384     
+828   alloc 110112  NO   24576      2          16384     
+829   free 821     YES  155648     3          131072    
+830   free 828     NO   155648     3          131072    
+831   free 808     YES  163840     2          131072    
+832   alloc 2656    YES  159744     4          131072    
+833   free 832     YES  163840     2          131072    
+834   alloc 120352  YES  32768      1          32768     
+835   alloc 80864   NO   32768      1          32768     
+836   alloc 48544   NO   32768      1          32768     
+837   free 811     YES  163840     2          131072    
+838   alloc 18784   YES  131072     1          131072    
+839   alloc 50592   YES  65536      1          65536     
+840   free 812     NO   65536      1          65536     
+841   alloc 54880   YES  0          0          0         
+842   free 814     NO   0          0          0         
+843   free 820     YES  65536      1          65536     
+844   free 834     YES  196608     2          131072    
+845   free 819     YES  327680     2          262144    
+846   alloc 103264  YES  196608     2          131072    
+847   alloc 114464  YES  65536      1          65536     
+848   free 846     YES  196608     2          131072    
+849   alloc 14112   YES  180224     3          131072    
+850   free 836     NO   180224     3          131072    
+851   alloc 21344   YES  147456     2          131072    
+852   free 847     YES  278528     2          262144    
+853   free 835     NO   278528     2          262144    
+854   free 824     YES  311296     3          262144    
+855   alloc 56928   YES  245760     4          131072    
+856   alloc 126624  YES  114688     3          65536     
+857   free 827     NO   114688     3          65536     
+858   alloc 63584   YES  49152      2          32768     
+859   free 839     YES  114688     3          65536     
+860   free 841     YES  180224     3          131072    
+861   alloc 18912   YES  147456     2          131072    
+862   free 838     YES  180224     3          131072    
+863   alloc 111328  YES  49152      2          32768     
+864   alloc 113120  NO   49152      2          32768     
+865   alloc 59104   NO   49152      2          32768     
+866   alloc 2592    YES  45056      3          32768     
+867   alloc 800     YES  44032      4          32768     
+868   free 861     YES  76800      4          65536     
+869   alloc 92832   NO   76800      4          65536     
+870   alloc 125088  NO   76800      4          65536     
+871   alloc 124128  NO   76800      4          65536     
+872   free 867     YES  77824      3          65536     
+873   alloc 80736   NO   77824      3          65536     
+874   alloc 24736   YES  45056      3          32768     
+875   free 856     YES  176128     4          131072    
+876   free 849     YES  192512     5          131072    
+877   free 866     YES  196608     3          131072    
+878   alloc 58400   YES  131072     3          65536     
+879   alloc 7584    YES  122880     4          65536     
+880   free 863     YES  253952     5          131072    
+881   free 851     YES  286720     6          131072    
+882   free 870     NO   286720     6          131072    
+883   free 865     NO   286720     6          131072    
+884   free 858     YES  352256     7          131072    
+885   free 855     YES  417792     7          131072    
+886   alloc 117920  YES  286720     6          131072    
+887   alloc 14752   YES  270336     5          131072    
+888   free 871     NO   270336     5          131072    
+889   free 879     YES  278528     5          131072    
+890   free 878     YES  344064     5          131072    
+891   free 864     NO   344064     5          131072    
+892   free 874     YES  376832     5          131072    
+893   alloc 107744  YES  245760     4          131072    
+894   alloc 57568   YES  180224     3          131072    
+895   alloc 160     YES  179968     8          131072    
+896   alloc 58720   YES  114432     8          65536     
+897   free 869     NO   114432     8          65536     
+898   alloc 121440  NO   114432     8          65536     
+899   free 873     NO   114432     8          65536     
+900   alloc 38496   YES  48896      7          32768     
+901   free 895     YES  49152      2          32768     
+902   alloc 29344   YES  16384      1          16384     
+903   free 886     YES  147456     2          131072    
+904   free 887     YES  163840     2          131072    
+905   alloc 25120   YES  131072     1          131072    
+906   alloc 29984   YES  98304      2          65536     
+907   free 905     YES  131072     3          65536     
+908   free 893     YES  262144     4          131072    
+909   free 906     YES  294912     2          262144    
+910   alloc 59104   YES  229376     3          131072    
+911   free 896     YES  294912     4          131072    
+912   alloc 77344   YES  163840     3          65536     
+913   free 900     YES  229376     3          131072    
+914   alloc 25312   YES  196608     2          131072    
+915   alloc 14112   YES  180224     3          131072    
+916   free 894     YES  245760     4          131072    
+917   alloc 42336   YES  180224     3          131072    
+918   alloc 18976   YES  147456     2          131072    
+919   alloc 68192   YES  16384      1          16384     
+920   free 902     YES  49152      2          32768     
+921   free 919     YES  180224     3          131072    
+922   free 910     YES  245760     4          131072    
+923   alloc 25504   YES  212992     3          131072    
+924   free 898     NO   212992     3          131072    
+925   free 912     YES  344064     4          131072    
+926   alloc 4576    YES  335872     4          131072    
+927   free 918     YES  368640     5          131072    
+928   free 915     YES  385024     6          131072    
+929   alloc 126048  YES  253952     5          131072    
+930   free 929     YES  385024     6          131072    
+931   alloc 34464   YES  319488     5          131072    
+932   free 926     YES  327680     3          131072    
+933   alloc 22240   YES  294912     3          131072    
+934   alloc 30048   YES  262144     2          131072    
+935   free 914     YES  294912     3          131072    
+936   alloc 68704   YES  163840     2          131072    
+937   alloc 60768   YES  98304      2          65536     
+938   free 917     YES  163840     3          65536     
+939   alloc 126368  NO   163840     3          65536     
+940   alloc 110624  NO   163840     3          65536     
+941   alloc 57248   YES  98304      2          65536     
+942   free 933     YES  131072     3          65536     
+943   alloc 3360    YES  126976     5          65536     
+944   alloc 110496  NO   126976     5          65536     
+945   alloc 90400   NO   126976     5          65536     
+946   free 931     YES  192512     6          65536     
+947   free 945     NO   192512     6          65536     
+948   free 941     YES  258048     7          65536     
+949   alloc 50400   YES  192512     6          65536     
+950   alloc 52704   YES  126976     5          65536     
+951   alloc 116832  NO   126976     5          65536     
+952   free 939     NO   126976     5          65536     
+953   free 923     YES  159744     5          65536     
+954   alloc 16800   YES  126976     5          65536     
+955   alloc 101728  NO   126976     5          65536     
+956   alloc 37664   YES  61440      4          32768     
+957   free 954     YES  94208      4          65536     
+958   free 949     YES  159744     4          131072    
+959   free 943     YES  163840     2          131072    
+960   alloc 30368   YES  131072     1          131072    
+961   free 944     NO   131072     1          131072    
+962   alloc 32672   YES  98304      2          65536     
+963   free 936     YES  229376     3          131072    
+964   free 934     YES  262144     4          131072    
+965   free 937     YES  327680     5          131072    
+966   alloc 41184   YES  262144     4          131072    
+967   alloc 75168   YES  131072     3          65536     
+968   free 956     YES  196608     4          65536     
+969   free 940     NO   196608     4          65536     
+970   alloc 95456   NO   196608     4          65536     
+971   free 955     NO   196608     4          65536     
+972   alloc 76320   NO   196608     4          65536     
+973   free 972     NO   196608     4          65536     
+974   alloc 30944   YES  163840     3          65536     
+975   alloc 1376    YES  161792     6          65536     
+976   free 950     YES  227328     7          65536     
+977   free 951     NO   227328     7          65536     
+978   alloc 78880   NO   227328     7          65536     
+979   free 960     YES  260096     8          65536     
+980   alloc 13536   YES  243712     7          65536     
+981   alloc 90656   NO   243712     7          65536     
+982   free 980     YES  260096     8          65536     
+983   alloc 4640    YES  251904     7          65536     
+984   alloc 87840   NO   251904     7          65536     
+985   free 962     YES  284672     8          65536     
+986   alloc 26592   YES  251904     7          65536     
+987   alloc 42016   YES  186368     6          65536     
+988   free 975     YES  188416     5          65536     
+989   alloc 119072  NO   188416     5          65536     
+990   free 966     YES  253952     5          131072    
+991   free 967     YES  385024     6          131072    
+992   free 970     NO   385024     6          131072    
+993   free 974     YES  417792     6          131072    
+994   free 978     NO   417792     6          131072    
+995   free 981     NO   417792     6          131072    
+996   free 983     YES  425984     5          131072    
+997   free 984     NO   425984     5          131072    
+998   free 986     YES  458752     3          262144    
+999   free 987     YES  524288     1          524288    
+1000  free 989     NO   524288     1          524288    
