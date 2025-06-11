@@ -1,4 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
+ // Initialize EmailJS once when the page loads
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init("sSqyl_v4Vrj4_6k2M");
+    } else {
+        console.error('EmailJS library not loaded.');
+    }
+
+    // Performance detection
+    let performanceLevel = 'high'; // 'low', 'medium', 'high'
+    
+    function detectPerformance(callback) {
+        let fps = 0;
+        let frameCount = 0;
+        let lastTime = performance.now();
+        const testDuration = 500; // Test for 500ms
+        
+        function measureFrame() {
+            frameCount++;
+            const currentTime = performance.now();
+            
+            if (currentTime - lastTime >= testDuration) {
+                fps = (frameCount * 1000) / (currentTime - lastTime);
+                
+                // Determine performance level
+                if (fps < 30) {
+                    performanceLevel = 'low';
+                } else if (fps < 50) {
+                    performanceLevel = 'medium';
+                } else {
+                    performanceLevel = 'high';
+                }
+                
+                console.log(`Detected FPS: ${fps.toFixed(1)}, Performance: ${performanceLevel}`);
+                callback(performanceLevel);
+            } else {
+                requestAnimationFrame(measureFrame);
+            }
+        }
+        
+        requestAnimationFrame(measureFrame);
+    }
+    
     // Perlin Noise implementation
     class PerlinNoise {
         constructor() {
@@ -57,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Cloud drawing function using Perlin noise
-    function drawPerlinClouds(canvas) {
+    function drawPerlinClouds(canvas, quality = performanceLevel) {
         if (!canvas) return;
         
         const ctx = canvas.getContext('2d');
@@ -69,8 +111,30 @@ document.addEventListener('DOMContentLoaded', function() {
         const perlin = new PerlinNoise();
         let time = 0;
         let animationId;
+        let isPaused = true;
+        
+        // Adjust quality settings based on performance
+        const qualitySettings = {
+            low: { pixelSkip: 4, octaves: 2, frameSkip: 2 },
+            medium: { pixelSkip: 3, octaves: 3, frameSkip: 1 },
+            high: { pixelSkip: 2, octaves: 4, frameSkip: 0 }
+        };
+        
+        const settings = qualitySettings[quality];
+        let frameCounter = 0;
         
         function animate() {
+            if (isPaused) {
+                animationId = requestAnimationFrame(animate);
+                return;
+            }
+            
+            // Skip frames for low performance
+            if (frameCounter++ % (settings.frameSkip + 1) !== 0) {
+                animationId = requestAnimationFrame(animate);
+                return;
+            }
+            
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             // Create image data for pixel manipulation
@@ -81,15 +145,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const scale = 0.005;
             const timeScale = 0.0001;
             
-            for (let x = 0; x < canvas.width; x += 2) { // Skip pixels for performance
-                for (let y = 0; y < canvas.height; y += 2) {
+            for (let x = 0; x < canvas.width; x += settings.pixelSkip) {
+                for (let y = 0; y < canvas.height; y += settings.pixelSkip) {
                     // Generate multiple octaves for more complex patterns
                     let value = 0;
                     let amplitude = 1;
                     let frequency = 1;
                     let maxValue = 0;
                     
-                    for (let i = 0; i < 4; i++) {
+                    for (let i = 0; i < settings.octaves; i++) {
                         value += perlin.noise(
                             x * scale * frequency + time * timeScale,
                             y * scale * frequency
@@ -124,19 +188,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         
                         // Fill skipped pixels
-                        if (x + 1 < canvas.width) {
-                            const indexRight = (y * canvas.width + (x + 1)) * 4;
-                            data[indexRight] = data[index];
-                            data[indexRight + 1] = data[index + 1];
-                            data[indexRight + 2] = data[index + 2];
-                            data[indexRight + 3] = data[index + 3];
-                        }
-                        if (y + 1 < canvas.height) {
-                            const indexBelow = ((y + 1) * canvas.width + x) * 4;
-                            data[indexBelow] = data[index];
-                            data[indexBelow + 1] = data[index + 1];
-                            data[indexBelow + 2] = data[index + 2];
-                            data[indexBelow + 3] = data[index + 3];
+                        for (let dx = 0; dx < settings.pixelSkip; dx++) {
+                            for (let dy = 0; dy < settings.pixelSkip; dy++) {
+                                if (x + dx < canvas.width && y + dy < canvas.height) {
+                                    const fillIndex = ((y + dy) * canvas.width + (x + dx)) * 4;
+                                    data[fillIndex] = data[index];
+                                    data[fillIndex + 1] = data[index + 1];
+                                    data[fillIndex + 2] = data[index + 2];
+                                    data[fillIndex + 3] = data[index + 3];
+                                }
+                            }
                         }
                     }
                 }
@@ -150,41 +211,89 @@ document.addEventListener('DOMContentLoaded', function() {
         
         animate();
         
-        // Return cleanup function
-        return () => {
-            if (animationId) {
-                cancelAnimationFrame(animationId);
+        // Return control object
+        return {
+            start: () => { isPaused = false; },
+            stop: () => { isPaused = true; },
+            cleanup: () => {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
             }
         };
     }
 
-    // Initialize Perlin clouds
-    const heroCanvas = document.getElementById('hero-fractal');
-    const contactCanvas = document.getElementById('contact-fractal');
+    // Track typing animations
+    let typingAnimationsComplete = 0;
+    const totalTypingAnimations = 7; // hero title, subtitle, logo, and section headings
+    let cloudAnimations = [];
     
-    if (heroCanvas) {
-        console.log('Initializing hero canvas Perlin noise');
-        drawPerlinClouds(heroCanvas);
+    function onTypingComplete() {
+        typingAnimationsComplete++;
+        console.log(`Typing animation complete: ${typingAnimationsComplete}/${totalTypingAnimations}`);
+        
+        if (typingAnimationsComplete >= totalTypingAnimations) {
+            console.log('All typing animations complete, starting Perlin clouds');
+            // Start all cloud animations
+            cloudAnimations.forEach(anim => {
+                console.log('Starting cloud animation');
+                anim.start();
+            });
+        }
     }
     
-    if (contactCanvas) {
-        console.log('Initializing contact canvas Perlin noise');
-        drawPerlinClouds(contactCanvas);
-    }
+    // Initialize Perlin clouds (but don't start them yet)
+    detectPerformance((detectedLevel) => {
+        performanceLevel = detectedLevel;
+        
+        const heroCanvas = document.getElementById('hero-fractal');
+        const contactCanvas = document.getElementById('contact-fractal');
+        
+        if (heroCanvas) {
+            console.log('Initializing hero canvas Perlin noise');
+            const heroAnim = drawPerlinClouds(heroCanvas, performanceLevel);
+            cloudAnimations.push(heroAnim);
+        }
+        
+        if (contactCanvas) {
+            console.log('Initializing contact canvas Perlin noise');
+            const contactAnim = drawPerlinClouds(contactCanvas, performanceLevel);
+            cloudAnimations.push(contactAnim);
+        }
+    });
     
     // Single resize handler for canvases
     window.addEventListener('resize', () => {
-        const heroCanvasResize = document.getElementById('hero-fractal');
-        const contactCanvasResize = document.getElementById('contact-fractal');
-        
-        if (heroCanvasResize) {
-            heroCanvasResize.width = heroCanvasResize.offsetWidth;
-            heroCanvasResize.height = heroCanvasResize.offsetHeight;
-        }
-        if (contactCanvasResize) {
-            contactCanvasResize.width = contactCanvasResize.offsetWidth;
-            contactCanvasResize.height = contactCanvasResize.offsetHeight;
-        }
+        // Re-detect performance on significant resize (might be switching device orientation)
+        detectPerformance((newLevel) => {
+            if (newLevel !== performanceLevel) {
+                performanceLevel = newLevel;
+                console.log(`Performance level changed to: ${performanceLevel}`);
+                
+                // Recreate animations with new performance level
+                cloudAnimations.forEach(anim => anim.cleanup());
+                cloudAnimations = [];
+                
+                const heroCanvas = document.getElementById('hero-fractal');
+                const contactCanvas = document.getElementById('contact-fractal');
+                
+                if (heroCanvas) {
+                    const heroAnim = drawPerlinClouds(heroCanvas, performanceLevel);
+                    if (typingAnimationsComplete >= totalTypingAnimations) {
+                        heroAnim.start();
+                    }
+                    cloudAnimations.push(heroAnim);
+                }
+                
+                if (contactCanvas) {
+                    const contactAnim = drawPerlinClouds(contactCanvas, performanceLevel);
+                    if (typingAnimationsComplete >= totalTypingAnimations) {
+                        contactAnim.start();
+                    }
+                    cloudAnimations.push(contactAnim);
+                }
+            }
+        });
     });
 
     // Hamburger Menu Logic
@@ -265,8 +374,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.textContent += text.charAt(i);
                 i++;
                 setTimeout(typing, speed);
-            } else if (callback) {
-                callback();
+            } else {
+                // Always call onTypingComplete when done
+                onTypingComplete();
+                if (callback) {
+                    callback();
+                }
             }
         }
         typing();
@@ -310,6 +423,24 @@ document.addEventListener('DOMContentLoaded', function() {
             heading.textContent = '';
             heading.dataset.originalText = originalText;
             observer.observe(heading);
+            
+            // Check if element is already in viewport
+            setTimeout(() => {
+                const rect = heading.getBoundingClientRect();
+                const inViewport = rect.top >= 0 && rect.bottom <= window.innerHeight;
+                if (inViewport && !heading.classList.contains('typed')) {
+                    console.log(`Element already in viewport, triggering typing: ${heading.id}`);
+                    heading.classList.add('typed');
+                    typeEffect(heading, originalText);
+                    
+                    if (heading.tagName === 'H2') {
+                        setTimeout(() => {
+                            heading.classList.add('typing');
+                        }, (originalText.length || 0) * 70 + 100);
+                    }
+                    observer.unobserve(heading);
+                }
+            }, 100);
         }
     });
 
@@ -319,25 +450,83 @@ document.addEventListener('DOMContentLoaded', function() {
         typeEffect(logoElement, originalLogoText);
     }
     
-    // Contact form
+    // Debug logging
+    console.log(`Total typing animations to track: ${totalTypingAnimations}`);
+    console.log(`Headings found: ${headings.filter(h => h !== null).length}`);
+    console.log(`Logo found: ${logoElement ? 'yes' : 'no'}`);
+    
+    // Fallback mechanism - if typing animations haven't started after 5 seconds, start clouds anyway
+    setTimeout(() => {
+        if (typingAnimationsComplete < totalTypingAnimations) {
+            console.log(`Warning: Only ${typingAnimationsComplete}/${totalTypingAnimations} typing animations completed after 5 seconds`);
+            console.log('Force-starting Perlin clouds as fallback');
+            cloudAnimations.forEach(anim => {
+                console.log('Starting cloud animation (fallback)');
+                anim.start();
+            });
+        }
+    }, 10000);
+    
+     // Contact form with EmailJS
     const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            
             const submitBtn = this.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = "Sending...";
-                submitBtn.disabled = true;
-                setTimeout(() => {
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
+            formStatus.innerHTML = ''; // Clear previous status
+            
+            if (typeof emailjs === 'undefined') {
+                console.error('EmailJS not loaded. Please set up EmailJS to send emails.');
+                formStatus.innerHTML = `
+                    <p style="color: #e74c3c;">⚠️ Email service not configured</p>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        For now, you can reach me at: <a href="mailto:christianblake3333@gmail.com" style="color: var(--highlight);">christianblake3333@gmail.com</a>
+                    </p>
+                `;
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                return;
+            }
+            
+            const templateParams = {
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                message: document.getElementById('message').value,
+                to_name: 'Christian Blake'
+            };
+            
+            // Service ID, Template ID, and Template Params
+            emailjs.send('service_cyin44b', 'template_6u5ge6p', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
                     submitBtn.textContent = "Message Sent!";
+                    formStatus.innerHTML = '<p style="color: #27ae60;">✓ Thank you! I\'ll get back to you soon.</p>';
+                    contactForm.reset();
+                    
                     setTimeout(() => {
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
-                        this.reset();
-                    }, 2000);
-                }, 1500);
-            }
+                        formStatus.innerHTML = '';
+                    }, 5000); // Keep message longer
+                }, function(error) {
+                    console.error('FAILED...', error);
+                    submitBtn.textContent = "Send Failed";
+                    formStatus.innerHTML = `
+                        <p style="color: #e74c3c;">Failed to send message.</p>
+                        <p style="font-size: 14px;">Please email me directly at: <a href="mailto:christianblake3333@gmail.com" style="color: var(--highlight);">christianblake3333@gmail.com</a></p>
+                    `;
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 5000); // Keep message longer
+                });
         });
     }
     
