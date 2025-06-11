@@ -438,6 +438,10 @@
             transform-style: preserve-3d;
             position: relative;
             backdrop-filter: blur(5px);
+            background-size: 48px 48px; /* Set a fixed size for all icons */
+            background-repeat: no-repeat;
+            background-position: center 25px; /* Position the icon: horizontally centered, 25px from the top */
+            padding-top: 85px;
         }
 
         .skill-item:hover {
@@ -449,6 +453,58 @@
         .skill-item.active {
             transform: translateY(3px);
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-item h3 {
+            margin-bottom: 0; /* Remove default bottom margin to keep text centered */
+        }
+
+        .skill-item[data-skill="cpp"] {
+            background-image: url('../img/icons/cpp.png');
+        }
+
+        .skill-item[data-skill="python"] {
+            background-image: url('../img/icons/python.png');
+        }
+
+        .skill-item[data-skill="java"] {
+            background-image: url('../img/icons/java.png');
+        }
+
+        .skill-item[data-skill="linux"] {
+            background-image: url('../img/icons/Tux.png');
+        }
+
+        .skill-item[data-skill="assembly"] {
+            background-image: url('../img/icons/x86.png'); /* e.g., a processor icon */
+        }
+
+        .skill-item[data-skill="git"] {
+            background-image: url('../img/icons/Git.png');
+        }
+
+        .skill-item[data-skill="sql"] {
+            background-image: url('../img/icons/sql.png'); /* e.g., a database icon */
+        }
+
+        .skill-item[data-skill="pthreads"] {
+            background-image: url('../img/icons/pthreads.png'); /* e.g., a thread icon */
+        }
+
+        .skill-item[data-skill="sysvipc"] {
+            background-image: url('../img/icons/ipc.png'); /* e.g., a data flow icon */
+        }
+
+        .skill-item[data-skill="gdb"] {
+            background-image: url('../img/icons/gdb.png');
+        }
+
+        .skill-item[data-skill="sfml"] {
+            background-image: url('../img/icons/sfml.png');
+        }
+
+        .skill-item[data-skill="latex"] {
+            background-image: url('../img/icons/LaTeX.png');
         }
 
         /* Projects section */
@@ -854,3 +910,4 @@ header:hover::after {
         transform: translateX(-40px) translateY(-30px) scale(1.02);
     }
 }
+
