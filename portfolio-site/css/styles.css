@@ -186,6 +186,7 @@
             position: relative;
             overflow: hidden;
             z-index: 101;
+            white-space: nowrap;
         }
 
         .logo:after {
@@ -819,6 +820,12 @@
 
             .nav-links.active {
                 transform: translateX(0);
+                /* background-color: var(--highlight); */
+                background-color: rgba(44, 62, 80, 0.98);
+            }
+
+            .nav-links.active a {
+                color: var(--key-text);
             }
 
             .nav-links li {
@@ -854,6 +861,15 @@
 
             .projects-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 880px) {
+            .nav-links li {
+                margin-left: 15px;
+            }
+            .logo {
+                font-size: 20px;
             }
         }
         
@@ -1041,13 +1057,14 @@ header:hover::after {
 
 .modal-close {
     position: absolute;
-    right: 20px;
-    top: 20px;
-    color: #ffffff;
+    right: 25px;
+    top: 15px;
+    color: var(--key-text);
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
+    z-index: 10;
 }
 
 .modal-close:hover,
