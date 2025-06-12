@@ -4,8 +4,8 @@ const projectData = {
         title: 'Custom Memory Allocator',
         tagline: 'A low-level memory management system implementing three allocation algorithms with performance analysis and fragmentation tracking.',
         links: {
-            demo: '#',
-            github: 'https://github.com/yourusername/memory-allocator'
+            //demo: '#',
+            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/custom_Mem_Alloc'
         },
         description: {
             problem: 'Operating systems need efficient memory management to handle dynamic allocation requests from multiple processes. Poor allocation strategies lead to memory fragmentation, wasted space, and degraded system performance.',
@@ -32,8 +32,8 @@ const projectData = {
         title: 'x86-64 Binary Bomb Defuser',
         tagline: 'Reverse-engineered a multi-phase binary executable using assembly analysis and GDB to defuse a "bomb" without source code.',
         links: {
-            github: 'https://github.com/yourusername/binary-bomb',
-            writeup: '#'
+            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/bin_Bomb'
+            //writeup: '#'
         },
         description: {
             problem: 'Understanding compiled binaries and assembly code is crucial for security researchers and systems programmers. The Binary Bomb tests these skills through a compiled program with six hidden phases.',
@@ -60,8 +60,8 @@ const projectData = {
         title: 'Concurrent Donut Shop Simulator',
         tagline: 'A high-performance producer-consumer system using POSIX threads, demonstrating advanced synchronization with mutexes and condition variables.',
         links: {
-            demo: '#',
-            github: 'https://github.com/yourusername/donut-shop'
+            //demo: '#',
+            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/sem_ProdCons'
         },
         description: {
             problem: 'The producer-consumer problem is a classic synchronization challenge. Multiple threads must coordinate access to shared resources without deadlock, race conditions, or starvation.',
@@ -88,9 +88,9 @@ const projectData = {
         title: 'SVM-Based Face Recognition System',
         tagline: 'Achieved 95%+ accuracy on face pair matching using Support Vector Machines with advanced feature engineering and hyperparameter optimization.',
         links: {
-            demo: '#',
-            github: 'https://github.com/yourusername/face-recognition',
-            notebook: '#'
+            //demo: '#',
+            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/ml_SVM_FaceRec'
+            //notebook: '#'
         },
         description: {
             problem: 'Face recognition requires determining whether two face images show the same person. The LFW dataset presents real-world challenges with varying lighting, poses, and expressions.',
@@ -117,9 +117,9 @@ const projectData = {
         title: 'University Course Management System',
         tagline: 'A full-stack web application managing students, courses, and instructors with role-based access control and comprehensive course rating system.',
         links: {
-            demo: '#',
-            github: 'https://github.com/yourusername/university-db',
-            schema: '#'
+            //demo: '#',
+            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/uni_DB'
+            //schema: '#'
         },
         description: {
             problem: 'Universities need comprehensive systems to manage course registration, student records, and feedback. Manual processes lead to scheduling conflicts and enrollment errors.',
@@ -146,9 +146,9 @@ const projectData = {
         title: 'N-Body Physics Simulator',
         tagline: 'Real-time visualization of planetary motion using Newton\'s law of gravitation, featuring accurate orbital mechanics and scalable performance.',
         links: {
-            demo: '#',
-            github: 'https://github.com/yourusername/nbody-sim',
-            docs: '#'
+            //demo: '#',
+            github: 'https://github.com/yourusername/nbody-sim'
+            //docs: '#'
         },
         description: {
             problem: 'Simulating gravitational interactions between multiple celestial bodies is computationally intensive, requiring O(n²) force calculations per time step.',

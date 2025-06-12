@@ -561,6 +561,10 @@
 
         .project-info {
             padding: 25px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .project-title {
@@ -991,10 +995,11 @@ header:hover::after {
 }
 
 .modal-header {
-    background: linear-gradient(135deg, var(--highlight) 0%, var(--highlight-secondary) 100%);
+    background: linear-gradient(135deg, #8D99AE 0%, #778DA9 100%);
     padding: 30px;
     border-radius: 8px 8px 0 0;
     position: relative;
+    border-bottom: 2px solid #5a6675;
 }
 
 .modal-header h2 {
@@ -1057,7 +1062,7 @@ header:hover::after {
 }
 
 .modal-links a {
-    background-color: var(--highlight);
+    background: linear-gradient(135deg, #8D99AE 0%, #778DA9 100%);
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -1066,14 +1071,15 @@ header:hover::after {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border: 2px solid transparent;
+    border: 2px solid #5a6675;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .modal-links a:hover {
-    background-color: var(--highlight-secondary);
+    background: linear-gradient(135deg, #778DA9 0%, #8D99AE 100%);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border-color: var(--accent);
+    border-color: #A3B1C6;
 }
 
 .tech-stack {
@@ -1103,10 +1109,12 @@ header:hover::after {
     color: var(--accent);
 }
 
-/* Update project card hover to indicate clickability */
+/* indicate clickability */
 .project-card {
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
@@ -1116,6 +1124,8 @@ header:hover::after {
 
 .project-modal-trigger {
     cursor: pointer;
+    align-self: center; /* Horizontally centers the button */
+    margin-top: 20px;   /* space above the button */
 }
 
 /* Responsive modal */
