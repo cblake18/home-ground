@@ -569,8 +569,40 @@
             color: var(--highlight);
         }
 
-        .project-image[data-project="memory_allocator"] {
+        .project-image {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 200px 200px;
+            color: #ffffff; /* Make the base text color white for contrast */
+            text-shadow: 
+                0 0 5px #213e5e,   /* A tight, inner blue shadow */
+                0 0 10px #4b7099,  /* A wider, primary blue glow */
+                0 0 20px #3b6796,  /* A softer, larger blue halo */
+                0 0 30px #819db8;  /* An even softer, light-blue outer glow */
+        }
+
+        .project-image[data-project="memory-allocator"] {
             background-image: url('../img/custom_mem.png');
+        }
+
+        .project-image[data-project="binary-bomb"] {
+            background-image: url('../img/binary_bomb.png');
+        }
+
+        .project-image[data-project="donut-shop"] {
+            background-image: url('../img/deadlock.png');
+        }
+
+        .project-image[data-project="face-recognition"] {
+            background-image: url('../img/face_rec.png');
+        }
+
+        .project-image[data-project="university-db"] {
+            background-image: url('../img/univ_db.png');
+        }
+
+        .project-image[data-project="nbody-sim"] {
+            background-image: url('../img/nbody2.png');
         }
 
         /* Contact section */
