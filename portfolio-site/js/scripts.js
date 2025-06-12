@@ -832,4 +832,35 @@ document.addEventListener('DOMContentLoaded', function() {
             openProjectModal(projectId);
         });
     });
+
+     const tiltCards = document.querySelectorAll('.project-card');
+
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; // Mouse x position within the card
+            const y = e.clientY - rect.top;  // Mouse y position within the card
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // Calculate rotation values. Max rotation is set to 10 degrees.
+            const rotateX = (centerY - y) / centerY * 10;
+            const rotateY = (x - centerX) / centerX * 10;
+
+            // Apply the dynamic transform
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+
+        card.addEventListener('mouseenter', () => {
+            // Set a quick transition for the transform when the mouse enters
+            card.style.transition = 'box-shadow 0.3s ease, transform 0.1s ease-out';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            // Reset the card to its default state smoothly
+            card.style.transition = 'box-shadow 0.3s ease, transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+        });
+    });
 });
