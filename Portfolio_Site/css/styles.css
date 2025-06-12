@@ -582,27 +582,27 @@
         }
 
         .project-image[data-project="memory-allocator"] {
-            background-image: url('../img/custom_mem.png');
+            background-image: url('../img/icons/custom_mem.png');
         }
 
         .project-image[data-project="binary-bomb"] {
-            background-image: url('../img/binary_bomb.png');
+            background-image: url('../img/icons/binary_bomb.png');
         }
 
         .project-image[data-project="donut-shop"] {
-            background-image: url('../img/deadlock.png');
+            background-image: url('../img/icons/deadlock.png');
         }
 
         .project-image[data-project="face-recognition"] {
-            background-image: url('../img/face_rec.png');
+            background-image: url('../img/icons/face_rec.png');
         }
 
         .project-image[data-project="university-db"] {
-            background-image: url('../img/univ_db.png');
+            background-image: url('../img/icons/univ_db.png');
         }
 
         .project-image[data-project="nbody-sim"] {
-            background-image: url('../img/nbody2.png');
+            background-image: url('../img/icons/nbody2.png');
         }
 
         /* Contact section */
