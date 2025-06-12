@@ -5,7 +5,7 @@ const projectData = {
         tagline: 'A low-level memory management system implementing three allocation algorithms with performance analysis and fragmentation tracking.',
         links: {
             //demo: '#',
-            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/custom_Mem_Alloc'
+            github: 'https://github.com/cblake18/home-ground/tree/main/projects/custom_Mem_Alloc'
         },
         description: {
             problem: 'Operating systems need efficient memory management to handle dynamic allocation requests from multiple processes. Poor allocation strategies lead to memory fragmentation, wasted space, and degraded system performance.',
@@ -32,7 +32,7 @@ const projectData = {
         title: 'x86-64 Binary Bomb Defuser',
         tagline: 'Reverse-engineered a multi-phase binary executable using assembly analysis and GDB to defuse a "bomb" without source code.',
         links: {
-            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/bin_Bomb'
+            github: 'https://github.com/cblake18/home-ground/tree/main/projects/bin_Bomb'
             //writeup: '#'
         },
         description: {
@@ -61,7 +61,7 @@ const projectData = {
         tagline: 'A high-performance producer-consumer system using POSIX threads, demonstrating advanced synchronization with mutexes and condition variables.',
         links: {
             //demo: '#',
-            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/sem_ProdCons'
+            github: 'https://github.com/cblake18/home-ground/tree/main/projects/sem_ProdCons'
         },
         description: {
             problem: 'The producer-consumer problem is a classic synchronization challenge. Multiple threads must coordinate access to shared resources without deadlock, race conditions, or starvation.',
@@ -89,7 +89,7 @@ const projectData = {
         tagline: 'Achieved 95%+ accuracy on face pair matching using Support Vector Machines with advanced feature engineering and hyperparameter optimization.',
         links: {
             //demo: '#',
-            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/ml_SVM_FaceRec'
+            github: 'https://github.com/cblake18/home-ground/tree/main/projects/ml_SVM_FaceRec'
             //notebook: '#'
         },
         description: {
@@ -118,7 +118,7 @@ const projectData = {
         tagline: 'A full-stack web application managing students, courses, and instructors with role-based access control and comprehensive course rating system.',
         links: {
             //demo: '#',
-            github: 'https://github.com/cblake18/tha_whole_pie/tree/main/School_Projects/uni_DB'
+            github: 'https://github.com/cblake18/home-ground/tree/main/projects/uni_DB'
             //schema: '#'
         },
         description: {
@@ -147,7 +147,7 @@ const projectData = {
         tagline: 'Real-time visualization of planetary motion using Newton\'s law of gravitation, featuring accurate orbital mechanics and scalable performance.',
         links: {
             //demo: '#',
-            github: 'https://github.com/yourusername/nbody-sim'
+            github: 'https://github.com/cblake18/home-ground/tree/main/projects/sim_NBody'
             //docs: '#'
         },
         description: {
