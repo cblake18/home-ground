@@ -630,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(`Headings found: ${headings.filter(h => h !== null).length}`);
     console.log(`Logo found: ${logoElement ? 'yes' : 'no'}`);
     
-    // Fallback mechanism - if typing animations haven't started after 5 seconds, start clouds anyway
+    // Fallback mechanism - if typing animations haven't started after 30 seconds, start clouds anyway
     setTimeout(() => {
         if (typingAnimationsComplete < totalTypingAnimations) {
             console.log(`Warning: Only ${typingAnimationsComplete}/${totalTypingAnimations} typing animations completed after 5 seconds`);
@@ -640,7 +640,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 anim.start();
             });
         }
-    }, 10000);
+    }, 30000);
     
      // Contact form with EmailJS
     const contactForm = document.getElementById('contact-form');
