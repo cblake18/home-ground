@@ -748,81 +748,79 @@ document.addEventListener('DOMContentLoaded', function() {
             metalSurface.style.backgroundPosition = `${x * 30}% ${y * 30}%`;
         }
     });
-});
 
-// Modal functionality
-const modal = document.getElementById('projectModal');
-const modalClose = document.getElementsByClassName('modal-close')[0];
+    // Modal functionality
+    const modal = document.getElementById('projectModal');
+    const modalClose = document.getElementsByClassName('modal-close')[0];
 
-// Function to open modal with project data
-function openProjectModal(projectId) {
-    const project = projectData[projectId];
-    if (!project) return;
+    // Function to open modal with project data
+    function openProjectModal(projectId) {
+        const project = projectData[projectId];
+        if (!project) return;
 
-    // Play key click sound if available
-    playRandomKeySound();
+        // Play key click sound if available
+        playRandomKeySound();
 
-    // Set title and tagline
-    document.getElementById('modalTitle').textContent = project.title;
-    document.getElementById('modalTagline').textContent = project.tagline;
+        // Set title and tagline
+        document.getElementById('modalTitle').textContent = project.title;
+        document.getElementById('modalTagline').textContent = project.tagline;
 
-    // Set links
-    const linksHtml = Object.entries(project.links).map(([key, url]) => {
-        const linkText = key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' ');
-        const icon = key === 'github' ? '📁' : key === 'demo' ? '🚀' : '📄';
-        return `<a href="${url}" target="_blank">${icon} ${linkText}</a>`;
-    }).join('');
-    document.getElementById('modalLinks').innerHTML = linksHtml;
+        // Set links
+        const linksHtml = Object.entries(project.links).map(([key, url]) => {
+            const linkText = key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' ');
+            const icon = key === 'github' ? '📁' : key === 'demo' ? '🚀' : '📄';
+            return `<a href="${url}" target="_blank">${icon} ${linkText}</a>`;
+        }).join('');
+        document.getElementById('modalLinks').innerHTML = linksHtml;
 
-    // Set description
-    const descHtml = `
-        <h4>The Problem</h4>
-        <p>${project.description.problem}</p>
-        <h4>The Solution</h4>
-        <p>${project.description.solution}</p>
-        <h4>My Role & Contributions</h4>
-        <p>${project.description.role}</p>
-    `;
-    document.getElementById('modalDescription').innerHTML = descHtml;
+        // Set description
+        const descHtml = `
+            <h4>The Problem</h4>
+            <p>${project.description.problem}</p>
+            <h4>The Solution</h4>
+            <p>${project.description.solution}</p>
+            <h4>My Role & Contributions</h4>
+            <p>${project.description.role}</p>
+        `;
+        document.getElementById('modalDescription').innerHTML = descHtml;
 
-    // Set tech stack
-    const techHtml = project.techStack.map(tech => 
-        `<span class="tech-item">${tech}</span>`
-    ).join('');
-    document.getElementById('modalTechStack').innerHTML = techHtml;
+        // Set tech stack
+        const techHtml = project.techStack.map(tech => 
+            `<span class="tech-item">${tech}</span>`
+        ).join('');
+        document.getElementById('modalTechStack').innerHTML = techHtml;
 
-    // Set challenges
-    const challengesHtml = project.challenges.map(challenge => `
-        <div class="challenge-box">
-            <strong>${challenge.title}:</strong>
-            <p>${challenge.description}</p>
-        </div>
-    `).join('');
-    document.getElementById('modalChallenges').innerHTML = challengesHtml;
+        // Set challenges
+        const challengesHtml = project.challenges.map(challenge => `
+            <div class="challenge-box">
+                <strong>${challenge.title}:</strong>
+                <p>${challenge.description}</p>
+            </div>
+        `).join('');
+        document.getElementById('modalChallenges').innerHTML = challengesHtml;
 
-    // Show modal
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
+        // Show modal
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
 
-// Close modal
-modalClose.onclick = function() {
-    playRandomKeySound();
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    if (event.target == modal) {
+    // Close modal
+    modalClose.onclick = function() {
         playRandomKeySound();
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-}
 
-// Add click handlers to project cards
-document.addEventListener('DOMContentLoaded', function() {
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            playRandomKeySound();
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    // Add click handlers to project cards
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach(card => {
         card.addEventListener('click', function(e) {

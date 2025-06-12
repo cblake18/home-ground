@@ -569,6 +569,10 @@
             color: var(--highlight);
         }
 
+        .project-image[data-project="memory_allocator"] {
+            background-image: url('../img/custom_mem.png');
+        }
+
         /* Contact section */
         .contact {
             background-color: var(--body-bg);
