@@ -528,22 +528,40 @@
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
             margin-top: 40px;
+            perspective: 1000px;
         }
 
         .project-card {
-            background-color: var(--key-color);
-            border-radius: 8px;
+            background-color: #e8eaed;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
             overflow: hidden;
-            border: 2px solid var(--key-border);
-            box-shadow: 0 5px 0 rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            
+            box-shadow:
+                /* "thickness" of the slab */
+                0px 8px 3px -4px rgba(0, 0, 0, 0.3),
+                
+                /* "floating" shadow on the page (soft, diffuse shadow) */
+                0px 15px 25px -5px rgba(0, 0, 0, 0.2),
+                
+                /* subtle inner highlight on top edge */
+                inset 0px 2px 1px -1px rgba(255, 255, 255, 0.7);
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 0 rgba(0, 0, 0, 0.1), 0 0 25px rgba(52, 152, 219, 0.2);
-            border-color: var(--highlight);
+            /* Lifts and tilts the card in 3D space */
+            transform: translateY(-10px) rotateX(5deg) rotateY(-3deg) scale(1.03);
+
+            /* Enhances the shadows to make the "lifted" effect more dramatic */
+            box-shadow:
+                0px 18px 5px -6px rgba(0, 0, 0, 0.3),
+                0px 30px 40px -8px rgba(0, 0, 0, 0.25),
+                inset 0px 2px 1px -1px rgba(255, 255, 255, 0.7);
         }
 
         .project-image {
@@ -977,10 +995,17 @@ header:hover::after {
     padding: 0;
     width: 90%;
     max-width: 900px;
-    border-radius: 10px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 12px; /* Match card radius */
     animation: modalSlideIn 0.3s ease;
-    border: 2px solid var(--key-border);
+
+    /* --- Apply the same new 3D styles --- */
+    border-top: 1px solid rgba(255, 255, 255, 0.9);
+    border-left: 1px solid rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0px 10px 6px -6px rgba(0, 0, 0, 0.4),
+        0px 20px 30px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes modalSlideIn {
@@ -995,11 +1020,11 @@ header:hover::after {
 }
 
 .modal-header {
-    background: linear-gradient(135deg, #8D99AE 0%, #778DA9 100%);
+    background: linear-gradient(90deg, var(--highlight), var(--accent));
     padding: 30px;
     border-radius: 8px 8px 0 0;
     position: relative;
-    border-bottom: 2px solid #5a6675;
+    border-bottom: 2px solid var(--highlight-secondary);
 }
 
 .modal-header h2 {
@@ -1111,15 +1136,38 @@ header:hover::after {
 
 /* indicate clickability */
 .project-card {
-    cursor: pointer;
-    transition: all 0.3s ease;
+    background-color: #e8eaed;
+    border-radius: 12px; /* Slightly more rounded corners */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+
+    /* --- New, more pronounced 3D effect --- */
+    /* Use borders to simulate a light source from the top-left */
+    border-top: 1px solid rgba(255, 255, 255, 0.9);
+    border-left: 1px solid rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+
+    /* A more complex shadow for depth and thickness */
+    box-shadow:
+        /* The "slab" thickness - darker and more defined */
+        0px 10px 6px -6px rgba(0, 0, 0, 0.4),
+        /* The "floating" effect - softer and more spread out */
+        0px 20px 30px rgba(0, 0, 0, 0.2);
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 0 rgba(0, 0, 0, 0.1), 0 0 30px rgba(52, 152, 219, 0.3);
+    /* Lift higher and tilt more dramatically */
+    transform: translateY(-12px) rotateX(8deg) rotateY(-5deg) scale(1.05);
+
+    /* Enhance shadows for the lifted effect */
+    box-shadow:
+        0px 22px 8px -8px rgba(0, 0, 0, 0.4),
+        0px 35px 50px rgba(0, 0, 0, 0.3);
 }
 
 .project-modal-trigger {
