@@ -707,16 +707,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // Skip if already handled by nav link logic
         if (anchor.classList.contains('nav-link-item')) return;
+        
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                // Add a small delay to let animations complete
+                setTimeout(() => {
+                    // Use getBoundingClientRect for more accurate positioning
+                    const rect = targetElement.getBoundingClientRect();
+                    const absoluteTop = window.pageYOffset + rect.top;
+                    
+                    window.scrollTo({
+                        top: absoluteTop + 50, // offset for sticky header
+                        behavior: 'smooth'
+                    });
+                }, 100); // 100ms delay to let animations settle
             }
         });
     });
