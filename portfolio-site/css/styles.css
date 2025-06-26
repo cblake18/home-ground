@@ -1020,6 +1020,7 @@ header:hover::after {
     margin: 2% auto;
     padding: 0;
     width: 90%;
+    height: 100%;
     max-width: 900px;
     border-radius: 12px; /* Match card radius */
     animation: modalSlideIn 0.3s ease;
@@ -1047,7 +1048,7 @@ header:hover::after {
 
 .modal-header {
     background: linear-gradient(90deg, #5d8aa8d0, #a5c8e1cf);
-    padding: 30px;
+    padding: 15px; /* reduced from 30px */
     border-radius: 8px 8px 0 0;
     position: relative;
     border-bottom: 2px solid var(--highlight-secondary);
@@ -1084,8 +1085,11 @@ header:hover::after {
 }
 
 .modal-body {
-    padding: 30px;
-    max-height: 70vh;
+    padding-top: 5px; /* edited padding to fit more on modal page */
+    padding-bottom: 5px; 
+    padding-left: 15px;
+    padding-right: 15px;
+    max-height: 79vh; /* changed from 70vh */
     overflow-y: auto;
 }
 
