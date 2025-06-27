@@ -598,10 +598,10 @@ nav {
     background-size: 200px 200px;
     color: #ffffff; /* base text color white for contrast */
     text-shadow: 
-        0 0 5px #3f4e5f,
-        0 0 10px #68809c,
-        0 0 20px #597592,
-        0 0 30px #93a7b9; 
+        0 0 5px #213e5e,
+        0 0 10px #4b7099,
+        0 0 20px #3b6796,
+        0 0 30px #819db8; 
 }
 
 .project-image[data-project="memory-allocator"] {
