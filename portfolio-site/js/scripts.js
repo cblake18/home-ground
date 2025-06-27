@@ -290,14 +290,14 @@ class CloudRenderer {
             low: { 
                 pixelSkip: 3,        // Sample every 3rd pixel
                 octaves: 2,
-                frameSkip: 2,        // Skip 2 frames
+                frameSkip: 0,        // Skip 2 frames
                 useOffscreen: true,
                 resolution: 0.5      // 50% resolution for offscreen
             },
             medium: { 
                 pixelSkip: 2,        // Sample every 2nd pixel
                 octaves: 3,
-                frameSkip: 1,        // Skip 1 frame
+                frameSkip: 0,        // Skip 1 frame
                 useOffscreen: true,
                 resolution: 0.75     // 75% resolution for offscreen
             },
