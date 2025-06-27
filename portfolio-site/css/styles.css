@@ -429,7 +429,7 @@ nav {
 }
 
 .skill-item {
-    background-color: var(--key-color);
+    background-color: #e2e4e7;/* var(--key-color); */
     padding: 25px 20px;
     border-radius: 8px;
     text-align: center;
@@ -598,10 +598,10 @@ nav {
     background-size: 200px 200px;
     color: #ffffff; /* base text color white for contrast */
     text-shadow: 
-        0 0 5px #213e5e,
-        0 0 10px #4b7099,
-        0 0 20px #3b6796,
-        0 0 30px #819db8; 
+        0 0 5px #3f4e5f,
+        0 0 10px #68809c,
+        0 0 20px #597592,
+        0 0 30px #93a7b9; 
 }
 
 .project-image[data-project="memory-allocator"] {
@@ -994,6 +994,61 @@ header:hover::after {
     }
 }
 
+/* Cloud Toggle Button Styles */
+.cloud-toggle-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    background-color: var(--key-color);
+    border: 2px solid var(--key-border);
+    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.cloud-toggle-btn:hover {
+    opacity: 1;
+    background-color: var(--key-hover);
+    border-color: var(--highlight);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cloud-toggle-btn.disabled {
+    opacity: 0.5;
+    color: #999;
+}
+
+.cloud-toggle-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure proper positioning for sections with clouds */
+.hero, .contact {
+    position: relative;
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+    .cloud-toggle-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+        top: 5px;
+        right: 5px;
+    }
+}
+
 .project-modal {
     display: none;
     position: fixed;
@@ -1016,16 +1071,20 @@ header:hover::after {
 .modal-content {
     position: relative;
     /* background-color: var(--key-color); */
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: #e2e2e2ce;
     margin: 2% auto;
     padding: 0;
     width: 90%;
-    height: 100%;
+    max-height: 96vh; /* Prevent modal from exceeding viewport */
     max-width: 900px;
-    border-radius: 12px; /* Match card radius */
+    border-radius: 12px;
     animation: modalSlideIn 0.3s ease;
-
-    /* --- 3D styles --- */
+    
+    /* Flexbox for proper layout */
+    display: flex;
+    flex-direction: column;
+    
+    /* 3D styles */
     border-top: 1px solid rgba(255, 255, 255, 0.9);
     border-left: 1px solid rgba(255, 255, 255, 0.9);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -1052,6 +1111,7 @@ header:hover::after {
     border-radius: 8px 8px 0 0;
     position: relative;
     border-bottom: 2px solid var(--highlight-secondary);
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .modal-header h2 {
@@ -1089,8 +1149,28 @@ header:hover::after {
     padding-bottom: 5px; 
     padding-left: 15px;
     padding-right: 15px;
-    max-height: 79vh; /* changed from 70vh */
+    max-height: calc(96vh - 120px); /* Account for header height and margins */
     overflow-y: auto;
+    flex-grow: 1; /* Allow body to grow */
+}
+
+/* Smooth scrollbar styling */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: rgba(93, 138, 168, 0.5);
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(93, 138, 168, 0.7);
 }
 
 .modal-section {
@@ -1167,7 +1247,7 @@ header:hover::after {
 
 /* indicate clickability */
 .project-card {
-    background-color: #e8eaed;
+    background-color: #e2e4e7;
     border-radius: 12px; /* rounded corners */
     overflow: hidden;
     display: flex;

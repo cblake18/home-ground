@@ -216,157 +216,242 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(measureFrame);
     }
     
-    // Perlin Noise implementation
-    class PerlinNoise {
-        constructor() {
-            this.permutation = [];
-            for (let i = 0; i < 256; i++) {
-                this.permutation[i] = i;
-            }
-            // Shuffle
-            for (let i = 255; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [this.permutation[i], this.permutation[j]] = [this.permutation[j], this.permutation[i]];
-            }
-            // Duplicate
-            for (let i = 0; i < 256; i++) {
-                this.permutation[i + 256] = this.permutation[i];
-            }
+  class OptimizedPerlinNoise {
+    constructor() {
+        this.permutation = [];
+        for (let i = 0; i < 256; i++) {
+            this.permutation[i] = i;
         }
-
-        fade(t) {
-            return t * t * t * (t * (t * 6 - 15) + 10);
+        // Shuffle
+        for (let i = 255; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.permutation[i], this.permutation[j]] = [this.permutation[j], this.permutation[i]];
         }
-
-        lerp(t, a, b) {
-            return a + t * (b - a);
-        }
-
-        grad(hash, x, y) {
-            const h = hash & 3;
-            const u = h < 2 ? x : y;
-            const v = h < 2 ? y : x;
-            return ((h & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v);
-        }
-
-        noise(x, y) {
-            const X = Math.floor(x) & 255;
-            const Y = Math.floor(y) & 255;
-            
-            x -= Math.floor(x);
-            y -= Math.floor(y);
-            
-            const u = this.fade(x);
-            const v = this.fade(y);
-            
-            const a = this.permutation[X] + Y;
-            const aa = this.permutation[a];
-            const ab = this.permutation[a + 1];
-            const b = this.permutation[X + 1] + Y;
-            const ba = this.permutation[b];
-            const bb = this.permutation[b + 1];
-            
-            return this.lerp(v,
-                this.lerp(u, this.grad(this.permutation[aa], x, y), this.grad(this.permutation[ba], x - 1, y)),
-                this.lerp(u, this.grad(this.permutation[ab], x, y - 1), this.grad(this.permutation[bb], x - 1, y - 1))
-            );
+        // Duplicate
+        for (let i = 0; i < 256; i++) {
+            this.permutation[i + 256] = this.permutation[i];
         }
     }
 
-    // Cloud drawing function using Perlin noise
-    function drawPerlinClouds(canvas, quality = performanceLevel) {
-        if (!canvas) return;
+    fade(t) {
+        return t * t * t * (t * (t * 6 - 15) + 10);
+    }
+
+    lerp(t, a, b) {
+        return a + t * (b - a);
+    }
+
+    grad(hash, x, y) {
+        const h = hash & 3;
+        const u = h < 2 ? x : y;
+        const v = h < 2 ? y : x;
+        return ((h & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v);
+    }
+
+    noise(x, y) {
+        const X = Math.floor(x) & 255;
+        const Y = Math.floor(y) & 255;
         
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
+        x -= Math.floor(x);
+        y -= Math.floor(y);
         
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        const u = this.fade(x);
+        const v = this.fade(y);
         
-        const perlin = new PerlinNoise();
-        let time = 0;
-        let animationId;
-        let isPaused = true;
+        const a = this.permutation[X] + Y;
+        const aa = this.permutation[a];
+        const ab = this.permutation[a + 1];
+        const b = this.permutation[X + 1] + Y;
+        const ba = this.permutation[b];
+        const bb = this.permutation[b + 1];
         
-        // Adjust quality settings based on performance
-        const qualitySettings = {
-            low: { pixelSkip: 4, octaves: 2, frameSkip: 2 },
-            medium: { pixelSkip: 3, octaves: 3, frameSkip: 1 },
-            high: { pixelSkip: 2, octaves: 4, frameSkip: 0 }
-        };
+        return this.lerp(v,
+            this.lerp(u, this.grad(this.permutation[aa], x, y), this.grad(this.permutation[ba], x - 1, y)),
+            this.lerp(u, this.grad(this.permutation[ab], x, y - 1), this.grad(this.permutation[bb], x - 1, y - 1))
+        );
+    }
+}
+
+// Optimized cloud renderer with WebGL fallback
+class CloudRenderer {
+    constructor(canvas, performanceLevel = 'medium') {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.performanceLevel = performanceLevel;
+        this.perlin = new OptimizedPerlinNoise();
+        this.time = 0;
+        this.animationId = null;
+        this.isRunning = false;
+        this.isVisible = true;
+        this.frameCounter = 0;
         
-        const settings = qualitySettings[quality];
-        let frameCounter = 0;
-        
-        function animate() {
-            if (isPaused) {
-                animationId = requestAnimationFrame(animate);
-                return;
+        // Performance settings - preserve original quality for high performance
+        this.settings = {
+            low: { 
+                pixelSkip: 3,        // Sample every 3rd pixel
+                octaves: 2,
+                frameSkip: 2,        // Skip 2 frames
+                useOffscreen: true,
+                resolution: 0.5      // 50% resolution for offscreen
+            },
+            medium: { 
+                pixelSkip: 2,        // Sample every 2nd pixel
+                octaves: 3,
+                frameSkip: 1,        // Skip 1 frame
+                useOffscreen: true,
+                resolution: 0.75     // 75% resolution for offscreen
+            },
+            high: { 
+                pixelSkip: 1,        // Original pixel-by-pixel
+                octaves: 4,          // Original octave count
+                frameSkip: 0,        // No frame skipping
+                useOffscreen: false, // Render directly to canvas
+                resolution: 1.0      // Full resolution
             }
+        }[performanceLevel];
+        
+        // Create offscreen canvas only for lower performance modes
+        if (this.settings.useOffscreen) {
+            this.offscreenCanvas = document.createElement('canvas');
+            this.offscreenCtx = this.offscreenCanvas.getContext('2d');
+        }
+        
+        // Add toggle button
+        this.createToggleButton();
+        
+        // Set up intersection observer for visibility
+        this.setupVisibilityObserver();
+        
+        // Resize handler
+        this.handleResize = this.handleResize.bind(this);
+        window.addEventListener('resize', this.handleResize);
+        this.handleResize();
+    }
+    
+    createToggleButton() {
+        const button = document.createElement('button');
+        button.className = 'cloud-toggle-btn';
+        button.innerHTML = '☁';
+        button.title = 'Toggle cloud animation';
+        
+        // Position relative to canvas
+        const container = this.canvas.parentElement;
+        container.style.position = 'relative';
+        
+        button.addEventListener('click', () => {
+            this.toggle();
+            button.classList.toggle('disabled');
             
-            // Skip frames for low performance
-            if (frameCounter++ % (settings.frameSkip + 1) !== 0) {
-                animationId = requestAnimationFrame(animate);
-                return;
+            // Play key sound if available
+            const keyClick = document.getElementById('keyClick1');
+            if (keyClick) {
+                keyClick.currentTime = 0;
+                keyClick.volume = 0.3;
+                keyClick.play().catch(() => {});
             }
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Create image data for pixel manipulation
-            const imageData = ctx.createImageData(canvas.width, canvas.height);
-            const data = imageData.data;
-            
-            // Scale factors for noise
-            const scale = 0.005;
-            const timeScale = 0.0001;
-            
-            for (let x = 0; x < canvas.width; x += settings.pixelSkip) {
-                for (let y = 0; y < canvas.height; y += settings.pixelSkip) {
-                    // Generate multiple octaves for more complex patterns
-                    let value = 0;
-                    let amplitude = 1;
-                    let frequency = 1;
-                    let maxValue = 0;
+        });
+        
+        container.appendChild(button);
+        this.toggleButton = button;
+        
+        // Set initial state based on performance
+        if (this.performanceLevel === 'low') {
+            this.isRunning = false;
+            button.classList.add('disabled');
+        }
+    }
+    
+    setupVisibilityObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                this.isVisible = entry.isIntersecting;
+                if (!this.isVisible && this.isRunning) {
+                    this.pause();
+                } else if (this.isVisible && this.isRunning) {
+                    this.resume();
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(this.canvas);
+    }
+    
+    handleResize() {
+        this.canvas.width = this.canvas.offsetWidth;
+        this.canvas.height = this.canvas.offsetHeight;
+        
+        // Resize offscreen canvas if using one
+        if (this.settings.useOffscreen) {
+            this.offscreenCanvas.width = Math.floor(this.canvas.width * this.settings.resolution);
+            this.offscreenCanvas.height = Math.floor(this.canvas.height * this.settings.resolution);
+        }
+    }
+    
+    generateClouds() {
+        const targetCanvas = this.settings.useOffscreen ? this.offscreenCanvas : this.canvas;
+        const targetCtx = this.settings.useOffscreen ? this.offscreenCtx : this.ctx;
+        const width = targetCanvas.width;
+        const height = targetCanvas.height;
+        
+        targetCtx.clearRect(0, 0, width, height);
+        
+        // Create image data for pixel manipulation
+        const imageData = targetCtx.createImageData(width, height);
+        const data = imageData.data;
+        
+        // Original scale factors for noise
+        const scale = 0.005;
+        const timeScale = 0.0001;
+        const pixelSkip = this.settings.pixelSkip;
+        
+        for (let x = 0; x < width; x += pixelSkip) {
+            for (let y = 0; y < height; y += pixelSkip) {
+                // Generate multiple octaves for complex patterns (original algorithm)
+                let value = 0;
+                let amplitude = 1;
+                let frequency = 1;
+                let maxValue = 0;
+                
+                for (let i = 0; i < this.settings.octaves; i++) {
+                    value += this.perlin.noise(
+                        x * scale * frequency + this.time * timeScale,
+                        y * scale * frequency
+                    ) * amplitude;
                     
-                    for (let i = 0; i < settings.octaves; i++) {
-                        value += perlin.noise(
-                            x * scale * frequency + time * timeScale,
-                            y * scale * frequency
-                        ) * amplitude;
-                        
-                        maxValue += amplitude;
-                        amplitude *= 0.5;
-                        frequency *= 2;
+                    maxValue += amplitude;
+                    amplitude *= 0.5;
+                    frequency *= 2;
+                }
+                
+                value = value / maxValue;
+                value = (value + 1) / 2; // Normalize to 0-1
+                
+                // Create threshold for cloud-like appearance (original thresholds)
+                if (value > 0.4) {
+                    const intensity = (value - 0.4) / 0.6;
+                    const index = (y * width + x) * 4;
+                    
+                    // Mix purple and dark grey based on noise value (original colors)
+                    if (value > 0.6) {
+                        // Purple areas
+                        data[index] = 142 * intensity;     // R
+                        data[index + 1] = 68 * intensity;  // G
+                        data[index + 2] = 173 * intensity; // B
+                        data[index + 3] = intensity * 180; // A
+                    } else {
+                        // Dark grey areas
+                        data[index] = 60 * intensity;      // R
+                        data[index + 1] = 60 * intensity;  // G
+                        data[index + 2] = 70 * intensity;  // B
+                        data[index + 3] = intensity * 150; // A
                     }
                     
-                    value = value / maxValue;
-                    value = (value + 1) / 2; // Normalize to 0-1
-                    
-                    // Create threshold for cloud-like appearance
-                    if (value > 0.4) {
-                        const intensity = (value - 0.4) / 0.6;
-                        const index = (y * canvas.width + x) * 4;
-                        
-                        // Mix purple and dark grey based on noise value
-                        if (value > 0.6) {
-                            // Purple areas
-                            data[index] = 142 * intensity;     // R
-                            data[index + 1] = 68 * intensity;  // G
-                            data[index + 2] = 173 * intensity; // B
-                            data[index + 3] = intensity * 180; // A
-                        } else {
-                            // Dark grey areas
-                            data[index] = 60 * intensity;      // R
-                            data[index + 1] = 60 * intensity;  // G
-                            data[index + 2] = 70 * intensity;  // B
-                            data[index + 3] = intensity * 150; // A
-                        }
-                        
-                        // Fill skipped pixels
-                        for (let dx = 0; dx < settings.pixelSkip; dx++) {
-                            for (let dy = 0; dy < settings.pixelSkip; dy++) {
-                                if (x + dx < canvas.width && y + dy < canvas.height) {
-                                    const fillIndex = ((y + dy) * canvas.width + (x + dx)) * 4;
+                    // Fill skipped pixels (for performance modes)
+                    if (pixelSkip > 1) {
+                        for (let dx = 0; dx < pixelSkip; dx++) {
+                            for (let dy = 0; dy < pixelSkip; dy++) {
+                                if (x + dx < width && y + dy < height) {
+                                    const fillIndex = ((y + dy) * width + (x + dx)) * 4;
                                     data[fillIndex] = data[index];
                                     data[fillIndex + 1] = data[index + 1];
                                     data[fillIndex + 2] = data[index + 2];
@@ -377,98 +462,162 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
-            
-            ctx.putImageData(imageData, 0, 0);
-            
-            time += 16;
-            animationId = requestAnimationFrame(animate);
         }
         
-        animate();
+        targetCtx.putImageData(imageData, 0, 0);
         
-        // Return control object
-        return {
-            start: () => { isPaused = false; },
-            stop: () => { isPaused = true; },
-            cleanup: () => {
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                }
-            }
-        };
+        // If using offscreen canvas, scale up to main canvas
+        if (this.settings.useOffscreen) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.imageSmoothingEnabled = true;
+            this.ctx.imageSmoothingQuality = 'high';
+            this.ctx.drawImage(
+                this.offscreenCanvas,
+                0, 0, this.offscreenCanvas.width, this.offscreenCanvas.height,
+                0, 0, this.canvas.width, this.canvas.height
+            );
+        }
     }
+    
+    animate() {
+        if (!this.isRunning || !this.isVisible) {
+            this.animationId = requestAnimationFrame(() => this.animate());
+            return;
+        }
+        
+        // Skip frames for lower performance
+        if (this.frameCounter++ % (this.settings.frameSkip + 1) !== 0) {
+            this.animationId = requestAnimationFrame(() => this.animate());
+            return;
+        }
+        
+        this.generateClouds();
+        this.time += 16;
+        this.animationId = requestAnimationFrame(() => this.animate());
+    }
+    
+    start() {
+        if (this.isRunning) return;
+        this.isRunning = true;
+        this.toggleButton.classList.remove('disabled');
+        this.animate();
+    }
+    
+    stop() {
+        this.isRunning = false;
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.toggleButton.classList.add('disabled');
+    }
+    
+    pause() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
+    }
+    
+    resume() {
+        if (this.isRunning && !this.animationId) {
+            this.animate();
+        }
+    }
+    
+    toggle() {
+        if (this.isRunning) {
+            this.stop();
+        } else {
+            this.start();
+        }
+    }
+    
+    cleanup() {
+        this.stop();
+        window.removeEventListener('resize', this.handleResize);
+        if (this.toggleButton && this.toggleButton.parentNode) {
+            this.toggleButton.parentNode.removeChild(this.toggleButton);
+        }
+    }
+}
 
     // Track typing animations
     let typingAnimationsComplete = 0;
-    const totalTypingAnimations = 7; // hero title, subtitle, logo, and section headings
-    let cloudAnimations = [];
+    const totalTypingAnimations = 7;
+    let cloudRenderers = [];
+    
+    // Performance detection based on FPS measurement
+    function detectPerformance(callback) {
+        let fps = 0;
+        let frameCount = 0;
+        let lastTime = performance.now();
+        const testDuration = 500; // Test for 500ms
+        
+        function measureFrame() {
+            frameCount++;
+            const currentTime = performance.now();
+            
+            if (currentTime - lastTime >= testDuration) {
+                fps = (frameCount * 1000) / (currentTime - lastTime);
+                
+                // Determine performance level based on achievable FPS
+                let performanceLevel;
+                if (fps < 30) {
+                    performanceLevel = 'low';
+                } else if (fps < 50) {
+                    performanceLevel = 'medium';
+                } else {
+                    performanceLevel = 'high';
+                }
+                
+                console.log(`Detected FPS: ${fps.toFixed(1)}, Performance: ${performanceLevel}`);
+                callback(performanceLevel);
+            } else {
+                requestAnimationFrame(measureFrame);
+            }
+        }
+        
+        requestAnimationFrame(measureFrame);
+    }
     
     function onTypingComplete() {
         typingAnimationsComplete++;
         console.log(`Typing animation complete: ${typingAnimationsComplete}/${totalTypingAnimations}`);
         
         if (typingAnimationsComplete >= totalTypingAnimations) {
-            console.log('All typing animations complete, starting Perlin clouds');
-            // Start all cloud animations
-            cloudAnimations.forEach(anim => {
-                console.log('Starting cloud animation');
-                anim.start();
+            console.log('All typing animations complete, starting cloud animations');
+            // Start cloud animations only if performance is medium or high
+            cloudRenderers.forEach(renderer => {
+                if (renderer.performanceLevel !== 'low') {
+                    renderer.start();
+                }
             });
         }
     }
     
-    // Initialize Perlin clouds (but don't start them yet)
-    detectPerformance((detectedLevel) => {
-        performanceLevel = detectedLevel;
-        
+    // Initialize cloud renderers
+    detectPerformance((performanceLevel) => {
         const heroCanvas = document.getElementById('hero-fractal');
         const contactCanvas = document.getElementById('contact-fractal');
         
         if (heroCanvas) {
-            console.log('Initializing hero canvas Perlin noise');
-            const heroAnim = drawPerlinClouds(heroCanvas, performanceLevel);
-            cloudAnimations.push(heroAnim);
+            console.log(`Initializing hero canvas with performance level: ${performanceLevel}`);
+            const heroRenderer = new CloudRenderer(heroCanvas, performanceLevel);
+            cloudRenderers.push(heroRenderer);
         }
         
         if (contactCanvas) {
-            console.log('Initializing contact canvas Perlin noise');
-            const contactAnim = drawPerlinClouds(contactCanvas, performanceLevel);
-            cloudAnimations.push(contactAnim);
+            console.log(`Initializing contact canvas with performance level: ${performanceLevel}`);
+            const contactRenderer = new CloudRenderer(contactCanvas, performanceLevel);
+            cloudRenderers.push(contactRenderer);
         }
     });
     
-    // Single resize handler for canvases
-    window.addEventListener('resize', () => {
-        // Re-detect performance on significant resize (might be switching device orientation)
-        detectPerformance((newLevel) => {
-            if (newLevel !== performanceLevel) {
-                performanceLevel = newLevel;
-                console.log(`Performance level changed to: ${performanceLevel}`);
-                
-                // Recreate animations with new performance level
-                cloudAnimations.forEach(anim => anim.cleanup());
-                cloudAnimations = [];
-                
-                const heroCanvas = document.getElementById('hero-fractal');
-                const contactCanvas = document.getElementById('contact-fractal');
-                
-                if (heroCanvas) {
-                    const heroAnim = drawPerlinClouds(heroCanvas, performanceLevel);
-                    if (typingAnimationsComplete >= totalTypingAnimations) {
-                        heroAnim.start();
-                    }
-                    cloudAnimations.push(heroAnim);
-                }
-                
-                if (contactCanvas) {
-                    const contactAnim = drawPerlinClouds(contactCanvas, performanceLevel);
-                    if (typingAnimationsComplete >= totalTypingAnimations) {
-                        contactAnim.start();
-                    }
-                    cloudAnimations.push(contactAnim);
-                }
-            }
-        });
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+        cloudRenderers.forEach(renderer => renderer.cleanup());
     });
 
     // Hamburger Menu Logic
