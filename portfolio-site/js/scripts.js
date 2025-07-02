@@ -289,21 +289,21 @@ class CloudRenderer {
         this.settings = {
             low: { 
                 pixelSkip: 3,        // Sample every 3rd pixel
-                octaves: 2,
+                octaves: 2,          // octave count
                 frameSkip: 0,        // Skip 2 frames
                 useOffscreen: true,
                 resolution: 0.5      // 50% resolution for offscreen
             },
             medium: { 
                 pixelSkip: 2,        // Sample every 2nd pixel
-                octaves: 3,
+                octaves: 3,          // octave count
                 frameSkip: 0,        // Skip 1 frame
                 useOffscreen: true,
                 resolution: 0.75     // 75% resolution for offscreen
             },
             high: { 
                 pixelSkip: 1,        // Original pixel-by-pixel
-                octaves: 4,          // Original octave count
+                octaves: 4,          // octave count
                 frameSkip: 0,        // No frame skipping
                 useOffscreen: false, // Render directly to canvas
                 resolution: 1.0      // Full resolution
@@ -588,9 +588,9 @@ class CloudRenderer {
         
         if (typingAnimationsComplete >= totalTypingAnimations) {
             console.log('All typing animations complete, starting cloud animations');
-            // Start cloud animations only if performance is medium or high
+            // Start cloud animations only if performance is high
             cloudRenderers.forEach(renderer => {
-                if (renderer.performanceLevel !== 'low') {
+                if (renderer.performanceLevel == 'high') {
                     renderer.start();
                 }
             });
@@ -648,6 +648,7 @@ class CloudRenderer {
     
     const keyElements = document.querySelectorAll('.key');
     const keyInputs = document.querySelectorAll('.key-input');
+    //let typingSoundsEnabled = true; // Track typing sound state
     
     keyElements.forEach(key => {
         key.addEventListener('mousedown', function() {
@@ -661,19 +662,56 @@ class CloudRenderer {
             this.classList.remove('active');
         });
     });
-    
-    keyInputs.forEach(input => {
-        input.addEventListener('keydown', () => playRandomKeySound());
+
+    let typingSoundsEnabled = true; // track typing sound state
+     keyInputs.forEach(input => {
+        input.addEventListener('keydown', () => {
+            if (typingSoundsEnabled) {
+                playRandomKeySound();
+            }
+        });
     });
-    
+     
     function playRandomKeySound() {
         const sounds = [keyClick1, keyClick2, keyClick3];
         const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
         if (randomSound && randomSound.play) {
             randomSound.currentTime = 0;
-            randomSound.volume = 0.3;
+            randomSound.volume = 0.18;
             randomSound.play().catch(e => {});
         }
+    }
+
+    function createTypingSoundToggle() {
+        const contactForm = document.querySelector('.contact-form');
+        if (!contactForm) return;
+        
+        // Create toggle button
+        const button = document.createElement('button');
+        button.className = 'sound-toggle-btn';
+        button.innerHTML = '🔊';
+        button.title = 'Toggle typing sounds';
+        
+        // Set initial state
+        if (!typingSoundsEnabled) {
+            button.classList.add('disabled');
+            button.innerHTML = '🔇';
+        }
+        
+        button.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent form submission
+            typingSoundsEnabled = !typingSoundsEnabled;
+            button.classList.toggle('disabled');
+            button.innerHTML = typingSoundsEnabled ? '🔊' : '🔇';
+            
+            // Play key sound on toggle if enabling
+            if (typingSoundsEnabled) {
+                playRandomKeySound();
+            }
+        });
+        
+        // Insert the button at the top of the contact form
+        contactForm.insertBefore(button, contactForm.firstChild);
     }
     
     // Color animation
@@ -688,91 +726,136 @@ class CloudRenderer {
     }
     setInterval(updateSilverBlueColors, 1000);
     
-    // Typing effect
-    function typeEffect(element, text, speed = 70, callback = null) {
-        if (!element || !text) return;
-        let i = 0;
-        element.textContent = '';
-        function typing() {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-                setTimeout(typing, speed);
-            } else {
-                // Always call onTypingComplete when done
-                onTypingComplete();
-                if (callback) {
-                    callback();
-                }
+    // Typing effect function
+function typeEffect(element, text, speed = 80, callback = null) {
+    if (!element || !text) return;
+    let i = 0;
+    // Clear the element completely
+    element.innerHTML = '';
+    
+    function typing() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        } else {
+            // Always call onTypingComplete when done
+            onTypingComplete();
+            if (callback) {
+                callback();
             }
         }
-        typing();
     }
-    
-    const headings = [
-        document.getElementById('hero-title'),
-        document.getElementById('hero-subtitle'),
-        document.getElementById('about-heading'),
-        document.getElementById('skills-heading'),
-        document.getElementById('projects-heading'),
-        document.getElementById('contact-heading')
-    ];
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const element = entry.target;
-                if (!element) return;
-                
-                const originalText = element.dataset.originalText;
-                
-                if (!element.classList.contains('typed')) {
-                    element.classList.add('typed');
-                    typeEffect(element, originalText);
-                    
-                    if (element.tagName === 'H2') {
-                        setTimeout(() => {
-                            element.classList.add('typing');
-                        }, (originalText.length || 0) * 70 + 100);
-                    }
-                }
-                observer.unobserve(element);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    headings.forEach(heading => {
-        if (heading) {
-            const originalText = heading.textContent;
-            heading.textContent = '';
-            heading.dataset.originalText = originalText;
-            observer.observe(heading);
+    typing();
+}
+
+// Get all heading elements
+const headings = [
+    document.getElementById('hero-title'),
+    document.getElementById('hero-subtitle'),
+    document.getElementById('about-heading'),
+    document.getElementById('skills-heading'),
+    document.getElementById('projects-heading'),
+    document.getElementById('contact-heading')
+];
+
+// Store original text and prepare elements
+headings.forEach(heading => {
+    if (heading) {
+        // Store original text
+        heading.dataset.originalText = heading.textContent.trim();
+        // Use CSS to maintain height
+        heading.style.minHeight = heading.offsetHeight + 'px';
+        // Clear content
+        heading.textContent = '';
+        console.log(`Prepared ${heading.id}: "${heading.dataset.originalText}"`);
+    }
+});
+
+// Create observer for all headings
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const element = entry.target;
+            if (!element || element.classList.contains('typed')) return;
             
-            // Check if element is already in viewport
-            setTimeout(() => {
-                const rect = heading.getBoundingClientRect();
-                const inViewport = rect.top >= 0 && rect.bottom <= window.innerHeight;
-                if (inViewport && !heading.classList.contains('typed')) {
-                    console.log(`Element already in viewport, triggering typing: ${heading.id}`);
-                    heading.classList.add('typed');
-                    typeEffect(heading, originalText);
-                    
-                    if (heading.tagName === 'H2') {
-                        setTimeout(() => {
-                            heading.classList.add('typing');
-                        }, (originalText.length || 0) * 70 + 100);
+            const originalText = element.dataset.originalText;
+            
+            // Special handling for hero-subtitle - don't start it automatically
+            if (element.id === 'hero-subtitle') {
+                observer.unobserve(element);
+                return;
+            }
+            
+            element.classList.add('typed');
+            
+            // Special handling for hero-title
+            if (element.id === 'hero-title') {
+                typeEffect(element, originalText, 70, () => {
+                    // When hero-title is done, start hero-subtitle
+                    const heroSubtitle = document.getElementById('hero-subtitle');
+                    if (heroSubtitle && !heroSubtitle.classList.contains('typed')) {
+                        console.log('Starting hero-subtitle animation');
+                        heroSubtitle.classList.add('typed');
+                        typeEffect(heroSubtitle, heroSubtitle.dataset.originalText, 25);
                     }
-                    observer.unobserve(heading);
-                }
-            }, 100);
+                });
+            } else {
+                // Normal typing for other elements
+                typeEffect(element, originalText);
+            }
+            
+            // Add typing class for H2 elements
+            if (element.tagName === 'H2') {
+                setTimeout(() => {
+                    element.classList.add('typing');
+                }, originalText.length * 70 + 100);
+            }
+            
+            observer.unobserve(element);
         }
     });
+}, { threshold: 0.5 });
 
-    const logoElement = document.getElementById('logo');
-    if (logoElement) {
-        const originalLogoText = logoElement.textContent;
-        typeEffect(logoElement, originalLogoText);
+// Start observing all headings
+headings.forEach(heading => {
+    if (heading) {
+        observer.observe(heading);
     }
+});
+
+// Handle case where hero elements are already in viewport on load
+setTimeout(() => {
+    const heroTitle = document.getElementById('hero-title');
+    const heroSubtitle = document.getElementById('hero-subtitle');
+    
+    if (heroTitle && !heroTitle.classList.contains('typed')) {
+        const rect = heroTitle.getBoundingClientRect();
+        const inViewport = rect.top >= 0 && rect.bottom <= window.innerHeight;
+        
+        if (inViewport) {
+            console.log('Hero title in viewport on load, starting animation');
+            heroTitle.classList.add('typed');
+            observer.unobserve(heroTitle);
+            
+            typeEffect(heroTitle, heroTitle.dataset.originalText, 70, () => {
+                if (heroSubtitle && !heroSubtitle.classList.contains('typed')) {
+                    console.log('Starting hero-subtitle animation after hero-title');
+                    heroSubtitle.classList.add('typed');
+                    typeEffect(heroSubtitle, heroSubtitle.dataset.originalText, 20);
+                }
+            });
+        }
+    }
+}, 100);
+
+// Logo typing animation
+const logoElement = document.getElementById('logo');
+if (logoElement) {
+    const originalLogoText = logoElement.textContent;
+    typeEffect(logoElement, originalLogoText);
+    createTypingSoundToggle();
+}
     
     // Debug logging
     console.log(`Total typing animations to track: ${totalTypingAnimations}`);

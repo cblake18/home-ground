@@ -1047,6 +1047,52 @@ header:hover::after {
         top: 5px;
         right: 5px;
     }
+    .sound-toggle-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+        top: -40px;
+    }
+}
+
+/* Sound Toggle Button Styles */
+.sound-toggle-btn {
+    position: absolute;
+    top: 0px;
+    left: -25px;
+    right: auto;
+    z-index: 10;
+    background-color: var(--key-color);
+    border: 2px solid var(--key-border);
+    border-radius: 6px;
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.sound-toggle-btn:hover {
+    opacity: 1;
+    background-color: var(--key-hover);
+    border-color: var(--highlight);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.sound-toggle-btn.disabled {
+    opacity: 0.5;
+    color: #999;
+}
+
+.sound-toggle-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .project-modal {
@@ -1071,7 +1117,7 @@ header:hover::after {
 .modal-content {
     position: relative;
     /* background-color: var(--key-color); */
-    background-color: #e2e2e2ce;
+    background-color: #f7f7f7ce;
     margin: 2% auto;
     padding: 0;
     width: 90%;
@@ -1234,7 +1280,7 @@ header:hover::after {
 }
 
 .challenge-box {
-    background-color: rgba(93, 138, 168, 0.1);
+    background-color: rgba(51, 116, 160, 0.157);
     border-left: 4px solid var(--highlight);
     padding: 15px;
     margin: 15px 0;
@@ -1308,3 +1354,4 @@ header:hover::after {
         justify-content: center;
     }
 }
+
