@@ -797,90 +797,6 @@ footer:before {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
-
-/* Responsive Design for Mobile */
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-    }
-
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(44, 62, 80, 0.98);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .nav-links.active {
-        transform: translateX(0);
-        /* background-color: var(--highlight); */
-        background-color: rgba(44, 62, 80, 0.98);
-    }
-
-    .nav-links.active a {
-        color: var(--key-text);
-    }
-
-    .nav-links li {
-        margin: 20px 0;
-    }
-
-    .nav-links a {
-        color: var(--key-color);
-        font-size: 20px;
-    }
-
-    .hamburger {
-        display: block;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    .hero p {
-        font-size: 18px;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 880px) {
-    .nav-links li {
-        margin-left: 15px;
-    }
-    .logo {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 779px) {
-    .nav-links li {
-        margin-left: 15px;
-    }
-    .logo {
-        font-size: 18px;
-    }
-}
         
 /* header hover effects */
 header {
@@ -1036,23 +952,6 @@ header:hover::after {
 /* Ensure proper positioning for sections with clouds */
 .hero, .contact {
     position: relative;
-}
-
-/* Media query for mobile */
-@media (max-width: 768px) {
-    .cloud-toggle-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 18px;
-        top: 5px;
-        right: 5px;
-    }
-    .sound-toggle-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 18px;
-        top: -40px;
-    }
 }
 
 /* Sound Toggle Button Styles */
@@ -1352,6 +1251,109 @@ header:hover::after {
     .modal-links a {
         width: 100%;
         justify-content: center;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(44, 62, 80, 0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+        /* background-color: var(--highlight); */
+        background-color: rgba(44, 62, 80, 0.98);
+    }
+
+    .nav-links.active a {
+        color: var(--key-text);
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .nav-links a {
+        color: var(--key-color);
+        font-size: 20px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cloud-toggle-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+        top: 5px;
+        right: 5px;
+    }
+    /* .sound-toggle-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+        top: -40px;
+    } */
+}
+
+@media (max-width: 880px) {
+    .nav-links li {
+        margin-left: 15px;
+    }
+    .logo {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 779px) {
+    .nav-links li {
+        margin-left: 15px;
+    }
+    .logo {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 664px) {
+    .sound-toggle-btn {
+        position : static;
+        left: auto;
+        top: -40px;
     }
 }
 
