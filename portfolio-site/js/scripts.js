@@ -964,13 +964,25 @@ if (logoElement) {
     
     // Skill items interaction
     const skillItems = document.querySelectorAll('.skill-item');
+    const skillsSection = document.querySelector('.skills');
+    let skillHue = 0;
     skillItems.forEach(item => {
         item.addEventListener('click', function() {
             this.classList.add('active');
             playRandomKeySound();
+
+            // Cycle through hues for a subtle color change
+            skillHue = (skillHue + 30) % 360;
+            const gradient = `linear-gradient(135deg, hsl(${skillHue}, 70%, 90%) 0%, hsl(${skillHue}, 70%, 97%) 50%, hsl(${skillHue}, 70%, 85%) 100%)`;
+            skillsSection.style.background = gradient;
+            skillsSection.style.boxShadow = `0 0 20px hsla(${skillHue}, 70%, 75%, 0.8)`;
+
             setTimeout(() => {
                 this.classList.remove('active');
             }, 200);
+            setTimeout(() => {
+                skillsSection.style.boxShadow = '';
+            }, 500);
         });
     });
     
