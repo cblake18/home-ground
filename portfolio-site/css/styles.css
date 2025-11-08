@@ -1229,6 +1229,131 @@ header:hover::after {
     margin-top: 20px;   /* space above the button */
 }
 
+/* Card flip animation styles */
+.project-card {
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    position: relative;
+    min-height: 400px;
+}
+
+.project-card.flipping {
+    transform: rotateY(180deg) scale(1.1);
+    z-index: 999;
+}
+
+.project-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.project-card-front,
+.project-card-back {
+    width: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+}
+
+.project-card-front {
+    position: relative;
+    z-index: 2;
+    transform: rotateY(0deg);
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: rotateY(180deg);
+    background-color: #f7f7f7ce;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mini modal on card back */
+.card-back-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transform: scale(1);
+    transform-origin: center;
+}
+
+.card-back-header {
+    background: linear-gradient(90deg, #5d8aa8d0, #a5c8e1cf);
+    padding: 10px;
+    border-radius: 12px 12px 0 0;
+    border-bottom: 2px solid var(--highlight-secondary);
+}
+
+.card-back-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #ffffff;
+}
+
+.card-back-header .tagline {
+    font-size: 0.8em;
+    color: #e8eaed;
+    font-style: italic;
+    margin: 5px 0 0 0;
+}
+
+.card-back-body {
+    padding: 10px;
+    font-size: 0.75em;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.card-back-body .modal-section {
+    margin-bottom: 10px;
+}
+
+.card-back-body h3 {
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+.card-back-body .tech-stack {
+    gap: 5px;
+}
+
+.card-back-body .tech-item {
+    font-size: 0.7em;
+    padding: 3px 8px;
+}
+
+/* Modal transition animation */
+.project-modal.from-card {
+    animation: none;
+}
+
+.modal-content.expanding {
+    animation: expandFromCard 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+@keyframes expandFromCard {
+    from {
+        transform: scale(0.3) translateY(-30%);
+        opacity: 0.8;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
 /* Responsive modal */
 @media (max-width: 768px) {
     .modal-content {

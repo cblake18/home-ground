@@ -1045,20 +1045,55 @@ if (logoElement) {
         document.body.style.overflow = 'hidden';
     }
 
-    // Close modal
-    modalClose.onclick = function() {
+    // Function to close modal and reset cards
+    function closeModal() {
         playRandomKeySound();
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
+
+        // Reset all flipped cards
+        document.querySelectorAll('.project-card.flipping').forEach(card => {
+            card.classList.remove('flipping');
+            card.style.transition = '';
+        });
     }
+
+    // Close modal
+    modalClose.onclick = closeModal;
 
     // Close modal when clicking outside
     window.onclick = function(event) {
         if (event.target == modal) {
-            playRandomKeySound();
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
+            closeModal();
         }
+    }
+
+    // Function to populate card back with modal content
+    function populateCardBack(card, projectId) {
+        const project = projectData[projectId];
+        if (!project) return;
+
+        const cardBack = card.querySelector('.project-card-back');
+
+        // Create mini modal content for card back
+        const backContent = `
+            <div class="card-back-content">
+                <div class="card-back-header">
+                    <h2>${project.title}</h2>
+                    <p class="tagline">${project.tagline}</p>
+                </div>
+                <div class="card-back-body">
+                    <div class="modal-section">
+                        <h3>Technologies</h3>
+                        <div class="tech-stack">
+                            ${project.techStack.map(tech => `<span class="tech-item">${tech}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        cardBack.innerHTML = backContent;
     }
 
     // Add click handlers to project cards
@@ -1069,8 +1104,44 @@ if (logoElement) {
             if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
                 e.preventDefault();
             }
+
+            // Don't flip if already flipping
+            if (card.classList.contains('flipping')) {
+                return;
+            }
+
             const projectId = this.getAttribute('data-project');
-            openProjectModal(projectId);
+
+            // Play sound
+            playRandomKeySound();
+
+            // Populate the card back
+            populateCardBack(card, projectId);
+
+            // Disable hover effects during flip
+            card.style.transition = 'transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1)';
+
+            // Start flip animation
+            card.classList.add('flipping');
+
+            // After flip completes, show full modal
+            setTimeout(() => {
+                // Open modal with special class for transition
+                modal.classList.add('from-card');
+                openProjectModal(projectId);
+
+                // Add expanding animation to modal content
+                const modalContent = document.querySelector('.modal-content');
+                modalContent.classList.add('expanding');
+
+                // Reset card after modal is shown
+                setTimeout(() => {
+                    card.classList.remove('flipping');
+                    card.style.transition = '';
+                    modalContent.classList.remove('expanding');
+                    modal.classList.remove('from-card');
+                }, 100);
+            }, 800); // Match the flip animation duration
         });
     });
 
@@ -1078,6 +1149,9 @@ if (logoElement) {
 
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
+            // Don't apply tilt effect if card is flipping
+            if (card.classList.contains('flipping')) return;
+
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left; // Mouse x position within the card
             const y = e.clientY - rect.top;  // Mouse y position within the card
@@ -1094,11 +1168,17 @@ if (logoElement) {
         });
 
         card.addEventListener('mouseenter', () => {
+            // Don't apply hover transition if card is flipping
+            if (card.classList.contains('flipping')) return;
+
             // Set a quick transition for the transform when the mouse enters
             card.style.transition = 'box-shadow 0.3s ease, transform 0.1s ease-out';
         });
 
         card.addEventListener('mouseleave', () => {
+            // Don't reset if card is flipping
+            if (card.classList.contains('flipping')) return;
+
             // Reset the card to its default state smoothly
             card.style.transition = 'box-shadow 0.3s ease, transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
