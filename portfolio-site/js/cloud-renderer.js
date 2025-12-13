@@ -27,6 +27,9 @@ const FRAGMENT_SHADER = `
     uniform float u_time;
     uniform vec2 u_resolution;
     uniform float u_opacity;
+    uniform vec3 u_colorDark;
+    uniform vec3 u_colorMid;
+    uniform vec3 u_colorBright;
     
     // Simplex 3D noise helper functions
     vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -144,10 +147,10 @@ const FRAGMENT_SHADER = `
             float intensity = (noise - 0.35) / 0.65;
             intensity = smoothstep(0.0, 1.0, intensity); // Smoother falloff
             
-            // Three-color gradient: dark grey -> steel blue -> purple
-            vec3 purple = vec3(0.557, 0.267, 0.678);     // #8e44ad
-            vec3 steelBlue = vec3(0.365, 0.541, 0.659);  // #5d8aa8 (your --highlight)
-            vec3 darkGrey = vec3(0.235, 0.235, 0.275);
+            // Three-color gradient using dynamic uniforms
+            vec3 purple = u_colorBright;
+            vec3 steelBlue = u_colorMid;
+            vec3 darkGrey = u_colorDark;
             
             // Create smooth transitions between colors
             float blueMix = smoothstep(0.35, 0.52, noise);   // Grey -> Blue
@@ -259,7 +262,17 @@ class WebGLCloudRenderer {
             this.uniforms = {
                 time: this.gl.getUniformLocation(this.program, 'u_time'),
                 resolution: this.gl.getUniformLocation(this.program, 'u_resolution'),
-                opacity: this.gl.getUniformLocation(this.program, 'u_opacity')
+                opacity: this.gl.getUniformLocation(this.program, 'u_opacity'),
+                colorDark: this.gl.getUniformLocation(this.program, 'u_colorDark'),
+                colorMid: this.gl.getUniformLocation(this.program, 'u_colorMid'),
+                colorBright: this.gl.getUniformLocation(this.program, 'u_colorBright')
+            };
+            
+            // Default cloud colors (can be updated via setColors)
+            this.colors = {
+                dark: [0.235, 0.235, 0.275],      // Dark grey
+                mid: [0.365, 0.541, 0.659],       // Steel blue #5d8aa8
+                bright: [0.557, 0.267, 0.678]     // Purple #8e44ad
             };
             
             // Enable blending for transparency
@@ -364,8 +377,25 @@ class WebGLCloudRenderer {
         gl.uniform2f(this.uniforms.resolution, this.canvas.width, this.canvas.height);
         gl.uniform1f(this.uniforms.opacity, this.options.opacity);
         
+        // Set color uniforms
+        gl.uniform3fv(this.uniforms.colorDark, this.colors.dark);
+        gl.uniform3fv(this.uniforms.colorMid, this.colors.mid);
+        gl.uniform3fv(this.uniforms.colorBright, this.colors.bright);
+        
         // Draw fullscreen quad
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+    
+    // Update cloud colors dynamically
+    setColors(dark, mid, bright) {
+        this.colors.dark = dark;
+        this.colors.mid = mid;
+        this.colors.bright = bright;
+        
+        // Also update fallback renderer if present
+        if (this.fallbackRenderer) {
+            this.fallbackRenderer.setColors(dark, mid, bright);
+        }
     }
     
     animate(timestamp) {
@@ -491,6 +521,13 @@ class OptimizedCanvas2DRenderer {
         this.animationId = null;
         this.isRunning = false;
         this.isVisible = true;
+        
+        // Dynamic colors (RGB 0-255)
+        this.colors = {
+            dark: [60, 60, 70],
+            mid: [93, 138, 168],
+            bright: [142, 68, 173]
+        };
         
         // Use simplex noise for better quality
         this.initSimplex();
@@ -656,24 +693,24 @@ class OptimizedCanvas2DRenderer {
                     const intensity = (value - 0.35) / 0.65;
                     const idx = (y * width + x) * 4;
                     
-                    // Three-tier color: grey -> blue -> purple
+                    // Three-tier color using dynamic colors
                     if (value > 0.6) {
-                        // Purple for brightest areas
-                        data[idx] = 142 * intensity;
-                        data[idx + 1] = 68 * intensity;
-                        data[idx + 2] = 173 * intensity;
+                        // Bright color for brightest areas
+                        data[idx] = this.colors.bright[0] * intensity;
+                        data[idx + 1] = this.colors.bright[1] * intensity;
+                        data[idx + 2] = this.colors.bright[2] * intensity;
                         data[idx + 3] = intensity * 190;
                     } else if (value > 0.48) {
-                        // Steel blue (#5d8aa8) for mid areas
-                        data[idx] = 93 * intensity;
-                        data[idx + 1] = 138 * intensity;
-                        data[idx + 2] = 168 * intensity;
+                        // Mid color for mid areas
+                        data[idx] = this.colors.mid[0] * intensity;
+                        data[idx + 1] = this.colors.mid[1] * intensity;
+                        data[idx + 2] = this.colors.mid[2] * intensity;
                         data[idx + 3] = intensity * 165;
                     } else {
-                        // Dark grey for darker areas
-                        data[idx] = 60 * intensity;
-                        data[idx + 1] = 60 * intensity;
-                        data[idx + 2] = 70 * intensity;
+                        // Dark color for darker areas
+                        data[idx] = this.colors.dark[0] * intensity;
+                        data[idx + 1] = this.colors.dark[1] * intensity;
+                        data[idx + 2] = this.colors.dark[2] * intensity;
                         data[idx + 3] = intensity * 140;
                     }
                     
@@ -712,6 +749,13 @@ class OptimizedCanvas2DRenderer {
     
     pause() {}
     resume() {}
+    
+    // Update colors dynamically (expects RGB 0-1 format, converts to 0-255)
+    setColors(dark, mid, bright) {
+        this.colors.dark = [dark[0] * 255, dark[1] * 255, dark[2] * 255];
+        this.colors.mid = [mid[0] * 255, mid[1] * 255, mid[2] * 255];
+        this.colors.bright = [bright[0] * 255, bright[1] * 255, bright[2] * 255];
+    }
     
     cleanup() {
         this.stop();

@@ -174,19 +174,17 @@ const projectData = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
- // Initialize EmailJS once when the page loads
+    // Initialize EmailJS once when the page loads
     if (typeof emailjs !== 'undefined') {
         emailjs.init("sSqyl_v4Vrj4_6k2M");
     } else {
         console.error('EmailJS library not loaded.');
     }
 
-
     // Track typing animations
     let typingAnimationsComplete = 0;
     const totalTypingAnimations = 7;
     let cloudRenderers = [];
-    
     
     function onTypingComplete() {
         typingAnimationsComplete++;
@@ -194,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (typingAnimationsComplete >= totalTypingAnimations) {
             console.log('All typing animations complete, starting cloud animations');
-            // Start cloud animations
+            // Start all cloud animations - WebGL handles performance automatically
             cloudRenderers.forEach(renderer => {
                 renderer.start();
             });
@@ -265,7 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const keyElements = document.querySelectorAll('.key');
     const keyInputs = document.querySelectorAll('.key-input');
-    //let typingSoundsEnabled = true; // Track typing sound state
     
     keyElements.forEach(key => {
         key.addEventListener('mousedown', function() {
@@ -281,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     let typingSoundsEnabled = true; // track typing sound state
-     keyInputs.forEach(input => {
+    keyInputs.forEach(input => {
         input.addEventListener('keydown', () => {
             if (typingSoundsEnabled) {
                 playRandomKeySound();
@@ -331,148 +328,139 @@ document.addEventListener('DOMContentLoaded', function() {
         contactForm.insertBefore(button, contactForm.firstChild);
     }
     
-    // Color animation
-    function updateSilverBlueColors() {
-        const time = Date.now() * 0.0003;
-        const hue1 = 210 + Math.sin(time) * 5;
-        const hue2 = 220 + Math.cos(time) * 5;
-        const hue3 = 200 + Math.sin(time + 1) * 5;
-        document.documentElement.style.setProperty('--highlight', `hsl(${hue1}, 25%, 48%)`);
-        document.documentElement.style.setProperty('--accent', `hsl(${hue2}, 30%, 70%)`);
-        document.documentElement.style.setProperty('--highlight-secondary', `hsl(${hue3}, 30%, 35%)`);
-    }
-    setInterval(updateSilverBlueColors, 1000);
+    // Note: Color animation removed - theme cycling system now handles colors
+    // See colorThemes array and cycleColorTheme() function
     
     // Typing effect function
-function typeEffect(element, text, speed = 80, callback = null) {
-    if (!element || !text) return;
-    let i = 0;
-    // Clear the element completely
-    element.innerHTML = '';
-    
-    function typing() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(typing, speed);
-        } else {
-            // Always call onTypingComplete when done
-            onTypingComplete();
-            if (callback) {
-                callback();
+    function typeEffect(element, text, speed = 80, callback = null) {
+        if (!element || !text) return;
+        let i = 0;
+        // Clear the element completely
+        element.innerHTML = '';
+        
+        function typing() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(typing, speed);
+            } else {
+                // Always call onTypingComplete when done
+                onTypingComplete();
+                if (callback) {
+                    callback();
+                }
             }
         }
+        typing();
     }
-    typing();
-}
 
-// Get all heading elements
-const headings = [
-    document.getElementById('hero-title'),
-    document.getElementById('hero-subtitle'),
-    document.getElementById('about-heading'),
-    document.getElementById('skills-heading'),
-    document.getElementById('projects-heading'),
-    document.getElementById('contact-heading')
-];
+    // Get all heading elements
+    const headings = [
+        document.getElementById('hero-title'),
+        document.getElementById('hero-subtitle'),
+        document.getElementById('about-heading'),
+        document.getElementById('skills-heading'),
+        document.getElementById('projects-heading'),
+        document.getElementById('contact-heading')
+    ];
 
-// Store original text and prepare elements
-headings.forEach(heading => {
-    if (heading) {
-        // Store original text
-        heading.dataset.originalText = heading.textContent.trim();
-        // Use CSS to maintain height
-        heading.style.minHeight = heading.offsetHeight + 'px';
-        // Clear content
-        heading.textContent = '';
-        console.log(`Prepared ${heading.id}: "${heading.dataset.originalText}"`);
-    }
-});
-
-// Create observer for all headings
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const element = entry.target;
-            if (!element || element.classList.contains('typed')) return;
-            
-            const originalText = element.dataset.originalText;
-            
-            // Special handling for hero-subtitle - don't start it automatically
-            if (element.id === 'hero-subtitle') {
-                observer.unobserve(element);
-                return;
-            }
-            
-            element.classList.add('typed');
-            
-            // Special handling for hero-title
-            if (element.id === 'hero-title') {
-                typeEffect(element, originalText, 70, () => {
-                    // When hero-title is done, start hero-subtitle
-                    const heroSubtitle = document.getElementById('hero-subtitle');
-                    if (heroSubtitle && !heroSubtitle.classList.contains('typed')) {
-                        console.log('Starting hero-subtitle animation');
-                        heroSubtitle.classList.add('typed');
-                        typeEffect(heroSubtitle, heroSubtitle.dataset.originalText, 25);
-                    }
-                });
-            } else {
-                // Normal typing for other elements
-                typeEffect(element, originalText);
-            }
-            
-            // Add typing class for H2 elements
-            if (element.tagName === 'H2') {
-                setTimeout(() => {
-                    element.classList.add('typing');
-                }, originalText.length * 70 + 100);
-            }
-            
-            observer.unobserve(element);
+    // Store original text and prepare elements
+    headings.forEach(heading => {
+        if (heading) {
+            // Store original text
+            heading.dataset.originalText = heading.textContent.trim();
+            // Use CSS to maintain height
+            heading.style.minHeight = heading.offsetHeight + 'px';
+            // Clear content
+            heading.textContent = '';
+            console.log(`Prepared ${heading.id}: "${heading.dataset.originalText}"`);
         }
     });
-}, { threshold: 0.5 });
 
-// Start observing all headings
-headings.forEach(heading => {
-    if (heading) {
-        observer.observe(heading);
-    }
-});
-
-// Handle case where hero elements are already in viewport on load
-setTimeout(() => {
-    const heroTitle = document.getElementById('hero-title');
-    const heroSubtitle = document.getElementById('hero-subtitle');
-    
-    if (heroTitle && !heroTitle.classList.contains('typed')) {
-        const rect = heroTitle.getBoundingClientRect();
-        const inViewport = rect.top >= 0 && rect.bottom <= window.innerHeight;
-        
-        if (inViewport) {
-            console.log('Hero title in viewport on load, starting animation');
-            heroTitle.classList.add('typed');
-            observer.unobserve(heroTitle);
-            
-            typeEffect(heroTitle, heroTitle.dataset.originalText, 70, () => {
-                if (heroSubtitle && !heroSubtitle.classList.contains('typed')) {
-                    console.log('Starting hero-subtitle animation after hero-title');
-                    heroSubtitle.classList.add('typed');
-                    typeEffect(heroSubtitle, heroSubtitle.dataset.originalText, 20);
+    // Create observer for all headings
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                if (!element || element.classList.contains('typed')) return;
+                
+                const originalText = element.dataset.originalText;
+                
+                // Special handling for hero-subtitle - don't start it automatically
+                if (element.id === 'hero-subtitle') {
+                    observer.unobserve(element);
+                    return;
                 }
-            });
-        }
-    }
-}, 100);
+                
+                element.classList.add('typed');
+                
+                // Special handling for hero-title
+                if (element.id === 'hero-title') {
+                    typeEffect(element, originalText, 70, () => {
+                        // When hero-title is done, start hero-subtitle
+                        const heroSubtitle = document.getElementById('hero-subtitle');
+                        if (heroSubtitle && !heroSubtitle.classList.contains('typed')) {
+                            console.log('Starting hero-subtitle animation');
+                            heroSubtitle.classList.add('typed');
+                            typeEffect(heroSubtitle, heroSubtitle.dataset.originalText, 25);
+                        }
+                    });
+                } else {
+                    // Normal typing for other elements
+                    typeEffect(element, originalText);
+                }
+                
+                // Add typing class for H2 elements
+                if (element.tagName === 'H2') {
+                    setTimeout(() => {
+                        element.classList.add('typing');
+                    }, originalText.length * 70 + 100);
+                }
+                
+                observer.unobserve(element);
+            }
+        });
+    }, { threshold: 0.5 });
 
-// Logo typing animation
-const logoElement = document.getElementById('logo');
-if (logoElement) {
-    const originalLogoText = logoElement.textContent;
-    typeEffect(logoElement, originalLogoText);
-    createTypingSoundToggle();
-}
+    // Start observing all headings
+    headings.forEach(heading => {
+        if (heading) {
+            observer.observe(heading);
+        }
+    });
+
+    // Handle case where hero elements are already in viewport on load
+    setTimeout(() => {
+        const heroTitle = document.getElementById('hero-title');
+        const heroSubtitle = document.getElementById('hero-subtitle');
+        
+        if (heroTitle && !heroTitle.classList.contains('typed')) {
+            const rect = heroTitle.getBoundingClientRect();
+            const inViewport = rect.top >= 0 && rect.bottom <= window.innerHeight;
+            
+            if (inViewport) {
+                console.log('Hero title in viewport on load, starting animation');
+                heroTitle.classList.add('typed');
+                observer.unobserve(heroTitle);
+                
+                typeEffect(heroTitle, heroTitle.dataset.originalText, 70, () => {
+                    if (heroSubtitle && !heroSubtitle.classList.contains('typed')) {
+                        console.log('Starting hero-subtitle animation after hero-title');
+                        heroSubtitle.classList.add('typed');
+                        typeEffect(heroSubtitle, heroSubtitle.dataset.originalText, 20);
+                    }
+                });
+            }
+        }
+    }, 100);
+
+    // Logo typing animation
+    const logoElement = document.getElementById('logo');
+    if (logoElement) {
+        const originalLogoText = logoElement.textContent;
+        typeEffect(logoElement, originalLogoText);
+        createTypingSoundToggle();
+    }
     
     // Debug logging
     console.log(`Total typing animations to track: ${totalTypingAnimations}`);
@@ -491,7 +479,7 @@ if (logoElement) {
         }
     }, 30000);
     
-     // Contact form with EmailJS
+    // Contact form with EmailJS
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
     
@@ -537,7 +525,7 @@ if (logoElement) {
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
                         formStatus.innerHTML = '';
-                    }, 5000); // Keep message longer
+                    }, 5000);
                 }, function(error) {
                     console.error('FAILED...', error);
                     submitBtn.textContent = "Send Failed";
@@ -549,7 +537,7 @@ if (logoElement) {
                     setTimeout(() => {
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
-                    }, 5000); // Keep message longer
+                    }, 5000);
                 });
         });
     }
@@ -574,10 +562,226 @@ if (logoElement) {
                         top: absoluteTop + 50, // offset for sticky header
                         behavior: 'smooth'
                     });
-                }, 100); // 100ms delay to let animations settle
+                }, 100);
             }
         });
     });
+    
+    // =========================================================================
+    // Color Theme Cycling System
+    // =========================================================================
+    
+    // Preset color themes that cycle through the spectrum
+    const colorThemes = [
+        {
+            name: 'Steel Blue',
+            highlight: '#5d8aa8',
+            highlightSecondary: '#445d70',
+            highlightDark: '#3d6a82',
+            accent: '#a5c8e1',
+            fractalPurple: '#8e44ad',
+            fractalPurpleLight: '#a569bd',
+            // Text colors (darker versions for readability)
+            textPrimary: '#3d6a82',
+            textSecondary: '#445d70',
+            // Text glow colors (dark to light)
+            textGlow1: '#213e5e',
+            textGlow2: '#4b7099',
+            textGlow3: '#3b6796',
+            textGlow4: '#819db8',
+            // Cloud colors (RGB 0-1)
+            cloudDark: [0.235, 0.235, 0.275],
+            cloudMid: [0.365, 0.541, 0.659],
+            cloudBright: [0.557, 0.267, 0.678]
+        },
+        {
+            name: 'Teal',
+            highlight: '#2a9d8f',
+            highlightSecondary: '#1d6e63',
+            highlightDark: '#1a5c54',
+            accent: '#8ed4c8',
+            fractalPurple: '#264653',
+            fractalPurpleLight: '#457b8c',
+            textPrimary: '#1a5c54',
+            textSecondary: '#1d6e63',
+            textGlow1: '#153d3a',
+            textGlow2: '#1d6e63',
+            textGlow3: '#2a9d8f',
+            textGlow4: '#6dc4b8',
+            cloudDark: [0.15, 0.27, 0.33],
+            cloudMid: [0.165, 0.616, 0.561],
+            cloudBright: [0.35, 0.82, 0.75]
+        },
+        {
+            name: 'Emerald',
+            highlight: '#27ae60',
+            highlightSecondary: '#1e8449',
+            highlightDark: '#186a3b',
+            accent: '#82e0aa',
+            fractalPurple: '#145a32',
+            fractalPurpleLight: '#239b56',
+            textPrimary: '#186a3b',
+            textSecondary: '#1e8449',
+            textGlow1: '#0e3d22',
+            textGlow2: '#1e8449',
+            textGlow3: '#27ae60',
+            textGlow4: '#58d68d',
+            cloudDark: [0.08, 0.35, 0.20],
+            cloudMid: [0.153, 0.682, 0.376],
+            cloudBright: [0.40, 0.88, 0.55]
+        },
+        {
+            name: 'Gold',
+            highlight: '#d4a03a',
+            highlightSecondary: '#a67c00',
+            highlightDark: '#7d5e00',
+            accent: '#f4d793',
+            fractalPurple: '#8b6914',
+            fractalPurpleLight: '#c9a227',
+            textPrimary: '#7d5e00',
+            textSecondary: '#8b6914',
+            textGlow1: '#5c4400',
+            textGlow2: '#8b6914',
+            textGlow3: '#c9a227',
+            textGlow4: '#f4d793',
+            cloudDark: [0.35, 0.28, 0.12],
+            cloudMid: [0.831, 0.627, 0.227],
+            cloudBright: [0.96, 0.82, 0.45]
+        },
+        {
+            name: 'Coral',
+            highlight: '#e07b53',
+            highlightSecondary: '#b85c3a',
+            highlightDark: '#8e4529',
+            accent: '#f4b89a',
+            fractalPurple: '#943126',
+            fractalPurpleLight: '#c0564b',
+            textPrimary: '#8e4529',
+            textSecondary: '#943126',
+            textGlow1: '#5c1f17',
+            textGlow2: '#943126',
+            textGlow3: '#c0564b',
+            textGlow4: '#e89a8c',
+            cloudDark: [0.35, 0.20, 0.15],
+            cloudMid: [0.878, 0.482, 0.325],
+            cloudBright: [0.96, 0.65, 0.50]
+        },
+        {
+            name: 'Rose',
+            highlight: '#c0392b',
+            highlightSecondary: '#922b21',
+            highlightDark: '#6e2018',
+            accent: '#f1948a',
+            fractalPurple: '#641e16',
+            fractalPurpleLight: '#a93226',
+            textPrimary: '#6e2018',
+            textSecondary: '#7a241a',
+            textGlow1: '#3d120d',
+            textGlow2: '#641e16',
+            textGlow3: '#922b21',
+            textGlow4: '#d4726a',
+            cloudDark: [0.30, 0.12, 0.12],
+            cloudMid: [0.753, 0.224, 0.169],
+            cloudBright: [0.94, 0.45, 0.42]
+        },
+        {
+            name: 'Magenta',
+            highlight: '#9b59b6',
+            highlightSecondary: '#76448a',
+            highlightDark: '#5b3469',
+            accent: '#d7bde2',
+            fractalPurple: '#512e5f',
+            fractalPurpleLight: '#884ea0',
+            textPrimary: '#5b3469',
+            textSecondary: '#663d75',
+            textGlow1: '#341d3d',
+            textGlow2: '#512e5f',
+            textGlow3: '#76448a',
+            textGlow4: '#bb8fce',
+            cloudDark: [0.25, 0.15, 0.30],
+            cloudMid: [0.608, 0.349, 0.714],
+            cloudBright: [0.85, 0.55, 0.90]
+        },
+        {
+            name: 'Violet',
+            highlight: '#6c5ce7',
+            highlightSecondary: '#4834d4',
+            highlightDark: '#3627a3',
+            accent: '#a29bfe',
+            fractalPurple: '#2c2057',
+            fractalPurpleLight: '#5b4bbd',
+            textPrimary: '#3627a3',
+            textSecondary: '#3d2db5',
+            textGlow1: '#1a133a',
+            textGlow2: '#2c2057',
+            textGlow3: '#4834d4',
+            textGlow4: '#8c82e8',
+            cloudDark: [0.17, 0.13, 0.34],
+            cloudMid: [0.424, 0.361, 0.906],
+            cloudBright: [0.70, 0.58, 0.98]
+        }
+    ];
+    
+    let currentThemeIndex = 0;
+    
+    // Helper function to convert hex to RGB
+    function hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+    
+    // Apply a color theme
+    function applyColorTheme(theme) {
+        const root = document.documentElement;
+        
+        // Update main CSS variables
+        root.style.setProperty('--highlight', theme.highlight);
+        root.style.setProperty('--highlight-secondary', theme.highlightSecondary);
+        root.style.setProperty('--highlight-dark', theme.highlightDark);
+        root.style.setProperty('--accent', theme.accent);
+        root.style.setProperty('--fractal-purple', theme.fractalPurple);
+        root.style.setProperty('--fractal-purple-light', theme.fractalPurpleLight);
+        
+        // Update text colors
+        root.style.setProperty('--text-primary', theme.textPrimary);
+        root.style.setProperty('--text-secondary', theme.textSecondary);
+        
+        // Update text glow colors
+        root.style.setProperty('--text-glow-1', theme.textGlow1);
+        root.style.setProperty('--text-glow-2', theme.textGlow2);
+        root.style.setProperty('--text-glow-3', theme.textGlow3);
+        root.style.setProperty('--text-glow-4', theme.textGlow4);
+        
+        // Generate glow colors from highlight
+        const rgb = hexToRgb(theme.highlight);
+        if (rgb) {
+            root.style.setProperty('--glow-color', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)`);
+            root.style.setProperty('--glow-color-light', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.2)`);
+            root.style.setProperty('--glow-color-subtle', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.1)`);
+            root.style.setProperty('--grid-color', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.03)`);
+        }
+        
+        // Update cloud renderer colors
+        cloudRenderers.forEach(renderer => {
+            if (renderer.setColors) {
+                renderer.setColors(theme.cloudDark, theme.cloudMid, theme.cloudBright);
+            }
+        });
+        
+        console.log(`Applied theme: ${theme.name}`);
+    }
+    
+    // Cycle to next theme
+    function cycleColorTheme() {
+        currentThemeIndex = (currentThemeIndex + 1) % colorThemes.length;
+        applyColorTheme(colorThemes[currentThemeIndex]);
+    }
+    
+    // =========================================================================
     
     // Skill items interaction
     const skillItems = document.querySelectorAll('.skill-item');
@@ -585,6 +789,10 @@ if (logoElement) {
         item.addEventListener('click', function() {
             this.classList.add('active');
             playRandomKeySound();
+            
+            // Cycle color theme on click
+            cycleColorTheme();
+            
             setTimeout(() => {
                 this.classList.remove('active');
             }, 200);
@@ -691,13 +899,13 @@ if (logoElement) {
         });
     });
 
-     const tiltCards = document.querySelectorAll('.project-card');
+    const tiltCards = document.querySelectorAll('.project-card');
 
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left; // Mouse x position within the card
-            const y = e.clientY - rect.top;  // Mouse y position within the card
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
