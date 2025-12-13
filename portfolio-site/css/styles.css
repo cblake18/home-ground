@@ -254,19 +254,10 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.4; /* Increased from 0.3 for stronger effect */
+    opacity: 0.4;
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: multiply; /* Blend with background */
-}
-#hero-fractal,
-#contact-fractal {
-    animation: cloudDrift 60s ease-in-out infinite alternate;
-}
-
-@keyframes cloudDrift {
-    0% { transform: scale(1) translateX(0); }
-    100% { transform: scale(1.1) translateX(-20px); }
 }
 
 /* Hero section */
@@ -591,18 +582,19 @@ nav {
     margin-bottom: 15px;
     color: var(--highlight);
 }
-
+/* 
 .project-image {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 200px 200px;
-    color: #ffffff; /* base text color white for contrast */
+    color: #ffffff;
     text-shadow: 
         0 0 5px #213e5e,
         0 0 10px #4b7099,
         0 0 20px #3b6796,
-        0 0 30px #819db8; 
-}
+        0 0 30px #819db8;
+} 
+*/
 
 .project-image[data-project="memory-allocator"] {
     background-image: url('../img/icons/custom_mem.png');
@@ -858,56 +850,6 @@ header:hover::after {
 @keyframes shimmer {
     0% { background-position: -200% 50%; }
     100% { background-position: 200% 50%; }
-}
-
-/* Enhanced cloud animation styles */
-.fractal-canvas {
-    opacity: 0.4;
-    transition: opacity 0.5s ease;
-}
-
-/* Strong cloud effect on section hover */
-.hero:hover .fractal-canvas,
-.contact:hover .fractal-canvas {
-    opacity: 0.6;
-}
-
-/* Multi-layer cloud effect */
-.cloud-layer-1,
-.cloud-layer-2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    opacity: 0.2;
-}
-
-.cloud-layer-1 {
-    animation: cloudFloat 45s ease-in-out infinite;
-    z-index: 1;
-}
-
-.cloud-layer-2 {
-    animation: cloudFloat 60s ease-in-out infinite reverse;
-    z-index: 0;
-    opacity: 0.15;
-}
-
-@keyframes cloudFloat {
-    0%, 100% { 
-        transform: translateX(0) translateY(0) scale(1);
-    }
-    25% { 
-        transform: translateX(30px) translateY(-20px) scale(1.05);
-    }
-    50% { 
-        transform: translateX(-20px) translateY(10px) scale(0.95);
-    }
-    75% { 
-        transform: translateX(-40px) translateY(-30px) scale(1.02);
-    }
 }
 
 /* Cloud Toggle Button Styles */

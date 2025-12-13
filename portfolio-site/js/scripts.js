@@ -181,406 +181,12 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('EmailJS library not loaded.');
     }
 
-    // Performance detection
-    let performanceLevel = 'high'; // 'low', 'medium', 'high'
-    
-    function detectPerformance(callback) {
-        let fps = 0;
-        let frameCount = 0;
-        let lastTime = performance.now();
-        const testDuration = 500; // Test for 500ms
-        
-        function measureFrame() {
-            frameCount++;
-            const currentTime = performance.now();
-            
-            if (currentTime - lastTime >= testDuration) {
-                fps = (frameCount * 1000) / (currentTime - lastTime);
-                
-                // Determine performance level
-                if (fps < 30) {
-                    performanceLevel = 'low';
-                } else if (fps < 50) {
-                    performanceLevel = 'medium';
-                } else {
-                    performanceLevel = 'high';
-                }
-                
-                console.log(`Detected FPS: ${fps.toFixed(1)}, Performance: ${performanceLevel}`);
-                callback(performanceLevel);
-            } else {
-                requestAnimationFrame(measureFrame);
-            }
-        }
-        
-        requestAnimationFrame(measureFrame);
-    }
-    
-  class OptimizedPerlinNoise {
-    constructor() {
-        this.permutation = [];
-        for (let i = 0; i < 256; i++) {
-            this.permutation[i] = i;
-        }
-        // Shuffle
-        for (let i = 255; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.permutation[i], this.permutation[j]] = [this.permutation[j], this.permutation[i]];
-        }
-        // Duplicate
-        for (let i = 0; i < 256; i++) {
-            this.permutation[i + 256] = this.permutation[i];
-        }
-    }
-
-    fade(t) {
-        return t * t * t * (t * (t * 6 - 15) + 10);
-    }
-
-    lerp(t, a, b) {
-        return a + t * (b - a);
-    }
-
-    grad(hash, x, y) {
-        const h = hash & 3;
-        const u = h < 2 ? x : y;
-        const v = h < 2 ? y : x;
-        return ((h & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v);
-    }
-
-    noise(x, y) {
-        const X = Math.floor(x) & 255;
-        const Y = Math.floor(y) & 255;
-        
-        x -= Math.floor(x);
-        y -= Math.floor(y);
-        
-        const u = this.fade(x);
-        const v = this.fade(y);
-        
-        const a = this.permutation[X] + Y;
-        const aa = this.permutation[a];
-        const ab = this.permutation[a + 1];
-        const b = this.permutation[X + 1] + Y;
-        const ba = this.permutation[b];
-        const bb = this.permutation[b + 1];
-        
-        return this.lerp(v,
-            this.lerp(u, this.grad(this.permutation[aa], x, y), this.grad(this.permutation[ba], x - 1, y)),
-            this.lerp(u, this.grad(this.permutation[ab], x, y - 1), this.grad(this.permutation[bb], x - 1, y - 1))
-        );
-    }
-}
-
-// Optimized cloud renderer with WebGL fallback
-class CloudRenderer {
-    constructor(canvas, performanceLevel = 'medium') {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.performanceLevel = performanceLevel;
-        this.perlin = new OptimizedPerlinNoise();
-        this.time = 0;
-        this.animationId = null;
-        this.isRunning = false;
-        this.isVisible = true;
-        this.frameCounter = 0;
-        
-        // Performance settings - preserve original quality for high performance
-        this.settings = {
-            low: { 
-                pixelSkip: 3,        // Sample every 3rd pixel
-                octaves: 2,          // octave count
-                frameSkip: 0,        // Skip 2 frames
-                useOffscreen: true,
-                resolution: 0.5      // 50% resolution for offscreen
-            },
-            medium: { 
-                pixelSkip: 2,        // Sample every 2nd pixel
-                octaves: 3,          // octave count
-                frameSkip: 0,        // Skip 1 frame
-                useOffscreen: true,
-                resolution: 0.75     // 75% resolution for offscreen
-            },
-            high: { 
-                pixelSkip: 1,        // Original pixel-by-pixel
-                octaves: 4,          // octave count
-                frameSkip: 0,        // No frame skipping
-                useOffscreen: false, // Render directly to canvas
-                resolution: 1.0      // Full resolution
-            }
-        }[performanceLevel];
-        
-        // Create offscreen canvas only for lower performance modes
-        if (this.settings.useOffscreen) {
-            this.offscreenCanvas = document.createElement('canvas');
-            this.offscreenCtx = this.offscreenCanvas.getContext('2d');
-        }
-        
-        // Add toggle button
-        this.createToggleButton();
-        
-        // Set up intersection observer for visibility
-        this.setupVisibilityObserver();
-        
-        // Resize handler
-        this.handleResize = this.handleResize.bind(this);
-        window.addEventListener('resize', this.handleResize);
-        this.handleResize();
-    }
-    
-    createToggleButton() {
-        const button = document.createElement('button');
-        button.className = 'cloud-toggle-btn';
-        button.innerHTML = '☁';
-        button.title = 'Toggle cloud animation';
-        
-        // Position relative to canvas
-        const container = this.canvas.parentElement;
-        container.style.position = 'relative';
-        
-        button.addEventListener('click', () => {
-            this.toggle();
-            button.classList.toggle('disabled');
-            
-            // Play key sound if available
-            const keyClick = document.getElementById('keyClick1');
-            if (keyClick) {
-                keyClick.currentTime = 0;
-                keyClick.volume = 0.3;
-                keyClick.play().catch(() => {});
-            }
-        });
-        
-        container.appendChild(button);
-        this.toggleButton = button;
-        
-        // Set initial state based on performance
-        if (this.performanceLevel === 'low') {
-            this.isRunning = false;
-            button.classList.add('disabled');
-        }
-    }
-    
-    setupVisibilityObserver() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                this.isVisible = entry.isIntersecting;
-                if (!this.isVisible && this.isRunning) {
-                    this.pause();
-                } else if (this.isVisible && this.isRunning) {
-                    this.resume();
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        observer.observe(this.canvas);
-    }
-    
-    handleResize() {
-        this.canvas.width = this.canvas.offsetWidth;
-        this.canvas.height = this.canvas.offsetHeight;
-        
-        // Resize offscreen canvas if using one
-        if (this.settings.useOffscreen) {
-            this.offscreenCanvas.width = Math.floor(this.canvas.width * this.settings.resolution);
-            this.offscreenCanvas.height = Math.floor(this.canvas.height * this.settings.resolution);
-        }
-    }
-    
-    generateClouds() {
-        const targetCanvas = this.settings.useOffscreen ? this.offscreenCanvas : this.canvas;
-        const targetCtx = this.settings.useOffscreen ? this.offscreenCtx : this.ctx;
-        const width = targetCanvas.width;
-        const height = targetCanvas.height;
-        
-        targetCtx.clearRect(0, 0, width, height);
-        
-        // Create image data for pixel manipulation
-        const imageData = targetCtx.createImageData(width, height);
-        const data = imageData.data;
-        
-        // Original scale factors for noise
-        const scale = 0.005;
-        const timeScale = 0.0001;
-        const pixelSkip = this.settings.pixelSkip;
-        
-        for (let x = 0; x < width; x += pixelSkip) {
-            for (let y = 0; y < height; y += pixelSkip) {
-                // Generate multiple octaves for complex patterns (original algorithm)
-                let value = 0;
-                let amplitude = 1;
-                let frequency = 1;
-                let maxValue = 0;
-                
-                for (let i = 0; i < this.settings.octaves; i++) {
-                    value += this.perlin.noise(
-                        x * scale * frequency + this.time * timeScale,
-                        y * scale * frequency
-                    ) * amplitude;
-                    
-                    maxValue += amplitude;
-                    amplitude *= 0.5;
-                    frequency *= 2;
-                }
-                
-                value = value / maxValue;
-                value = (value + 1) / 2; // Normalize to 0-1
-                
-                // Create threshold for cloud-like appearance (original thresholds)
-                if (value > 0.4) {
-                    const intensity = (value - 0.4) / 0.6;
-                    const index = (y * width + x) * 4;
-                    
-                    // Mix purple and dark grey based on noise value (original colors)
-                    if (value > 0.6) {
-                        // Purple areas
-                        data[index] = 142 * intensity;     // R
-                        data[index + 1] = 68 * intensity;  // G
-                        data[index + 2] = 173 * intensity; // B
-                        data[index + 3] = intensity * 180; // A
-                    } else {
-                        // Dark grey areas
-                        data[index] = 60 * intensity;      // R
-                        data[index + 1] = 60 * intensity;  // G
-                        data[index + 2] = 70 * intensity;  // B
-                        data[index + 3] = intensity * 150; // A
-                    }
-                    
-                    // Fill skipped pixels (for performance modes)
-                    if (pixelSkip > 1) {
-                        for (let dx = 0; dx < pixelSkip; dx++) {
-                            for (let dy = 0; dy < pixelSkip; dy++) {
-                                if (x + dx < width && y + dy < height) {
-                                    const fillIndex = ((y + dy) * width + (x + dx)) * 4;
-                                    data[fillIndex] = data[index];
-                                    data[fillIndex + 1] = data[index + 1];
-                                    data[fillIndex + 2] = data[index + 2];
-                                    data[fillIndex + 3] = data[index + 3];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        targetCtx.putImageData(imageData, 0, 0);
-        
-        // If using offscreen canvas, scale up to main canvas
-        if (this.settings.useOffscreen) {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.ctx.imageSmoothingEnabled = true;
-            this.ctx.imageSmoothingQuality = 'high';
-            this.ctx.drawImage(
-                this.offscreenCanvas,
-                0, 0, this.offscreenCanvas.width, this.offscreenCanvas.height,
-                0, 0, this.canvas.width, this.canvas.height
-            );
-        }
-    }
-    
-    animate() {
-        if (!this.isRunning || !this.isVisible) {
-            this.animationId = requestAnimationFrame(() => this.animate());
-            return;
-        }
-        
-        // Skip frames for lower performance
-        if (this.frameCounter++ % (this.settings.frameSkip + 1) !== 0) {
-            this.animationId = requestAnimationFrame(() => this.animate());
-            return;
-        }
-        
-        this.generateClouds();
-        this.time += 16;
-        this.animationId = requestAnimationFrame(() => this.animate());
-    }
-    
-    start() {
-        if (this.isRunning) return;
-        this.isRunning = true;
-        this.toggleButton.classList.remove('disabled');
-        this.animate();
-    }
-    
-    stop() {
-        this.isRunning = false;
-        if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
-            this.animationId = null;
-        }
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.toggleButton.classList.add('disabled');
-    }
-    
-    pause() {
-        if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
-            this.animationId = null;
-        }
-    }
-    
-    resume() {
-        if (this.isRunning && !this.animationId) {
-            this.animate();
-        }
-    }
-    
-    toggle() {
-        if (this.isRunning) {
-            this.stop();
-        } else {
-            this.start();
-        }
-    }
-    
-    cleanup() {
-        this.stop();
-        window.removeEventListener('resize', this.handleResize);
-        if (this.toggleButton && this.toggleButton.parentNode) {
-            this.toggleButton.parentNode.removeChild(this.toggleButton);
-        }
-    }
-}
 
     // Track typing animations
     let typingAnimationsComplete = 0;
     const totalTypingAnimations = 7;
     let cloudRenderers = [];
     
-    // Performance detection based on FPS measurement
-    function detectPerformance(callback) {
-        let fps = 0;
-        let frameCount = 0;
-        let lastTime = performance.now();
-        const testDuration = 500; // Test for 500ms
-        
-        function measureFrame() {
-            frameCount++;
-            const currentTime = performance.now();
-            
-            if (currentTime - lastTime >= testDuration) {
-                fps = (frameCount * 1000) / (currentTime - lastTime);
-                
-                // Determine performance level based on achievable FPS
-                let performanceLevel;
-                if (fps < 30) {
-                    performanceLevel = 'low';
-                } else if (fps < 50) {
-                    performanceLevel = 'medium';
-                } else {
-                    performanceLevel = 'high';
-                }
-                
-                console.log(`Detected FPS: ${fps.toFixed(1)}, Performance: ${performanceLevel}`);
-                callback(performanceLevel);
-            } else {
-                requestAnimationFrame(measureFrame);
-            }
-        }
-        
-        requestAnimationFrame(measureFrame);
-    }
     
     function onTypingComplete() {
         typingAnimationsComplete++;
@@ -588,32 +194,43 @@ class CloudRenderer {
         
         if (typingAnimationsComplete >= totalTypingAnimations) {
             console.log('All typing animations complete, starting cloud animations');
-            // Start cloud animations only if performance is high
+            // Start cloud animations
             cloudRenderers.forEach(renderer => {
-                if (renderer.performanceLevel == 'high') {
-                    renderer.start();
-                }
+                renderer.start();
             });
         }
     }
     
-    // Initialize cloud renderers
-    detectPerformance((performanceLevel) => {
+    // Initialize WebGL cloud renderers (much faster than Canvas 2D)
+    function initCloudRenderers() {
         const heroCanvas = document.getElementById('hero-fractal');
         const contactCanvas = document.getElementById('contact-fractal');
         
+        // Check if WebGLCloudRenderer is available (loaded from cloud-renderer.js)
+        const RendererClass = window.WebGLCloudRenderer || null;
+        
+        if (!RendererClass) {
+            console.warn('WebGLCloudRenderer not loaded, clouds will be disabled');
+            return;
+        }
+        
         if (heroCanvas) {
-            console.log(`Initializing hero canvas with performance level: ${performanceLevel}`);
-            const heroRenderer = new CloudRenderer(heroCanvas, performanceLevel);
+            console.log('Initializing hero canvas with WebGL cloud renderer');
+            const heroRenderer = new RendererClass(heroCanvas, { opacity: 1.0 });
             cloudRenderers.push(heroRenderer);
         }
         
         if (contactCanvas) {
-            console.log(`Initializing contact canvas with performance level: ${performanceLevel}`);
-            const contactRenderer = new CloudRenderer(contactCanvas, performanceLevel);
+            console.log('Initializing contact canvas with WebGL cloud renderer');
+            const contactRenderer = new RendererClass(contactCanvas, { opacity: 1.0 });
             cloudRenderers.push(contactRenderer);
         }
-    });
+        
+        console.log(`Initialized ${cloudRenderers.length} cloud renderer(s)`);
+    }
+    
+    // Initialize cloud renderers immediately (no performance detection needed - GPU handles it)
+    initCloudRenderers();
     
     // Clean up on page unload
     window.addEventListener('beforeunload', () => {
@@ -865,11 +482,11 @@ if (logoElement) {
     // Fallback mechanism - if typing animations haven't started after 30 seconds, start clouds anyway
     setTimeout(() => {
         if (typingAnimationsComplete < totalTypingAnimations) {
-            console.log(`Warning: Only ${typingAnimationsComplete}/${totalTypingAnimations} typing animations completed after 5 seconds`);
-            console.log('Force-starting Perlin clouds as fallback');
-            cloudAnimations.forEach(anim => {
+            console.log(`Warning: Only ${typingAnimationsComplete}/${totalTypingAnimations} typing animations completed after 30 seconds`);
+            console.log('Force-starting cloud animations as fallback');
+            cloudRenderers.forEach(renderer => {
                 console.log('Starting cloud animation (fallback)');
-                anim.start();
+                renderer.start();
             });
         }
     }, 30000);
