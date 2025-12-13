@@ -582,7 +582,7 @@ nav {
     margin-bottom: 15px;
     color: var(--highlight);
 }
-/* 
+
 .project-image {
     background-repeat: no-repeat;
     background-position: center;
@@ -594,7 +594,7 @@ nav {
         0 0 20px #3b6796,
         0 0 30px #819db8;
 } 
-*/
+
 
 .project-image[data-project="memory-allocator"] {
     background-image: url('../img/icons/custom_mem.png');
